@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "362069383743",
+    "firebase_url": "https://nook-knack.firebaseio.com",
+    "project_id": "nook-knack",
+    "storage_bucket": "nook-knack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362069383743:android:6332499f36583c3a9bf68a",
+        "android_client_info": {
+          "package_name": "com.digiwrecks.nookknack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362069383743-ts03tnp71dfdjf6requi8trd39egpjfc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDC10BkqHD_CgvBDy3CWyWtKJhQdK1ecO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362069383743-ts03tnp71dfdjf6requi8trd39egpjfc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

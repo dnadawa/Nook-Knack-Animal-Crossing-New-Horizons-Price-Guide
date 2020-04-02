@@ -83,10 +83,36 @@ class _FishState extends State<Fish> {
         body: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.fromLTRB(0,10,10,10),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+
+                  Container(
+                    child: IconButton(icon: Icon(
+                      name.text==''?null:caughtList.contains(name.text)?Icons.remove_circle:Icons.add_circle,
+                      color: name.text==''?Color(0xfffffae3):caughtList.contains(name.text)?Color(0xff75CBB5):Color(0xffB6A977),
+                      size: 33,
+                    ), onPressed: () async {
+                      print('tapped');
+                      if(name.text!=''){
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        if(caughtList.contains(name.text)){
+                          caughtList.remove(name.text);
+                          print(caughtList);
+                          prefs.setStringList('caughtInsects', caughtList);
+                          setState(() {});
+
+                        }
+                        else{
+                          caughtList.add(name.text);
+                          print(caughtList);
+                          prefs.setStringList('caughtInsects', caughtList);
+                          setState(() {});
+                        }
+                      }
+                    }),
+                  ),
                   Expanded(
                     flex: 10,
                     child: SizedBox(
@@ -155,36 +181,7 @@ class _FishState extends State<Fish> {
                       ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () async {
-                      print('tapped');
-                      if(name.text!=''){
-                        SharedPreferences prefs = await SharedPreferences.getInstance();
-                        if(caughtList.contains(name.text)){
-                            caughtList.remove(name.text);
-                            print(caughtList);
-                            prefs.setStringList('caught', caughtList);
-                            setState(() {});
 
-                        }
-                        else{
-                          caughtList.add(name.text);
-                          print(caughtList);
-                          prefs.setStringList('caught', caughtList);
-                          setState(() {});
-                        }
-                      }
-
-
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(15,0,5,0),
-                      child: CircleAvatar(
-                        radius: 6,
-                        backgroundColor: name.text==''?Color(0xfffffae3):caughtList.contains(name.text)?Color(0xff75CBB5):Color(0xffB6A977),
-                      ),
-                    ),
-                  )
 
                 ],
               ),
@@ -192,61 +189,68 @@ class _FishState extends State<Fish> {
 
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10,0,0,0),
-                  child: GestureDetector(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MyCustomRoute(builder: (context) => Insects()),
-                      );
-                    },
-                    child: CircleAvatar(
-                      backgroundColor: Color(0xfff5f7e1),
-                      radius: 25,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Image.asset('images/butterflyDe.png'),
-                      ),
+               Row(
+                 children: <Widget>[
+                   Padding(
+                     padding: const EdgeInsets.fromLTRB(10,0,0,0),
+                     child: GestureDetector(
+                       onTap: (){
+                         Navigator.push(
+                           context,
+                           MyCustomRoute(builder: (context) => Insects()),
+                         );
+                       },
+                       child: CircleAvatar(
+                         backgroundColor: Color(0xfff5f7e1),
+                         radius: 25,
+                         child: Padding(
+                           padding: const EdgeInsets.all(10),
+                           child: Image.asset('images/butterflyDe.png'),
+                         ),
 
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8,0,0,0),
-                  child: CircleAvatar(
-                    backgroundColor: Color(0xfff5f7e1),
-                    radius: 25,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Image.asset('images/fish.png'),
-                    ),
-                  ),
-                ),
+                       ),
+                     ),
+                   ),
+                   Padding(
+                     padding: const EdgeInsets.fromLTRB(8,0,0,0),
+                     child: CircleAvatar(
+                       backgroundColor: Color(0xfff5f7e1),
+                       radius: 25,
+                       child: Padding(
+                         padding: const EdgeInsets.all(10),
+                         child: Image.asset('images/fish.png'),
+                       ),
+                     ),
+                   ),
+                 ],
+               ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: Container(
                     height: 40,
-                    width: 95,
+                    width: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
                       color: Color(0xffCCBD73),
                     ),
                     child: Center(
-                        child: Text('${caughtList.length}/${fishlist.length}',style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w100),)),
+                        child: Text('${caughtList.length}/${fishlist.length}',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w100),)),
                   ),
                 ),
                 Container(
                   height: 40,
-                  width: 130,
+                  width: 110,
+                  margin: EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40),
                     color: Color(0xffCCBD73),
                   ),
                   child: Center(
-                      child: Text('$price Bells',style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w100),)),
-                )
+                      child: Text('$price Bells',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w100),)),
+                ),
+
 
 
               ],

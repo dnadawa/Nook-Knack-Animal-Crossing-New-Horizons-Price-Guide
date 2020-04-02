@@ -7,6 +7,7 @@ import 'fish.dart';
 
 void main(){
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: Splash(),
   ));
 }

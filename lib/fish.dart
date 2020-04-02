@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nookknack/route-animation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'insects.dart';
 
 
@@ -20,10 +21,24 @@ class _FishState extends State<Fish> {
   List newNameList = [];
   List newPriceList = [];
   List newImageList = [];
+  List<String> caughtList = [];
   var index;
   List<String> nameList = [];
   TextEditingController name = TextEditingController();
   bool isFocused = false;
+  Color dotButtonColor = Color(0xffB6A977);
+
+  getList() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      List<String> x = prefs.getStringList('caught');
+      if(x==null){
+        caughtList = [];
+      }else{
+        caughtList = x;
+      }
+    });
+  }
 
   void _onFocusChange(){
     print("Focus: "+_focus.hasFocus.toString());
@@ -36,6 +51,7 @@ class _FishState extends State<Fish> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    getList();
     setState(() {
       _focus.addListener(_onFocusChange);
     });
@@ -69,9 +85,10 @@ class _FishState extends State<Fish> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
-                    flex: 2,
+                    flex: 10,
                     child: SizedBox(
                       height: 40,
                       child: TextField(
@@ -138,6 +155,36 @@ class _FishState extends State<Fish> {
                       ),
                     ),
                   ),
+                  GestureDetector(
+                    onTap: () async {
+                      print('tapped');
+                      if(name.text!=''){
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        if(caughtList.contains(name.text)){
+                            caughtList.remove(name.text);
+                            print(caughtList);
+                            prefs.setStringList('caught', caughtList);
+                            setState(() {});
+
+                        }
+                        else{
+                          caughtList.add(name.text);
+                          print(caughtList);
+                          prefs.setStringList('caught', caughtList);
+                          setState(() {});
+                        }
+                      }
+
+
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(15,0,5,0),
+                      child: CircleAvatar(
+                        radius: 6,
+                        backgroundColor: name.text==''?Color(0xfffffae3):caughtList.contains(name.text)?Color(0xff75CBB5):Color(0xffB6A977),
+                      ),
+                    ),
+                  )
 
                 ],
               ),
@@ -147,7 +194,7 @@ class _FishState extends State<Fish> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(15,0,0,0),
+                  padding: const EdgeInsets.fromLTRB(10,0,0,0),
                   child: GestureDetector(
                     onTap: (){
                       Navigator.push(
@@ -167,7 +214,7 @@ class _FishState extends State<Fish> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(15,0,0,0),
+                  padding: const EdgeInsets.fromLTRB(8,0,0,0),
                   child: CircleAvatar(
                     backgroundColor: Color(0xfff5f7e1),
                     radius: 25,
@@ -177,10 +224,22 @@ class _FishState extends State<Fish> {
                     ),
                   ),
                 ),
-                SizedBox(width: 70,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Container(
+                    height: 40,
+                    width: 95,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: Color(0xffCCBD73),
+                    ),
+                    child: Center(
+                        child: Text('${caughtList.length}/${fishlist.length}',style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w100),)),
+                  ),
+                ),
                 Container(
                   height: 40,
-                  width: 150,
+                  width: 130,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40),
                     color: Color(0xffCCBD73),
@@ -188,25 +247,7 @@ class _FishState extends State<Fish> {
                   child: Center(
                       child: Text('$price Bells',style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w100),)),
                 )
-//                Padding(
-//                  padding: const EdgeInsets.fromLTRB(15,15,0,0),
-//                  child: GestureDetector(
-//                    onTap: (){
-//                      Navigator.push(
-//                        context,
-//                        CupertinoPageRoute(builder: (context) => Others()),
-//                      );
-//                    },
-//                    child: CircleAvatar(
-//                      backgroundColor: Color(0xfff5f7e1),
-//                      radius: 30,
-//                      child: Padding(
-//                        padding: const EdgeInsets.all(15),
-//                        child: Image.asset('images/otherDe.png'),
-//                      ),
-//                    ),
-//                  ),
-//                ),
+
 
               ],
             ),
@@ -237,6 +278,10 @@ class _FishState extends State<Fish> {
                   String url =  isFocused==false?fishlist[i].data['image']:newImageList[i];
                   String newPrice =  isFocused==false?fishlist[i].data['price']:newPriceList[i];
                   String newName =  isFocused==false?fishlist[i].data['name']:newNameList[i];
+                  Color dotColor = Color(0xffEFE8BD);
+                  if(caughtList.contains(newName)){
+                    dotColor = Color(0xff75CBB5);
+                  }
 
                   return Container(
                     decoration: BoxDecoration(
@@ -270,7 +315,20 @@ class _FishState extends State<Fish> {
                           color: Color(0xffEFE8BD),
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Image.network(url,fit: BoxFit.contain,),
+                        child: Stack(
+                          children: <Widget>[
+                            Align(
+                                alignment: Alignment.center,
+                                child: Image.network(url,fit: BoxFit.contain,)),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: Padding(
+                                padding: const EdgeInsets.all(6.0),
+                                child: CircleAvatar(radius: 5,backgroundColor: dotColor,),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   );

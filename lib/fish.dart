@@ -32,6 +32,7 @@ class _FishState extends State<Fish> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       List<String> x = prefs.getStringList('caught');
+      print(x);
       if(x==null){
         caughtList = [];
       }else{
@@ -100,14 +101,14 @@ class _FishState extends State<Fish> {
                         if(caughtList.contains(name.text)){
                           caughtList.remove(name.text);
                           print(caughtList);
-                          prefs.setStringList('caughtInsects', caughtList);
+                          prefs.setStringList('caught', caughtList);
                           setState(() {});
 
                         }
                         else{
                           caughtList.add(name.text);
                           print(caughtList);
-                          prefs.setStringList('caughtInsects', caughtList);
+                          prefs.setStringList('caught', caughtList);
                           setState(() {});
                         }
                       }

@@ -72,7 +72,7 @@ class SignUp extends StatelessWidget {
                 ),
                 SizedBox(height: ScreenUtil().setHeight(50),),
                 CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(70),),
-                CustomText(text: 'Catch it. Sell it. Track it.',size: ScreenUtil().setSp(35),),
+                CustomText(text: 'Catch it. Sell it. Track it.',size: ScreenUtil().setSp(35),bold: false,),
                 SizedBox(height: ScreenUtil().setHeight(80),),
                 CustomText(text: 'Create an account',size: ScreenUtil().setSp(60),),
                 Padding(

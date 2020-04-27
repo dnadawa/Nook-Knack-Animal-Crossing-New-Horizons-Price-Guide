@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:nookknack/route-animation.dart';
-import 'package:nookknack/settings.dart';
 import 'package:nookknack/widgets/custom-text.dart';
 
 
-class Home extends StatelessWidget {
+class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: false);
@@ -25,11 +23,8 @@ class Home extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child: Padding(
                       padding: EdgeInsets.all(ScreenUtil().setWidth(20)),
-                      child: IconButton(icon: Icon(Icons.dehaze,color: Colors.white,), onPressed: (){
-                        Navigator.push(
-                          context,
-                          MyCustomRoute(builder: (context) => Settings()),
-                        );
+                      child: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.white,), onPressed: (){
+                        Navigator.pop(context);
                       }),
                     )),
                 SizedBox(
@@ -49,37 +44,37 @@ class Home extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      SizedBox(
-                        width: ScreenUtil().setWidth(100),
-                        height: ScreenUtil().setHeight(100),
-                        child: Image.asset('images/homeButterfly.png'),
-                      ),
-                      CustomText(text: 'Insect',size: ScreenUtil().setSp(30),),
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      SizedBox(
-                        width: ScreenUtil().setWidth(100),
-                        height: ScreenUtil().setHeight(100),
-                        child: Image.asset('images/homeFish.png'),
-                      ),
-                      CustomText(text: 'Fish',size: ScreenUtil().setSp(30),),
-                    ],
-                  ),
-                  Column(
-                    children: <Widget>[
-                      SizedBox(
-                        width: ScreenUtil().setWidth(100),
-                        height: ScreenUtil().setHeight(100),
-                        child: Image.asset('images/homeFossil.png'),
-                      ),
-                      CustomText(text: 'Fossil',size: ScreenUtil().setSp(30),),
-                    ],
-                  ),
-                ],
+                    Column(
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(100),
+                          height: ScreenUtil().setHeight(100),
+                          child: Image.asset('images/homeButterfly.png'),
+                        ),
+                        CustomText(text: 'Insect',size: ScreenUtil().setSp(30),),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(100),
+                          height: ScreenUtil().setHeight(100),
+                          child: Image.asset('images/homeFish.png'),
+                        ),
+                        CustomText(text: 'Fish',size: ScreenUtil().setSp(30),),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(100),
+                          height: ScreenUtil().setHeight(100),
+                          child: Image.asset('images/homeFossil.png'),
+                        ),
+                        CustomText(text: 'Fossil',size: ScreenUtil().setSp(30),),
+                      ],
+                    ),
+                  ],
                 ),
                 SizedBox(height: ScreenUtil().setHeight(50),),
                 CustomText(text: 'Overall Progress',size: ScreenUtil().setSp(60),),

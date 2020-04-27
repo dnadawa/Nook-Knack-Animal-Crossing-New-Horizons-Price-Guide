@@ -268,7 +268,7 @@ class _FishState extends State<Fish> {
 
 
             Expanded(
-              child: fishlist != null? GridView.builder(
+              child: fishlist != null?GridView.builder(
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,

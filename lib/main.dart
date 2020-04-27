@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nookknack/sign-in.dart';
 import 'package:nookknack/splash.dart';
 
 import 'fish.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: Fish(),
+      home: SignIn(),
     );
   }
 }

@@ -8,9 +8,9 @@ class Button extends StatelessWidget {
   final Color color;
   final bool social;
   final IconData icon;
+  final bool isBorder;
 
-
-  const Button({Key key, this.onclick, this.text, this.color: Colors.black, this.social=false, this.icon}) : super(key: key);
+  const Button({Key key, this.onclick, this.text, this.color: Colors.black, this.social=false, this.icon, this.isBorder=true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class Button extends StatelessWidget {
         onPressed: onclick,
         shape:RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
-          side: BorderSide(color: Colors.white,width: 2)
+          side: isBorder?BorderSide(color: Colors.white,width: 2):BorderSide.none
         ),
         color: color,
         textColor: Colors.white,

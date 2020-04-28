@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
@@ -12,6 +13,7 @@ class SignUp extends StatelessWidget {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  CollectionReference collectionReference = Firestore.instance.collection('users');
   showAlertDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -29,12 +31,22 @@ class SignUp extends StatelessWidget {
       },
     );
   }
+
   signUp() async {
     if(email.text!='' && password.text!=''){
       try{
         AuthResult result = await _firebaseAuth.createUserWithEmailAndPassword(
             email: email.text, password: password.text);
         FirebaseUser user = result.user;
+
+        await collectionReference.document(email.text).setData({
+          'email': email.text,
+          'house': 0,
+          'ramp': 0,
+          'bridge': 0,
+          'turnip': 0,
+        });
+
         email.clear();
         password.clear();
         ToastBar(color: Colors.green,text: 'Registration Succesful!').show();

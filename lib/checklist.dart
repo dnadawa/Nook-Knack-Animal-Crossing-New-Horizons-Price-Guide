@@ -1,12 +1,43 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:nookknack/widgets/button.dart';
 import 'package:nookknack/widgets/custom-text.dart';
 import 'package:nookknack/widgets/inputfield.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
-class Checklist extends StatelessWidget {
+class Checklist extends StatefulWidget {
+  @override
+  _ChecklistState createState() => _ChecklistState();
+}
+
+class _ChecklistState extends State<Checklist> {
+  TextEditingController turnip = TextEditingController();
+  TextEditingController house = TextEditingController();
+  TextEditingController ramp = TextEditingController();
+  TextEditingController bridge = TextEditingController();
+  String email;
+
+  getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    email = prefs.getString('email');
+    var sub = await Firestore.instance.collection('users').where('email',isEqualTo: email).getDocuments();
+    var list = sub.documents;
+    setState(() {
+        turnip.text = list[0]['turnip'].toString();
+        house.text = list[0]['house'].toString();
+        ramp.text = list[0]['ramp'].toString();
+        bridge.text = list[0]['bridge'].toString();
+    });
+  }
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: false);
@@ -86,7 +117,14 @@ class Checklist extends StatelessWidget {
                           SizedBox(width: ScreenUtil().setWidth(145),),
                           Container(
                               width: ScreenUtil().setWidth(150),
-                              child: InputField(hint: '0',isChecklist: true,type: TextInputType.number,)),
+                              child: InputField(hint: '0',isChecklist: true,type: TextInputType.number,controller: turnip,
+                              onSubmit: (x) async {
+                                await Firestore.instance.collection('users').document(email).updateData({
+                                  'turnip': int.parse(x)
+                                });
+                                getData();
+                              },
+                              )),
                           CustomText(text: 'Bells',)
                         ],
                       )
@@ -116,7 +154,13 @@ class Checklist extends StatelessWidget {
                         SizedBox(width: ScreenUtil().setWidth(30),),
                         Container(
                             width: ScreenUtil().setWidth(200),
-                            child: InputField(hint: '1,200,000',isChecklist: true,type: TextInputType.number,)),
+                            child: InputField(hint: '0',isChecklist: true,type: TextInputType.number,controller: house,
+                              onSubmit: (x) async {
+                                await Firestore.instance.collection('users').document(email).updateData({
+                                  'house': int.parse(x)
+                                });
+                                getData();
+                              },)),
                         CustomText(text: 'Bells',)
                       ],
                     ),
@@ -131,7 +175,13 @@ class Checklist extends StatelessWidget {
                         SizedBox(width: ScreenUtil().setWidth(30),),
                         Container(
                             width: ScreenUtil().setWidth(200),
-                            child: InputField(hint: '1,200,000',isChecklist: true,type: TextInputType.number,)),
+                            child: InputField(hint: '0',isChecklist: true,type: TextInputType.number,controller: ramp,
+                              onSubmit: (x) async {
+                                await Firestore.instance.collection('users').document(email).updateData({
+                                  'ramp': int.parse(x)
+                                });
+                                getData();
+                              },)),
                         CustomText(text: 'Bells',)
                       ],
                     ),
@@ -146,7 +196,13 @@ class Checklist extends StatelessWidget {
                         SizedBox(width: ScreenUtil().setWidth(30),),
                         Container(
                             width: ScreenUtil().setWidth(200),
-                            child: InputField(hint: '1,200,000',isChecklist: true,type: TextInputType.number,)),
+                            child: InputField(hint: '0',isChecklist: true,type: TextInputType.number,controller: bridge,
+                              onSubmit: (x) async {
+                                await Firestore.instance.collection('users').document(email).updateData({
+                                  'bridge': int.parse(x)
+                                });
+                                getData();
+                              },)),
                         CustomText(text: 'Bells',)
                       ],
                     ),

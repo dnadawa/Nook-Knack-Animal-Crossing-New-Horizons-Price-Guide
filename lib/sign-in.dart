@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:nookknack/widgets/custom-text.dart';
 import 'package:nookknack/widgets/inputfield.dart';
 import 'package:nookknack/widgets/toast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home.dart';
 
 class SignIn extends StatelessWidget {
@@ -42,7 +44,8 @@ class SignIn extends StatelessWidget {
           email: email.text, password: password.text);
       FirebaseUser user = result.user;
       print(user.uid);
-
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('email', user.email);
       Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context){
         return Home();}));
     }
@@ -80,12 +83,37 @@ class SignIn extends StatelessWidget {
       );
 
       final FirebaseUser user = (await _firebaseAuth.signInWithCredential(credential)).user;
-      Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context){
-        return Home();}));
+
+      var sub = await Firestore.instance.collection('users').where('email',isEqualTo: user.email).getDocuments();
+      var logged = sub.documents;
+
+      if(logged.isEmpty){
+        print("user doesn't exists!");
+        await Firestore.instance.collection('users').document(user.email).setData({
+          'email': user.email,
+          'house': 0,
+          'ramp': 0,
+          'bridge': 0,
+          'turnip': 0,
+        });
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('email', user.email);
+
+        Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context){
+          return Home();}));
+      }
+      else{
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('email', user.email);
+        prefs.setString('uid', user.uid);
+
+        Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context){
+          return Home();}));
+      }
     }
     catch(E){
       print(E);
-      ToastBar(color: Colors.red,text: 'Something went Wrong').show();
+      ToastBar(color: Colors.red,text: E.toString()).show();
     }
   }
 

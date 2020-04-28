@@ -13,8 +13,9 @@ class InputField extends StatelessWidget {
   final bool ispassword;
   final TextEditingController controller;
   final bool isChecklist;
+  final Function(String) onSubmit;
 
-  const InputField({Key key, this.hint, this.type, this.ispassword=false, this.controller, this.isChecklist=false}) : super(key: key);
+  const InputField({Key key, this.hint, this.type, this.ispassword=false, this.controller, this.isChecklist=false, this.onSubmit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class InputField extends StatelessWidget {
         cursorColor: Colors.white,
         keyboardType: type,
         controller: controller,
+        onSubmitted: onSubmit,
         obscureText: ispassword,
         decoration: InputDecoration(
           hintText: hint,

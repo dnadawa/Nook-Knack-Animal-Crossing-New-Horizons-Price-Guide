@@ -1,12 +1,43 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:nookknack/checklist.dart';
 import 'package:nookknack/route-animation.dart';
 import 'package:nookknack/settings.dart';
 import 'package:nookknack/widgets/custom-text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  String house = '0';
+  String ramp = '0';
+  String bridge = '0';
+  getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String email = prefs.getString('email');
+    var sub = await Firestore.instance.collection('users').where('email',isEqualTo: email).getDocuments();
+    var list = sub.documents;
+    setState(() {
+      house = list[0]['house'].toString();
+      ramp = list[0]['ramp'].toString();
+      bridge = list[0]['bridge'].toString();
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: false);
@@ -28,7 +59,7 @@ class Home extends StatelessWidget {
                       child: IconButton(icon: Icon(Icons.dehaze,color: Colors.white,), onPressed: (){
                         Navigator.push(
                           context,
-                          MyCustomRoute(builder: (context) => Settings()),
+                          MyCustomRoute(builder: (context) => Checklist()),
                         );
                       }),
                     )),
@@ -182,7 +213,7 @@ class Home extends StatelessWidget {
                       child: Image.asset('images/homeHouse.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
-                    CustomText(text: '400,000 Remaining',size: ScreenUtil().setSp(35),),
+                    CustomText(text: '$house Remaining',size: ScreenUtil().setSp(35),),
                   ],
                 ),
                 SizedBox(height: ScreenUtil().setHeight(20),),
@@ -197,7 +228,7 @@ class Home extends StatelessWidget {
                       child: Image.asset('images/homeRamp.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
-                    CustomText(text: '0 Remaining',size: ScreenUtil().setSp(35),),
+                    CustomText(text: '$ramp Remaining',size: ScreenUtil().setSp(35),),
                   ],
                 ),
                 SizedBox(height: ScreenUtil().setHeight(20),),
@@ -212,7 +243,7 @@ class Home extends StatelessWidget {
                       child: Image.asset('images/homeBridge.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
-                    CustomText(text: '0 Remaining',size: ScreenUtil().setSp(35),),
+                    CustomText(text: '$bridge Remaining',size: ScreenUtil().setSp(35),),
                   ],
                 ),
               ],

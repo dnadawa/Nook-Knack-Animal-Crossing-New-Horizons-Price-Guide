@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nookknack/checklist.dart';
 import 'package:nookknack/sign-in.dart';
 import 'package:nookknack/splash.dart';
 
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        accentColor: Colors.white,
+        unselectedWidgetColor: Colors.white,
+        dividerColor: Colors.white,
         textTheme: GoogleFonts.varelaRoundTextTheme(
           Theme.of(context).textTheme,
         ),

@@ -8,6 +8,8 @@ import 'package:nookknack/settings.dart';
 import 'package:nookknack/widgets/custom-text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'fish.dart';
+
 
 class Home extends StatefulWidget {
 
@@ -90,15 +92,23 @@ class _HomeState extends State<Home> {
                       CustomText(text: 'Insect',size: ScreenUtil().setSp(30),),
                     ],
                   ),
-                  Column(
-                    children: <Widget>[
-                      SizedBox(
-                        width: ScreenUtil().setWidth(100),
-                        height: ScreenUtil().setHeight(100),
-                        child: Image.asset('images/homeFish.png'),
-                      ),
-                      CustomText(text: 'Fish',size: ScreenUtil().setSp(30),),
-                    ],
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MyCustomRoute(builder: (context) => Fish()),
+                      );
+                    },
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(100),
+                          height: ScreenUtil().setHeight(100),
+                          child: Image.asset('images/homeFish.png'),
+                        ),
+                        CustomText(text: 'Fish',size: ScreenUtil().setSp(30),),
+                      ],
+                    ),
                   ),
                   Column(
                     children: <Widget>[

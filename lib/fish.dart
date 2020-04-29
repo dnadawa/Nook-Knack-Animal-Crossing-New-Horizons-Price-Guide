@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/screenutil.dart';
+import 'package:nookknack/checklist.dart';
+import 'package:nookknack/home.dart';
 import 'package:nookknack/route-animation.dart';
+import 'package:nookknack/widgets/custom-text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'insects.dart';
 
@@ -48,6 +52,31 @@ class _FishState extends State<Fish> {
     });
   }
 
+  void _settingModalBottomSheet(context){
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc){
+          return Container(
+            child: new Wrap(
+              children: <Widget>[
+                new ListTile(
+                    leading: new Icon(Icons.music_note),
+                    title: new Text('Music'),
+                    onTap: () => {}
+                ),
+                new ListTile(
+                  leading: new Icon(Icons.videocam),
+                  title: new Text('Video'),
+                  onTap: () => {},
+                ),
+              ],
+            ),
+          );
+        }
+    );
+  }
+
+
   @override
   void initState() {
     // TODO: implement initState
@@ -78,6 +107,7 @@ class _FishState extends State<Fish> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: false);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xfffffae3),
@@ -88,36 +118,52 @@ class _FishState extends State<Fish> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-
-                  Container(
-                    child: IconButton(icon: Icon(
-                      name.text==''?null:caughtList.contains(name.text)?Icons.remove_circle:Icons.add_circle,
-                      color: name.text==''?Color(0xfffffae3):caughtList.contains(name.text)?Color(0xff75CBB5):Color(0xffB6A977),
-                      size: 33,
-                    ), onPressed: () async {
-                      print('tapped');
-                      if(name.text!=''){
-                        SharedPreferences prefs = await SharedPreferences.getInstance();
-                        if(caughtList.contains(name.text)){
-                          caughtList.remove(name.text);
-                          print(caughtList);
-                          prefs.setStringList('caught', caughtList);
-                          setState(() {});
-
-                        }
-                        else{
-                          caughtList.add(name.text);
-                          print(caughtList);
-                          prefs.setStringList('caught', caughtList);
-                          setState(() {});
-                        }
-                      }
-                    }),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(20)),
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MyCustomRoute(builder: (context) => Checklist()),
+                        );
+                      },
+                      child: Container(
+                        child: CircleAvatar(
+                          backgroundColor: Color(0xff75CBB5),
+                          child: SizedBox(
+                            width: ScreenUtil().setWidth(40),
+                            height: ScreenUtil().setHeight(40),
+                            child: Image.asset('images/list.png'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: ScreenUtil().setWidth(20)),
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MyCustomRoute(builder: (context) => Home()),
+                        );
+                      },
+                      child: Container(
+                        child: CircleAvatar(
+                          backgroundColor: Color(0xff75CBB5),
+                          child: SizedBox(
+                            width: ScreenUtil().setWidth(40),
+                            height: ScreenUtil().setHeight(40),
+                            child: Image.asset('images/homeHouse.png'),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                   Expanded(
                     flex: 10,
                     child: SizedBox(
-                      height: 40,
+                      height: ScreenUtil().setHeight(75),
                       child: TextField(
                         focusNode: _focus,
                         style: TextStyle(color: Colors.white,fontSize: 20,height: 1.4),
@@ -182,8 +228,6 @@ class _FishState extends State<Fish> {
                       ),
                     ),
                   ),
-
-
                 ],
               ),
             ),
@@ -205,12 +249,11 @@ class _FishState extends State<Fish> {
                        },
                        child: CircleAvatar(
                          backgroundColor: Color(0xfff5f7e1),
-                         radius: 25,
+                         radius: 15,
                          child: Padding(
-                           padding: const EdgeInsets.all(10),
+                           padding: const EdgeInsets.all(5),
                            child: Image.asset('images/butterflyDe.png'),
                          ),
-
                        ),
                      ),
                    ),
@@ -218,10 +261,29 @@ class _FishState extends State<Fish> {
                      padding: const EdgeInsets.fromLTRB(8,0,0,0),
                      child: CircleAvatar(
                        backgroundColor: Color(0xfff5f7e1),
-                       radius: 25,
+                       radius: 15,
                        child: Padding(
-                         padding: const EdgeInsets.all(10),
+                         padding: const EdgeInsets.all(5),
                          child: Image.asset('images/fish.png'),
+                       ),
+                     ),
+                   ),
+                   Padding(
+                     padding: const EdgeInsets.fromLTRB(8,0,0,0),
+                     child: GestureDetector(
+                       onTap: (){
+                         Navigator.push(
+                           context,
+                           MyCustomRoute(builder: (context) => Insects()),
+                         );
+                       },
+                       child: CircleAvatar(
+                         backgroundColor: Color(0xfff5f7e1),
+                         radius: 15,
+                         child: Padding(
+                           padding: const EdgeInsets.all(5),
+                           child: Image.asset('images/fossilDe.png'),
+                         ),
                        ),
                      ),
                    ),
@@ -230,34 +292,60 @@ class _FishState extends State<Fish> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: Container(
-                    height: 40,
-                    width: 100,
+                    height: ScreenUtil().setHeight(75),
+                    width: ScreenUtil().setWidth(110),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
                       color: Color(0xffCCBD73),
                     ),
-                    child: Center(
-                        child: Text('${caughtList.length}/${fishlist.length}',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w100),)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        CustomText(text: '10',size: ScreenUtil().setSp(30),bold: false,),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
+                        SizedBox(
+                            width: ScreenUtil().setWidth(30),
+                            height: ScreenUtil().setHeight(30),
+                            child: Image.asset('images/homeOwl.png')),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 5),
+                  child: Container(
+                    height: ScreenUtil().setHeight(75),
+                    width: ScreenUtil().setWidth(110),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: Color(0xffCCBD73),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        CustomText(text: '10',size: ScreenUtil().setSp(30),bold: false,),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
+                        SizedBox(
+                            width: ScreenUtil().setWidth(30),
+                            height: ScreenUtil().setHeight(30),
+                            child: Image.asset('images/homeHook.png')),
+                      ],
+                    ),
                   ),
                 ),
                 Container(
-                  height: 40,
-                  width: 110,
+                  height: ScreenUtil().setHeight(75),
+                  width: ScreenUtil().setWidth(210),
                   margin: EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(40),
                     color: Color(0xffCCBD73),
                   ),
                   child: Center(
-                      child: Text('$price Bells',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w100),)),
+                      child: CustomText(text: '$price Bells',bold: false,size: ScreenUtil().setSp(32),)),
                 ),
-
-
-
               ],
             ),
-
-
 
             Divider(
               color: Color(0xffB6A977),
@@ -265,7 +353,6 @@ class _FishState extends State<Fish> {
               indent: 10,
               endIndent: 10,
             ),
-
 
             Expanded(
               child: fishlist != null?GridView.builder(
@@ -296,6 +383,7 @@ class _FishState extends State<Fish> {
                     child: GestureDetector(
                       onTap: (){
                         setState(() {
+
                           for(int x=0;x<fishlist.length;x++){
                             if(x==i){
                               continue;
@@ -307,6 +395,7 @@ class _FishState extends State<Fish> {
                             select[i] = true;
                             price = newPrice;
                             name.text = newName;
+                            _settingModalBottomSheet(context);
                           }else{
                             select[i] = false;
                             name.clear();
@@ -328,8 +417,23 @@ class _FishState extends State<Fish> {
                             Align(
                               alignment: Alignment.topRight,
                               child: Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: CircleAvatar(radius: 5,backgroundColor: dotColor,),
+                                padding: EdgeInsets.only(right: ScreenUtil().setWidth(15)),
+                                child: Container(
+                                    width: ScreenUtil().setWidth(30),
+                                    height: ScreenUtil().setHeight(30),
+                                    //color: Colors.green,
+                                    child: Center(child: Image.asset('images/bannerHook.png',fit: BoxFit.contain,))),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: Padding(
+                                padding: EdgeInsets.only(right: ScreenUtil().setWidth(45)),
+                                child: Container(
+                                    width: ScreenUtil().setWidth(30),
+                                    height: ScreenUtil().setHeight(30),
+                                    //color: Colors.green,
+                                    child: Center(child: Image.asset('images/bannerOwl.png',fit: BoxFit.contain,))),
                               ),
                             )
                           ],

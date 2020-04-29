@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
                       child: IconButton(icon: Icon(Icons.dehaze,color: Colors.white,), onPressed: (){
                         Navigator.push(
                           context,
-                          MyCustomRoute(builder: (context) => Checklist()),
+                          MyCustomRoute(builder: (context) => Settings()),
                         );
                       }),
                     )),

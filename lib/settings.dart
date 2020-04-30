@@ -3,9 +3,54 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:nookknack/widgets/button.dart';
 import 'package:nookknack/widgets/custom-text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
-class Settings extends StatelessWidget {
+class Settings extends StatefulWidget {
+  @override
+  _SettingsState createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
+  Color nColor;
+  Color sColor;
+  bool nBorder;
+  bool sBorder;
+  getDetails() async {
+    SharedPreferences prefs= await SharedPreferences.getInstance();
+    var location = prefs.getString('location');
+    if(location==null){
+      setState(() {
+        nColor = Color(0xff75CBB5);
+        sColor = Colors.transparent;
+        nBorder = false;
+        sBorder = true;
+      });
+    }
+    else if(location=='n'){
+      setState(() {
+        nColor = Color(0xff75CBB5);
+        sColor = Colors.transparent;
+        nBorder = false;
+        sBorder = true;
+      });
+    }
+    else if(location=='s'){
+      setState(() {
+        sColor = Color(0xff75CBB5);
+        nColor = Colors.transparent;
+        sBorder = false;
+        nBorder = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getDetails();
+  }
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: false);
@@ -46,14 +91,22 @@ class Settings extends StatelessWidget {
                 SizedBox(height: ScreenUtil().setHeight(40),),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal :ScreenUtil().setWidth(50)),
-                  child: Button(text: 'Northern',color: Color(0xff75CBB5),onclick: (){},isBorder: false,),
+                  child: Button(text: 'Northern',color: nColor,isBorder: nBorder,onclick:() async {
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    prefs.setString('location',"n");
+                    getDetails();
+                  },),
                 ),
                 SizedBox(height: ScreenUtil().setHeight(30),),
                 CustomText(text: 'OR',size: ScreenUtil().setSp(40),),
                 SizedBox(height: ScreenUtil().setHeight(30),),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(50)),
-                  child: Button(text: 'Northern',color: Colors.transparent,onclick: (){}),
+                  child: Button(text: 'Sothern',color: sColor,isBorder: sBorder,onclick: () async {
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    prefs.setString('location', 's');
+                    getDetails();
+                  }),
                 ),
                 SizedBox(height: ScreenUtil().setHeight(70),),
                 Padding(

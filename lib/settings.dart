@@ -2,8 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:nookknack/home.dart';
+import 'package:nookknack/route-animation.dart';
+import 'package:nookknack/sign-in.dart';
 import 'package:nookknack/widgets/button.dart';
 import 'package:nookknack/widgets/custom-text.dart';
+import 'package:nookknack/widgets/toast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -71,7 +75,10 @@ class _SettingsState extends State<Settings> {
                     child: Padding(
                       padding: EdgeInsets.all(ScreenUtil().setWidth(20)),
                       child: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.white,), onPressed: (){
-                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MyCustomRoute(builder: (context) => Home()),
+                        );
                       }),
                     )),
                 SizedBox(
@@ -113,18 +120,68 @@ class _SettingsState extends State<Settings> {
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(50)),
                   child: Button(text: 'Reset all data',color: Colors.transparent,onclick: () async {
+                    ToastBar(color: Colors.orange,text: 'Please wait...').show();
                     SharedPreferences prefs = await SharedPreferences.getInstance();
                     prefs.setString('location', 'n');
                     String email = prefs.getString('email');
                     CollectionReference colref = Firestore.instance.collection('test');
-                    var sub = await colref.where('donated',arrayContains: email).getDocuments();
-                    var list = sub.documents;
+                    var caughtsub = await colref.where('caught',arrayContains: email).getDocuments();
+                    var caughtlist = caughtsub.documents;
 
-                    for(int i=0;i<list.length;i++){
-
-                      await colref.document(list[i].documentID).updateData(data)
+                    for(int i=0;i<caughtlist.length;i++){
+                      List<String> List1 = List<String>.from(caughtlist[i]['caught']);
+                      List1.remove(email);
+                      await colref.document(caughtlist[i].documentID).updateData({
+                        'caught': List1
+                      });
                     }
 
+                    var donatesub = await colref.where('donated',arrayContains: email).getDocuments();
+                    var donatelist = donatesub.documents;
+
+                    for(int i=0;i<donatelist.length;i++){
+                      List<String> List1 = List<String>.from(donatelist[i]['caught']);
+                      List1.remove(email);
+                      await colref.document(donatelist[i].documentID).updateData({
+                        'donated': List1
+                      });
+                    }
+
+                    await Firestore.instance.collection('users').document(email).updateData({
+                      'house': 0,
+                      'ramp': 0,
+                      'bridge': 0,
+                      'turnip': 0,
+                      'apple': false,
+                      'cherry': false,
+                      'orange': false,
+                      'peach': false,
+                      'coconut': false,
+                      'pear': false,
+                      'lilly1': false,
+                      'lilly2': false,
+                      'lilly3': false,
+                      'rose1': false,
+                      'rose2': false,
+                      'list1': false,
+                      'list2': false,
+                      'list3': false,
+                      'list4': false,
+                      'list5': false,
+                      'list6': false,
+                      'list7': false,
+                      'list8': false,
+                      'list9': false,
+                      'list10': false,
+                      'list11': false,
+                      'list12': false,
+                      'list13': false,
+                      'list14': false,
+                      'list15': false,
+                      'list16': false,
+                    });
+
+                    ToastBar(text: 'All Done!',color: Colors.green).show();
 
                   }),
                 ),
@@ -134,6 +191,10 @@ class _SettingsState extends State<Settings> {
                   child: Button(text: 'Logout',color: Colors.transparent,onclick: () async {
                     SharedPreferences prefs = await SharedPreferences.getInstance();
                     prefs.setString('email', null);
+                    Navigator.push(
+                      context,
+                      MyCustomRoute(builder: (context) => SignIn()),
+                    );
                   }),
                 ),
               ],

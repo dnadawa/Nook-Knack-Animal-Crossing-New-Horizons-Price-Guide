@@ -25,7 +25,9 @@ class _MyAppState extends State<MyApp> {
   String email;
   getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    email = prefs.getString('email');
+    setState(() {
+      email = prefs.getString('email');
+    });
   }
   @override
   void initState() {

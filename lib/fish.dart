@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:nookknack/checklist.dart';
+import 'package:nookknack/fossil.dart';
 import 'package:nookknack/home.dart';
 import 'package:nookknack/route-animation.dart';
 import 'package:nookknack/widgets/custom-text.dart';
@@ -704,7 +705,7 @@ class _FishState extends State<Fish> {
                           onTap: (){
                             Navigator.push(
                               context,
-                              MyCustomRoute(builder: (context) => Insects()),
+                              MyCustomRoute(builder: (context) => Fossils()),
                             );
                           },
                           child: CircleAvatar(

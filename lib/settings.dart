@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
@@ -111,7 +112,21 @@ class _SettingsState extends State<Settings> {
                 SizedBox(height: ScreenUtil().setHeight(70),),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(50)),
-                  child: Button(text: 'Reset all data',color: Colors.transparent,onclick: (){}),
+                  child: Button(text: 'Reset all data',color: Colors.transparent,onclick: () async {
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    prefs.setString('location', 'n');
+                    String email = prefs.getString('email');
+                    CollectionReference colref = Firestore.instance.collection('test');
+                    var sub = await colref.where('donated',arrayContains: email).getDocuments();
+                    var list = sub.documents;
+
+                    for(int i=0;i<list.length;i++){
+
+                      await colref.document(list[i].documentID).updateData(data)
+                    }
+
+
+                  }),
                 ),
                 SizedBox(height: ScreenUtil().setHeight(30),),
                 Padding(

@@ -4,21 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:nookknack/checklist.dart';
 import 'package:nookknack/fish.dart';
-import 'package:nookknack/fossil.dart';
 import 'package:nookknack/home.dart';
 import 'package:nookknack/route-animation.dart';
 import 'package:nookknack/widgets/custom-text.dart';
-import 'package:nookknack/widgets/month.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import 'insects.dart';
 
-class Insects extends StatefulWidget {
+
+class Fossils extends StatefulWidget {
   @override
-  _InsectsState createState() => _InsectsState();
+  _FossilsState createState() => _FossilsState();
 }
 
-class _InsectsState extends State<Insects> {
+class _FossilsState extends State<Fossils> {
   final CollectionReference collectionReference  = Firestore.instance.collection("test");
   FocusNode _focus = new FocusNode();
   var fishlist;
@@ -27,43 +27,19 @@ class _InsectsState extends State<Insects> {
   String infoName = 'Loading...';
   String infoImage = '';
   String infoPrice = '0';
-  String infoCJ = '0';
-  bool infoModel = false;
-  String infoLocation = '';
-  String infoTime = '';
   List<bool> select = [];
   List newNameList = [];
   List newPriceList = [];
   List newImageList = [];
-  List newCJList = [];
-  List<bool> newModelList = [];
-  List newOceanList = [];
-  List newTimeList = [];
-  List<List> newMonthListN = [];
-  List<List> newMonthListS = [];
   List<List> caughtList = [];
   List<List> donatedList = [];
   var index;
-  bool jan = false;
-  bool feb = false;
-  bool mar = false;
-  bool apr = false;
-  bool may = false;
-  bool jun = false;
-  bool jul = false;
-  bool aug = false;
-  bool sep = false;
-  bool oct = false;
-  bool nov = false;
-  bool dec = false;
   bool isDonated = false;
   bool isCaught = false;
-  String location;
   String email;
   List<String> nameList = [];
   TextEditingController name = TextEditingController();
   bool isFocused = false;
-  Color dotButtonColor = Color(0xffB6A977);
   PanelController panelController = PanelController();
   List newDonated;
   List newCaught;
@@ -71,7 +47,6 @@ class _InsectsState extends State<Insects> {
   int caughtCount;
   getList() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    location = prefs.getString('location');
     email = prefs.getString('email');
     panelController.hide();
   }
@@ -102,7 +77,7 @@ class _InsectsState extends State<Insects> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-          image: DecorationImage(image: AssetImage('images/insectback.png'),fit: BoxFit.fill)
+          image: DecorationImage(image: AssetImage('images/fossilback.png'),fit: BoxFit.fill)
       ),
       child: Stack(
         children: <Widget>[
@@ -179,7 +154,7 @@ class _InsectsState extends State<Insects> {
                   child: SizedBox(
                     width: ScreenUtil().setWidth(50),
                     height: ScreenUtil().setHeight(50),
-                    child: Image.asset(isCaught?'images/net.png':'images/netDe.png',),
+                    child: Image.asset(isCaught?'images/shovel.png':'images/shovelDe.png',),
                   ),
                 ),
               ],
@@ -192,10 +167,10 @@ class _InsectsState extends State<Insects> {
 
   Widget _floatingPanel(){
     return Container(
-      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(280)),
+      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(430)),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
-          image: DecorationImage(image: AssetImage('images/insectback.png'),fit: BoxFit.fill)
+          image: DecorationImage(image: AssetImage('images/fossilback.png'),fit: BoxFit.fill)
       ),
       child: Stack(
         children: <Widget>[
@@ -218,7 +193,7 @@ class _InsectsState extends State<Insects> {
                   ),
                   Row(
                     children: <Widget>[
-                      SizedBox(width: ScreenUtil().setWidth(30),),
+                      SizedBox(width: ScreenUtil().setWidth(200),),
                       CircleAvatar(
                         backgroundColor: Color(0xff75CBB5),
                         radius: 15,
@@ -229,36 +204,31 @@ class _InsectsState extends State<Insects> {
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
                       SizedBox(
-                          width: ScreenUtil().setWidth(230),
                           child: CustomText(text: '$infoPrice Bells',size: ScreenUtil().setSp(32),)),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Image.asset('images/flick.png')),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10),),
-                      CustomText(text: '$infoCJ Bells',size: ScreenUtil().setSp(32),)
                     ],
                   ),
                   SizedBox(height: ScreenUtil().setHeight(20),),
                   Row(
                     children: <Widget>[
-                      SizedBox(width: ScreenUtil().setWidth(30),),
+                      SizedBox(width: ScreenUtil().setWidth(200),),
                       CircleAvatar(
                         backgroundColor: Color(0xff75CBB5),
                         radius: 15,
                         child: SizedBox(
                             width: ScreenUtil().setWidth(40),
                             height: ScreenUtil().setHeight(40),
-                            child: Image.asset(isCaught?'images/net.png':'images/netDe.png')),
+                            child: Image.asset(isCaught?'images/shovel.png':'images/shovelDe.png')),
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
                       SizedBox(
                           width: ScreenUtil().setWidth(230),
                           child: CustomText(text: isCaught?'Caught':'Not Caught',size: ScreenUtil().setSp(32),)),
+                    ],
+                  ),
+                  SizedBox(height: ScreenUtil().setHeight(20),),
+                  Row(
+                    children: <Widget>[
+                      SizedBox(width: ScreenUtil().setWidth(200),),
                       CircleAvatar(
                         backgroundColor: Color(0xff75CBB5),
                         radius: 15,
@@ -271,98 +241,6 @@ class _InsectsState extends State<Insects> {
                       CustomText(text: isDonated?'Donated':'Not Donated',size: ScreenUtil().setSp(32),)
                     ],
                   ),
-                  SizedBox(height: ScreenUtil().setHeight(20),),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(width: ScreenUtil().setWidth(30),),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Image.asset(infoModel?'images/model.png':'images/modelDe.png')),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10),),
-                      SizedBox(
-                          width: ScreenUtil().setWidth(300),
-                          child: CustomText(text: infoModel?'Model':'No Model',size: ScreenUtil().setSp(32),)),
-                    ],
-                  ),
-                  SizedBox(height: ScreenUtil().setHeight(20),),
-                  CustomText(text:'Info',size: ScreenUtil().setSp(50),bold: false,),
-                  SizedBox(height: ScreenUtil().setHeight(10),),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(width: ScreenUtil().setWidth(30),),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Image.asset('images/location.png')),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10),),
-                      SizedBox(
-                          width: ScreenUtil().setWidth(225),
-                          child: CustomText(text: infoLocation,size: ScreenUtil().setSp(30),)),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Image.asset('images/time.png')),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10),),
-                      SizedBox(
-                          width: ScreenUtil().setWidth(125),
-                          child: CustomText(text: infoTime,size: ScreenUtil().setSp(24),)),
-                    ],
-                  ),
-                  SizedBox(height: ScreenUtil().setHeight(20),),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(width: ScreenUtil().setWidth(30),),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Padding(
-                              padding: EdgeInsets.all(2),
-                              child: Image.asset('images/calander.png'),
-                            )),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10),),
-                      MonthBox(text: 'Jan',color: jan==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Feb',color: feb==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Mar',color: mar==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Apr',color: apr==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'May',color: may==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Jun',color: jun==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                    ],
-                  ),
-                  SizedBox(height: ScreenUtil().setHeight(10),),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(width: ScreenUtil().setWidth(30),),
-                      CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        radius: 15,
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10),),
-                      MonthBox(text: 'Jul',color: jul==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Aug',color: aug==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Sep',color: sep==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Oct',color: oct==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Nov',color: nov==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Dec',color: dec==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                    ],
-                  ),
-                  //SizedBox(height: ScreenUtil().setHeight(100),)
                 ],
               ),
             ),
@@ -424,7 +302,7 @@ class _InsectsState extends State<Insects> {
                   child: SizedBox(
                     width: ScreenUtil().setWidth(50),
                     height: ScreenUtil().setHeight(50),
-                    child: Image.asset(isCaught?'images/net.png':'images/netDe.png',),
+                    child: Image.asset(isCaught?'images/shovel.png':'images/shovelDe.png',),
                   ),
                 ),
               ],
@@ -435,61 +313,6 @@ class _InsectsState extends State<Insects> {
     );
   }
 
-  setMonths(List myList) async {
-    jan = false;
-    feb = false;
-    mar = false;
-    apr = false;
-    may = false;
-    jun = false;
-    jul = false;
-    aug = false;
-    sep = false;
-    oct = false;
-    nov = false;
-    dec = false;
-    for(int y=0;y<=myList.length;y++){
-      if(myList[y]=='jan'){
-        jan = true;
-      }
-      if(myList[y]=='feb'){
-        feb = true;
-      }
-      if(myList[y]=='mar'){
-        mar = true;
-      }
-      if(myList[y]=='apr'){
-        apr = true;
-      }
-      if(myList[y]=='may'){
-        may = true;
-      }
-      if(myList[y]=='jun'){
-        jun = true;
-      }
-      if(myList[y]=='jul'){
-        jul = true;
-      }
-      if(myList[y]=='aug'){
-        aug = true;
-      }
-      if(myList[y]=='sep'){
-        sep = true;
-      }
-      if(myList[y]=='oct'){
-        oct = true;
-      }
-      if(myList[y]=='nov'){
-        nov = true;
-      }
-      if(myList[y]=='dec'){
-        dec = true;
-      }
-    }
-  }
-
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -498,7 +321,7 @@ class _InsectsState extends State<Insects> {
     setState(() {
       _focus.addListener(_onFocusChange);
     });
-    subscription = collectionReference..where('type',isEqualTo: 'insect').orderBy('name').snapshots().listen((datasnapshot){
+    subscription = collectionReference..where('type',isEqualTo: 'fossil').orderBy('name').snapshots().listen((datasnapshot){
       setState(() {
         fishlist = datasnapshot.documents;
       });
@@ -530,7 +353,7 @@ class _InsectsState extends State<Insects> {
           controller: panelController,
           borderRadius: BorderRadius.circular(40),
           margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
-          maxHeight: ScreenUtil().setHeight(1225),
+          maxHeight: ScreenUtil().setHeight(1025),
           minHeight: ScreenUtil().setHeight(170),
           backdropEnabled: true,
           renderPanelSheet: false,
@@ -615,11 +438,6 @@ class _InsectsState extends State<Insects> {
                               newNameList.clear();
                               newPriceList.clear();
                               newImageList.clear();
-                              newCJList.clear();
-                              newOceanList.clear();
-                              newTimeList.clear();
-                              newMonthListN.clear();
-                              newMonthListS.clear();
                               for(int j=0;j<nameList.length;j++){
                                 if(nameList[j].contains(x[0].toUpperCase()+x.substring(1))){
                                   print('there is a match ${nameList[j]}');
@@ -627,12 +445,6 @@ class _InsectsState extends State<Insects> {
                                   newNameList.add(nameList[j]);
                                   newPriceList.add(fishlist[j].data['price']);
                                   newImageList.add(fishlist[j].data['image']);
-                                  newCJList.add(fishlist[j].data['cj']);
-                                  newModelList.add(fishlist[j].data['model']);
-                                  newOceanList.add(fishlist[j].data['location']);
-                                  newTimeList.add(fishlist[j].data['time']);
-                                  newMonthListN.add(fishlist[j].data['monthN']);
-                                  newMonthListS.add(fishlist[j].data['monthS']);
                                   caughtList.add(fishlist[j].data['caught']);
                                   donatedList.add(fishlist[j].data['donated']);
                                 }
@@ -655,13 +467,18 @@ class _InsectsState extends State<Insects> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10,0,0,0),
                         child: GestureDetector(
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MyCustomRoute(builder: (context) => Insects()),
+                            );
+                          },
                           child: CircleAvatar(
                             backgroundColor: Color(0xfff5f7e1),
                             radius: 15,
                             child: Padding(
                               padding: const EdgeInsets.all(5),
-                              child: Image.asset('images/butterfly.png'),
+                              child: Image.asset('images/butterflyDe.png'),
                             ),
                           ),
                         ),
@@ -688,18 +505,13 @@ class _InsectsState extends State<Insects> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(8,0,0,0),
                         child: GestureDetector(
-                          onTap: (){
-                            Navigator.push(
-                              context,
-                              MyCustomRoute(builder: (context) => Fossils()),
-                            );
-                          },
+                          onTap: (){},
                           child: CircleAvatar(
                             backgroundColor: Color(0xfff5f7e1),
                             radius: 15,
                             child: Padding(
                               padding: const EdgeInsets.all(5),
-                              child: Image.asset('images/fossilDe.png'),
+                              child: Image.asset('images/fossil.png'),
                             ),
                           ),
                         ),
@@ -710,7 +522,7 @@ class _InsectsState extends State<Insects> {
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: GestureDetector(
                       onTap: (){
-                        subscription = collectionReference.where('donated',arrayContains: email).where('type',isEqualTo: 'insect').orderBy('name').snapshots().listen((datasnapshot){
+                        subscription = collectionReference.where('donated',arrayContains: email).where('type',isEqualTo: 'fossil').orderBy('name').snapshots().listen((datasnapshot){
                           setState(() {
                             fishlist = datasnapshot.documents;
                           });
@@ -748,7 +560,7 @@ class _InsectsState extends State<Insects> {
                     padding: const EdgeInsets.only(right: 5),
                     child: GestureDetector(
                       onTap: (){
-                        subscription = collectionReference.where('caught', arrayContains: email).where('type',isEqualTo: 'insect').orderBy('name').snapshots().listen((datasnapshot){
+                        subscription = collectionReference.where('caught', arrayContains: email).where('type',isEqualTo: 'fossil').orderBy('name').snapshots().listen((datasnapshot){
                           setState(() {
                             fishlist = datasnapshot.documents;
                           });
@@ -776,7 +588,7 @@ class _InsectsState extends State<Insects> {
                             SizedBox(
                                 width: ScreenUtil().setWidth(30),
                                 height: ScreenUtil().setHeight(30),
-                                child: Image.asset('images/homeNet.png')),
+                                child: Image.asset('images/homeShovel.png')),
                           ],
                         ),
                       ),
@@ -819,12 +631,6 @@ class _InsectsState extends State<Insects> {
                     String url =  isFocused==false?fishlist[i].data['image']:newImageList[i];
                     String newPrice =  isFocused==false?fishlist[i].data['price']:newPriceList[i];
                     String newName =  isFocused==false?fishlist[i].data['name']:newNameList[i];
-                    String newCj =  isFocused==false?fishlist[i].data['cj']:newCJList[i];
-                    bool newModel =  isFocused==false?fishlist[i].data['model']:newModelList[i];
-                    String newLocation =  isFocused==false?fishlist[i].data['location']:newOceanList[i];
-                    String newTime =  isFocused==false?fishlist[i].data['time']:newTimeList[i];
-                    List newMonthN =  isFocused==false?fishlist[i].data['monthN']:newMonthListN[i];
-                    List newMonthS =  isFocused==false?fishlist[i].data['monthS']:newMonthListS[i];
                     List donated =  isFocused==false?fishlist[i].data['donated']:donatedList[i];
                     List caught =  isFocused==false?fishlist[i].data['caught']:caughtList[i];
                     List<String> newDonatedforBanner = List<String>.from(donated);
@@ -871,14 +677,6 @@ class _InsectsState extends State<Insects> {
                               select[x] = false;
                             }
 
-                            if(location==null||location=='n'){
-                              setMonths(newMonthN);
-                            }
-                            else{
-                              setMonths(newMonthS);
-                            }
-
-
                             if(select[i]==false){
                               select[i] = true;
                               price = newPrice;
@@ -886,10 +684,6 @@ class _InsectsState extends State<Insects> {
                               infoName = newName;
                               infoImage = url;
                               infoPrice = newPrice;
-                              infoCJ = newCj;
-                              infoModel = newModel;
-                              infoLocation = newLocation;
-                              infoTime = newTime;
                               panelController.show();
                             }else{
                               select[i] = false;
@@ -920,7 +714,7 @@ class _InsectsState extends State<Insects> {
                                         width: ScreenUtil().setWidth(30),
                                         height: ScreenUtil().setHeight(30),
                                         //color: Colors.green,
-                                        child: Center(child: Image.asset('images/bannerNet.png',fit: BoxFit.contain,))),
+                                        child: Center(child: Image.asset('images/bannerShovel.png',fit: BoxFit.contain,))),
                                   ),
                                 ),
                               ),
@@ -946,9 +740,6 @@ class _InsectsState extends State<Insects> {
                   },
                 ): new Center(child: CircularProgressIndicator()),
               )
-
-
-
             ],
           ),
         ),

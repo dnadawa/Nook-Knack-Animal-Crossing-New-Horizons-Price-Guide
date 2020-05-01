@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:nookknack/fossil.dart';
 import 'package:nookknack/insects.dart';
 import 'package:nookknack/route-animation.dart';
 import 'package:nookknack/settings.dart';
@@ -25,8 +26,11 @@ class _HomeState extends State<Home> {
   int caughtFishCount;
   int caughtInsectCount;
   int donatedInsectCount;
+  int donatedFossilCount;
+  int caughtFossilCount;
   var fishList;
   var insectList;
+  var fossilList;
   getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String email = prefs.getString('email');
@@ -39,10 +43,15 @@ class _HomeState extends State<Home> {
     var insectSub = await Firestore.instance.collection('test').where('type', isEqualTo: 'insect').getDocuments();
     insectList = insectSub.documents;
 
+    var fossilSub = await Firestore.instance.collection('test').where('type', isEqualTo: 'fossil').getDocuments();
+    fossilList = fossilSub.documents;
+
     donatedFishCount = 0;
     caughtFishCount = 0;
     donatedInsectCount = 0;
     caughtInsectCount = 0;
+    donatedFossilCount=0;
+    caughtFossilCount=0;
     for(int i=0;i<fishList.length;i++){
       List donated = fishList[i]['donated'];
       List caught = fishList[i]['caught'];
@@ -62,6 +71,17 @@ class _HomeState extends State<Home> {
       }
       if(caught.contains(email)){
         caughtInsectCount++;
+      }
+    }
+
+    for(int i=0;i<fossilList.length;i++){
+      List donated = fossilList[i]['donated'];
+      List caught = fossilList[i]['caught'];
+      if(donated.contains(email)){
+        donatedFossilCount++;
+      }
+      if(caught.contains(email)){
+        caughtFossilCount++;
       }
     }
 
@@ -157,15 +177,23 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  Column(
-                    children: <Widget>[
-                      SizedBox(
-                        width: ScreenUtil().setWidth(100),
-                        height: ScreenUtil().setHeight(100),
-                        child: Image.asset('images/homeFossil.png'),
-                      ),
-                      CustomText(text: 'Fossil',size: ScreenUtil().setSp(30),),
-                    ],
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MyCustomRoute(builder: (context) => Fossils()),
+                      );
+                    },
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(100),
+                          height: ScreenUtil().setHeight(100),
+                          child: Image.asset('images/homeFossil.png'),
+                        ),
+                        CustomText(text: 'Fossil',size: ScreenUtil().setSp(30),),
+                      ],
+                    ),
                   ),
                 ],
                 ),
@@ -249,7 +277,9 @@ class _HomeState extends State<Home> {
                       child: Image.asset('images/homeFossil.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
-                    CustomText(text: '12/80',size: ScreenUtil().setSp(35),),
+                    SizedBox(
+                        width: ScreenUtil().setWidth(105),
+                        child: CustomText(text: '$donatedFossilCount/${fossilList.length}',size: ScreenUtil().setSp(35),align: TextAlign.end,)),
                     SizedBox(width: ScreenUtil().setWidth(10),),
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
@@ -257,7 +287,9 @@ class _HomeState extends State<Home> {
                       child: Image.asset('images/homeOwl.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
-                    CustomText(text: '12/80',size: ScreenUtil().setSp(35),),
+                    SizedBox(
+                        width: ScreenUtil().setWidth(105),
+                        child: CustomText(text: '$caughtFossilCount/${fossilList.length}',size: ScreenUtil().setSp(35),align: TextAlign.end,)),
                     SizedBox(width: ScreenUtil().setWidth(10),),
                     SizedBox(
                       height: ScreenUtil().setHeight(50),

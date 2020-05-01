@@ -116,7 +116,10 @@ class _SettingsState extends State<Settings> {
                 SizedBox(height: ScreenUtil().setHeight(30),),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(50)),
-                  child: Button(text: 'Logout',color: Colors.transparent,onclick: (){}),
+                  child: Button(text: 'Logout',color: Colors.transparent,onclick: () async {
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                    prefs.setString('email', null);
+                  }),
                 ),
               ],
             ),

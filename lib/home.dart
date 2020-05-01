@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:nookknack/checklist.dart';
+import 'package:nookknack/insects.dart';
 import 'package:nookknack/route-animation.dart';
 import 'package:nookknack/settings.dart';
 import 'package:nookknack/widgets/custom-text.dart';
@@ -21,11 +21,50 @@ class _HomeState extends State<Home> {
   String house = '0';
   String ramp = '0';
   String bridge = '0';
+  int donatedFishCount;
+  int caughtFishCount;
+  int caughtInsectCount;
+  int donatedInsectCount;
+  var fishList;
+  var insectList;
   getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String email = prefs.getString('email');
     var sub = await Firestore.instance.collection('users').where('email',isEqualTo: email).getDocuments();
     var list = sub.documents;
+
+    var fishSub = await Firestore.instance.collection('test').where('type',isEqualTo:'fish').getDocuments();
+    fishList = fishSub.documents;
+
+    var insectSub = await Firestore.instance.collection('test').where('type', isEqualTo: 'insect').getDocuments();
+    insectList = insectSub.documents;
+
+    donatedFishCount = 0;
+    caughtFishCount = 0;
+    donatedInsectCount = 0;
+    caughtInsectCount = 0;
+    for(int i=0;i<fishList.length;i++){
+      List donated = fishList[i]['donated'];
+      List caught = fishList[i]['caught'];
+      if(donated.contains(email)){
+        donatedFishCount++;
+      }
+      if(caught.contains(email)){
+        caughtFishCount++;
+      }
+    }
+
+    for(int i=0;i<insectList.length;i++){
+      List donated = insectList[i]['donated'];
+      List caught = insectList[i]['caught'];
+      if(donated.contains(email)){
+        donatedInsectCount++;
+      }
+      if(caught.contains(email)){
+        caughtInsectCount++;
+      }
+    }
+
     setState(() {
       house = list[0]['house'].toString();
       ramp = list[0]['ramp'].toString();
@@ -51,7 +90,7 @@ class _HomeState extends State<Home> {
           decoration: BoxDecoration(
               image: DecorationImage(image: AssetImage('images/homeback.png'),fit: BoxFit.fill)
           ),
-          child: SingleChildScrollView(
+          child: fishList!=null?SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 Align(
@@ -82,15 +121,23 @@ class _HomeState extends State<Home> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      SizedBox(
-                        width: ScreenUtil().setWidth(100),
-                        height: ScreenUtil().setHeight(100),
-                        child: Image.asset('images/homeButterfly.png'),
-                      ),
-                      CustomText(text: 'Insect',size: ScreenUtil().setSp(30),),
-                    ],
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MyCustomRoute(builder: (context) => Insects()),
+                      );
+                    },
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(100),
+                          height: ScreenUtil().setHeight(100),
+                          child: Image.asset('images/homeButterfly.png'),
+                        ),
+                        CustomText(text: 'Insect',size: ScreenUtil().setSp(30),),
+                      ],
+                    ),
                   ),
                   GestureDetector(
                     onTap: (){
@@ -136,7 +183,9 @@ class _HomeState extends State<Home> {
                       child: Image.asset('images/homeButterfly.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
-                    CustomText(text: '12/80',size: ScreenUtil().setSp(35),),
+                    SizedBox(
+                        width: ScreenUtil().setWidth(105),
+                        child: CustomText(text: '$donatedInsectCount/${insectList.length}',size: ScreenUtil().setSp(35),align: TextAlign.end,)),
                     SizedBox(width: ScreenUtil().setWidth(10),),
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
@@ -144,7 +193,9 @@ class _HomeState extends State<Home> {
                       child: Image.asset('images/homeOwl.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
-                    CustomText(text: '12/80',size: ScreenUtil().setSp(35),),
+                    SizedBox(
+                        width: ScreenUtil().setWidth(105),
+                        child: CustomText(text: '$caughtInsectCount/${insectList.length}',size: ScreenUtil().setSp(35),align: TextAlign.end,)),
                     SizedBox(width: ScreenUtil().setWidth(10),),
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
@@ -165,7 +216,9 @@ class _HomeState extends State<Home> {
                       child: Image.asset('images/homeFish.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
-                    CustomText(text: '12/80',size: ScreenUtil().setSp(35),),
+                    SizedBox(
+                        width: ScreenUtil().setWidth(105),
+                        child: CustomText(text: '$donatedFishCount/${fishList.length}',size: ScreenUtil().setSp(35),align: TextAlign.end,)),
                     SizedBox(width: ScreenUtil().setWidth(10),),
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
@@ -173,7 +226,9 @@ class _HomeState extends State<Home> {
                       child: Image.asset('images/homeOwl.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
-                    CustomText(text: '12/80',size: ScreenUtil().setSp(35),),
+                    SizedBox(
+                        width: ScreenUtil().setWidth(105),
+                        child: CustomText(text: '$caughtFishCount/${fishList.length}',size: ScreenUtil().setSp(35),align: TextAlign.end,)),
                     SizedBox(width: ScreenUtil().setWidth(10),),
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
@@ -258,7 +313,7 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-          ),
+          ):Center(child: CircularProgressIndicator(),),
 
         ),
       ),

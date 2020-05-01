@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,8 +43,8 @@ class _FishState extends State<Fish> {
   List newTimeList = [];
   List<List> newMonthListN = [];
   List<List> newMonthListS = [];
-  List<String> caughtList = [];
-  List<String> donatedList = [];
+  List<List> caughtList = [];
+  List<List> donatedList = [];
   var index;
   bool jan = false;
   bool feb = false;
@@ -77,6 +75,7 @@ class _FishState extends State<Fish> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     location = prefs.getString('location');
     email = prefs.getString('email');
+    panelController.hide();
   }
 
   calculateCount(){
@@ -451,6 +450,18 @@ class _FishState extends State<Fish> {
   }
 
   setMonths(List myList) async {
+    jan = false;
+    feb = false;
+    mar = false;
+    apr = false;
+    may = false;
+    jun = false;
+    jul = false;
+    aug = false;
+    sep = false;
+    oct = false;
+    nov = false;
+    dec = false;
     for(int y=0;y<=myList.length;y++){
         if(myList[y]=='jan'){
           jan = true;
@@ -501,7 +512,7 @@ class _FishState extends State<Fish> {
     setState(() {
       _focus.addListener(_onFocusChange);
     });
-    subscription = collectionReference.orderBy('name').snapshots().listen((datasnapshot){
+    subscription = collectionReference..where('type',isEqualTo: 'fish').orderBy('name').snapshots().listen((datasnapshot){
       setState(() {
         fishlist = datasnapshot.documents;
       });
@@ -513,7 +524,7 @@ class _FishState extends State<Fish> {
 
       calculateCount();
     });
-    Timer(Duration(milliseconds: 100), (){panelController.hide();});
+    //Timer(Duration(milliseconds: 50), (){panelController.hide();});
   }
 
   @override
@@ -712,7 +723,7 @@ class _FishState extends State<Fish> {
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: GestureDetector(
                       onTap: (){
-                        subscription = collectionReference.where('donated',arrayContains: email).orderBy('name').snapshots().listen((datasnapshot){
+                        subscription = collectionReference.where('donated',arrayContains: email).where('type',isEqualTo: 'fish').orderBy('name').snapshots().listen((datasnapshot){
                           setState(() {
                             fishlist = datasnapshot.documents;
                           });
@@ -750,7 +761,7 @@ class _FishState extends State<Fish> {
                     padding: const EdgeInsets.only(right: 5),
                     child: GestureDetector(
                       onTap: (){
-                        subscription = collectionReference.where('caught', arrayContains: email).orderBy('name').snapshots().listen((datasnapshot){
+                        subscription = collectionReference.where('caught', arrayContains: email).where('type',isEqualTo: 'fish').orderBy('name').snapshots().listen((datasnapshot){
                           setState(() {
                             fishlist = datasnapshot.documents;
                           });

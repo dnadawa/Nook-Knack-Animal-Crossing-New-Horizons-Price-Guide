@@ -28,7 +28,6 @@ class _InsectsState extends State<Insects> {
   String infoImage = '';
   String infoPrice = '0';
   String infoCJ = '0';
-  bool infoModel = false;
   String infoLocation = '';
   String infoTime = '';
   List<bool> select = [];
@@ -36,13 +35,13 @@ class _InsectsState extends State<Insects> {
   List newPriceList = [];
   List newImageList = [];
   List newCJList = [];
-  List<bool> newModelList = [];
   List newOceanList = [];
   List newTimeList = [];
   List<List> newMonthListN = [];
   List<List> newMonthListS = [];
   List<List> caughtList = [];
   List<List> donatedList = [];
+  List<List> modelList = [];
   var index;
   bool jan = false;
   bool feb = false;
@@ -58,6 +57,7 @@ class _InsectsState extends State<Insects> {
   bool dec = false;
   bool isDonated = false;
   bool isCaught = false;
+  bool isModel = false;
   String location;
   String email;
   List<String> nameList = [];
@@ -67,6 +67,7 @@ class _InsectsState extends State<Insects> {
   PanelController panelController = PanelController();
   List newDonated;
   List newCaught;
+  List newModel;
   int donatedCount;
   int caughtCount;
   getList() async {
@@ -189,6 +190,68 @@ class _InsectsState extends State<Insects> {
       ),
     );
   }
+  onOwlPress(){
+    if(newDonated.contains(email)){
+      newDonated.remove(email);
+      setState(() {
+        isDonated = false;
+      });
+      collectionReference.document(infoName).updateData({
+        'donated': newDonated
+      });
+    }
+    else{
+      newDonated.add(email);
+      setState(() {
+        isDonated = true;
+      });
+      collectionReference.document(infoName).updateData({
+        'donated': newDonated
+      });
+    }
+  }
+
+  onCaughtPress(){
+    if(newCaught.contains(email)){
+      newCaught.remove(email);
+      setState(() {
+        isCaught = false;
+      });
+      collectionReference.document(infoName).updateData({
+        'caught': newCaught
+      });
+    }
+    else{
+      newCaught.add(email);
+      setState(() {
+        isCaught = true;
+      });
+      collectionReference.document(infoName).updateData({
+        'caught': newCaught
+      });
+    }
+  }
+
+  onModelPress(){
+    if(newModel.contains(email)){
+      newModel.remove(email);
+      setState(() {
+        isModel = false;
+      });
+      collectionReference.document(infoName).updateData({
+        'model': newModel
+      });
+    }
+    else{
+      newModel.add(email);
+      setState(() {
+        isModel = true;
+      });
+      collectionReference.document(infoName).updateData({
+        'model': newModel
+      });
+    }
+  }
 
   Widget _floatingPanel(){
     return Container(
@@ -204,6 +267,7 @@ class _InsectsState extends State<Insects> {
               padding: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
+
                 children: <Widget>[
                   SizedBox(
                     width: ScreenUtil().setWidth(100),
@@ -247,46 +311,63 @@ class _InsectsState extends State<Insects> {
                   Row(
                     children: <Widget>[
                       SizedBox(width: ScreenUtil().setWidth(30),),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Image.asset(isCaught?'images/net.png':'images/netDe.png')),
+                      GestureDetector(
+                        onTap: ()=>onCaughtPress(),
+                        child: CircleAvatar(
+                          backgroundColor: Color(0xff75CBB5),
+                          radius: 15,
+                          child: SizedBox(
+                              width: ScreenUtil().setWidth(40),
+                              height: ScreenUtil().setHeight(40),
+                              child: Image.asset(isCaught?'images/net.png':'images/netDe.png')),
+                        ),
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
-                      SizedBox(
-                          width: ScreenUtil().setWidth(230),
-                          child: CustomText(text: isCaught?'Caught':'Not Caught',size: ScreenUtil().setSp(32),)),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
+                      GestureDetector(
+                        onTap: ()=>onCaughtPress(),
                         child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Image.asset(isDonated?'images/owl.png':'images/owlDe.png')),
+                            width: ScreenUtil().setWidth(230),
+                            child: CustomText(text: isCaught?'Caught':'Not Caught',size: ScreenUtil().setSp(32),)),
+                      ),
+                      GestureDetector(
+                        onTap: ()=>onOwlPress(),
+                        child: CircleAvatar(
+                          backgroundColor: Color(0xff75CBB5),
+                          radius: 15,
+                          child: SizedBox(
+                              width: ScreenUtil().setWidth(40),
+                              height: ScreenUtil().setHeight(40),
+                              child: Image.asset(isDonated?'images/owl.png':'images/owlDe.png')),
+                        ),
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
-                      CustomText(text: isDonated?'Donated':'Not Donated',size: ScreenUtil().setSp(32),)
+                      GestureDetector(
+                          onTap: ()=>onOwlPress(),
+                          child: CustomText(text: isDonated?'Donated':'Not Donated',size: ScreenUtil().setSp(32),))
                     ],
                   ),
                   SizedBox(height: ScreenUtil().setHeight(20),),
                   Row(
                     children: <Widget>[
                       SizedBox(width: ScreenUtil().setWidth(30),),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Image.asset(infoModel?'images/model.png':'images/modelDe.png')),
+                      GestureDetector(
+                        onTap: ()=>onModelPress(),
+                        child: CircleAvatar(
+                          backgroundColor: Color(0xff75CBB5),
+                          radius: 15,
+                          child: SizedBox(
+                              width: ScreenUtil().setWidth(40),
+                              height: ScreenUtil().setHeight(40),
+                              child: Image.asset(isModel?'images/model.png':'images/modelDe.png')),
+                        ),
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
-                      SizedBox(
-                          width: ScreenUtil().setWidth(300),
-                          child: CustomText(text: infoModel?'Model':'No Model',size: ScreenUtil().setSp(32),)),
+                      GestureDetector(
+                        onTap: ()=>onModelPress(),
+                        child: SizedBox(
+                            width: ScreenUtil().setWidth(300),
+                            child: CustomText(text: isModel?'Model':'No Model',size: ScreenUtil().setSp(32),)),
+                      ),
                     ],
                   ),
                   SizedBox(height: ScreenUtil().setHeight(20),),
@@ -530,7 +611,7 @@ class _InsectsState extends State<Insects> {
           controller: panelController,
           borderRadius: BorderRadius.circular(40),
           margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
-          maxHeight: ScreenUtil().setHeight(1225),
+          maxHeight: ScreenUtil().setHeight(1275),
           minHeight: ScreenUtil().setHeight(170),
           backdropEnabled: true,
           renderPanelSheet: false,
@@ -628,12 +709,12 @@ class _InsectsState extends State<Insects> {
                                   newPriceList.add(fishlist[j].data['price']);
                                   newImageList.add(fishlist[j].data['image']);
                                   newCJList.add(fishlist[j].data['cj']);
-                                  newModelList.add(fishlist[j].data['model']);
                                   newOceanList.add(fishlist[j].data['location']);
                                   newTimeList.add(fishlist[j].data['time']);
                                   newMonthListN.add(fishlist[j].data['monthN']);
                                   newMonthListS.add(fishlist[j].data['monthS']);
                                   caughtList.add(fishlist[j].data['caught']);
+                                  modelList.add(fishlist[j].data['model']);
                                   donatedList.add(fishlist[j].data['donated']);
                                 }
                               }
@@ -820,13 +901,13 @@ class _InsectsState extends State<Insects> {
                     String newPrice =  isFocused==false?fishlist[i].data['price']:newPriceList[i];
                     String newName =  isFocused==false?fishlist[i].data['name']:newNameList[i];
                     String newCj =  isFocused==false?fishlist[i].data['cj']:newCJList[i];
-                    bool newModel =  isFocused==false?fishlist[i].data['model']:newModelList[i];
                     String newLocation =  isFocused==false?fishlist[i].data['location']:newOceanList[i];
                     String newTime =  isFocused==false?fishlist[i].data['time']:newTimeList[i];
                     List newMonthN =  isFocused==false?fishlist[i].data['monthN']:newMonthListN[i];
                     List newMonthS =  isFocused==false?fishlist[i].data['monthS']:newMonthListS[i];
                     List donated =  isFocused==false?fishlist[i].data['donated']:donatedList[i];
                     List caught =  isFocused==false?fishlist[i].data['caught']:caughtList[i];
+                    List model =  isFocused==false?fishlist[i].data['model']:modelList[i];
                     List<String> newDonatedforBanner = List<String>.from(donated);
                     List<String> newCaughtforBanner = List<String>.from(caught);
                     bool donatedForBanner;
@@ -854,6 +935,7 @@ class _InsectsState extends State<Insects> {
                           setState(() {
                             newDonated = List<String>.from(donated);
                             newCaught = List<String>.from(caught);
+                            newModel = List<String>.from(model);
                             if(newDonated.contains(email)){
                               isDonated = true;
                             }else{
@@ -863,6 +945,11 @@ class _InsectsState extends State<Insects> {
                               isCaught = true;
                             }else{
                               isCaught = false;
+                            }
+                            if(newModel.contains(email)){
+                              isModel = true;
+                            }else{
+                              isModel = false;
                             }
                             for(int x=0;x<fishlist.length;x++){
                               if(x==i){
@@ -887,7 +974,6 @@ class _InsectsState extends State<Insects> {
                               infoImage = url;
                               infoPrice = newPrice;
                               infoCJ = newCj;
-                              infoModel = newModel;
                               infoLocation = newLocation;
                               infoTime = newTime;
                               panelController.show();

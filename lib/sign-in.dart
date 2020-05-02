@@ -91,10 +91,10 @@ class SignIn extends StatelessWidget {
         print("user doesn't exists!");
         await Firestore.instance.collection('users').document(user.email).setData({
           'email': user.email,
-          'house': 0,
-          'ramp': 0,
-          'bridge': 0,
-          'turnip': 0,
+          'house': '0',
+          'ramp': '0',
+          'bridge': '0',
+          'turnip': '0',
           'apple': false,
           'cherry': false,
           'orange': false,
@@ -146,7 +146,7 @@ class SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: false);
+    ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: true);
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -164,13 +164,13 @@ class SignIn extends StatelessWidget {
                     width: ScreenUtil().setWidth(150),
                     height: ScreenUtil().setHeight(150),
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(50)),
                         child: Image.asset('images/logo.png')),
                   ),
-                  SizedBox(height: ScreenUtil().setHeight(50),),
+                  SizedBox(height: ScreenUtil().setHeight(30),),
                   CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(70),),
                   CustomText(text: 'Catch it. Sell it. Track it.',size: ScreenUtil().setSp(35),bold: false,),
-                  SizedBox(height: ScreenUtil().setHeight(50),),
+                  SizedBox(height: ScreenUtil().setHeight(30),),
                   CustomText(text: 'Log into your account',size: ScreenUtil().setSp(55),),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(60)),
@@ -180,12 +180,12 @@ class SignIn extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(60)),
                     child: InputField(hint: 'Password',ispassword: true,controller: password,),
                   ),
-                  SizedBox(height: ScreenUtil().setHeight(50),),
+                  SizedBox(height: ScreenUtil().setHeight(40),),
                   GestureDetector(
                       onTap: ()=>resetPassword(),
                       child: CustomText(text: 'Forgot Password',size: ScreenUtil().setSp(30),dec: TextDecoration.underline,)),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(60),ScreenUtil().setWidth(50),ScreenUtil().setWidth(60),ScreenUtil().setWidth(50)),
+                    padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(60),ScreenUtil().setWidth(40),ScreenUtil().setWidth(60),ScreenUtil().setWidth(50)),
                     child: SizedBox(
                       width: double.infinity,
                       child: RaisedButton(
@@ -209,15 +209,18 @@ class SignIn extends StatelessWidget {
                         );
                       },
                       child: CustomText(text: "Don't have an account? Sign Up",size: ScreenUtil().setSp(30),)),
-                  SizedBox(height: ScreenUtil().setHeight(40),),
+                  SizedBox(height: ScreenUtil().setHeight(30),),
                   CustomText(text: 'OR',size: 20,),
+                  SizedBox(height: ScreenUtil().setHeight(30),),
                   Padding(
-                    padding: EdgeInsets.all(ScreenUtil().setWidth(40)),
+                    padding: EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(60)),
                     child: Button(text: 'Continue with Google',color: Colors.transparent,icon: FontAwesomeIcons.google,social: true,onclick: ()=>signInWithGoogle(context),),
                   ),
+                  SizedBox(height: ScreenUtil().setHeight(20),),
                   GestureDetector(
                       onTap: ()=>showAlertDialog(context),
                       child: CustomText(text: 'Why sign in?',size: ScreenUtil().setSp(30),dec: TextDecoration.underline,)),
+                  SizedBox(height: ScreenUtil().setHeight(100),),
                 ],
               ),
             ),

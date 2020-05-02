@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:nookknack/widgets/button.dart';
 import 'package:nookknack/widgets/checklist-item.dart';
@@ -303,7 +304,7 @@ class _ChecklistState extends State<Checklist> {
                         });
                         getData();
                       },
-                      name: 'Check plazza and island for visitors',
+                      name: 'Check plaza and island for visitors',
                       list: list13,
                     ),
                     SizedBox(height: ScreenUtil().setHeight(15),),
@@ -360,11 +361,11 @@ class _ChecklistState extends State<Checklist> {
                         children: <Widget>[
                           SizedBox(width: ScreenUtil().setWidth(145),),
                           Container(
-                              width: ScreenUtil().setWidth(150),
+                              width: ScreenUtil().setWidth(220),
                               child: InputField(hint: '0',isChecklist: true,type: TextInputType.number,controller: turnip,
                               onSubmit: (x) async {
                                 await Firestore.instance.collection('users').document(email).updateData({
-                                  'turnip': int.parse(x)
+                                  'turnip': x
                                 });
                                 getData();
                               },
@@ -401,7 +402,7 @@ class _ChecklistState extends State<Checklist> {
                             child: InputField(hint: '0',isChecklist: true,type: TextInputType.number,controller: house,
                               onSubmit: (x) async {
                                 await Firestore.instance.collection('users').document(email).updateData({
-                                  'house': int.parse(x)
+                                  'house': x
                                 });
                                 getData();
                               },)),
@@ -422,7 +423,7 @@ class _ChecklistState extends State<Checklist> {
                             child: InputField(hint: '0',isChecklist: true,type: TextInputType.number,controller: ramp,
                               onSubmit: (x) async {
                                 await Firestore.instance.collection('users').document(email).updateData({
-                                  'ramp': int.parse(x)
+                                  'ramp': x
                                 });
                                 getData();
                               },)),
@@ -443,7 +444,7 @@ class _ChecklistState extends State<Checklist> {
                             child: InputField(hint: '0',isChecklist: true,type: TextInputType.number,controller: bridge,
                               onSubmit: (x) async {
                                 await Firestore.instance.collection('users').document(email).updateData({
-                                  'bridge': int.parse(x)
+                                  'bridge': x
                                 });
                                 getData();
                               },)),
@@ -466,6 +467,7 @@ class _ChecklistState extends State<Checklist> {
                   ),
                   children: <Widget>[
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         SizedBox(width: ScreenUtil().setWidth(145),),
                         GestureDetector(
@@ -483,8 +485,8 @@ class _ChecklistState extends State<Checklist> {
                         ),
                         SizedBox(width: ScreenUtil().setWidth(20),),
                         SizedBox(
-                          width: ScreenUtil().setWidth(60),
-                          height: ScreenUtil().setHeight(60),
+                          width: ScreenUtil().setWidth(75),
+                          height: ScreenUtil().setHeight(75),
                           child: Image.asset('images/apple.png',fit: BoxFit.cover,),
                         ),
                         SizedBox(width: ScreenUtil().setWidth(50),),
@@ -504,8 +506,8 @@ class _ChecklistState extends State<Checklist> {
                         ),
                         SizedBox(width: ScreenUtil().setWidth(20),),
                         SizedBox(
-                          width: ScreenUtil().setWidth(60),
-                          height: ScreenUtil().setHeight(60),
+                          width: ScreenUtil().setWidth(75),
+                          height: ScreenUtil().setHeight(75),
                           child: Image.asset('images/cherry.png',fit: BoxFit.cover,),
                         ),
                       ],
@@ -529,8 +531,8 @@ class _ChecklistState extends State<Checklist> {
                         ),
                         SizedBox(width: ScreenUtil().setWidth(20),),
                         SizedBox(
-                          width: ScreenUtil().setWidth(60),
-                          height: ScreenUtil().setHeight(60),
+                          width: ScreenUtil().setWidth(75),
+                          height: ScreenUtil().setHeight(75),
                           child: Image.asset('images/orange.png',fit: BoxFit.cover,),
                         ),
                         SizedBox(width: ScreenUtil().setWidth(50),),
@@ -550,8 +552,8 @@ class _ChecklistState extends State<Checklist> {
                         ),
                         SizedBox(width: ScreenUtil().setWidth(20),),
                         SizedBox(
-                          width: ScreenUtil().setWidth(60),
-                          height: ScreenUtil().setHeight(60),
+                          width: ScreenUtil().setWidth(75),
+                          height: ScreenUtil().setHeight(75),
                           child: Image.asset('images/peach.png',fit: BoxFit.cover,),
                         ),
                       ],
@@ -575,8 +577,8 @@ class _ChecklistState extends State<Checklist> {
                         ),
                         SizedBox(width: ScreenUtil().setWidth(20),),
                         SizedBox(
-                          width: ScreenUtil().setWidth(60),
-                          height: ScreenUtil().setHeight(60),
+                          width: ScreenUtil().setWidth(75),
+                          height: ScreenUtil().setHeight(75),
                           child: Image.asset('images/coconut.png',fit: BoxFit.cover,),
                         ),
                         SizedBox(width: ScreenUtil().setWidth(50),),
@@ -596,8 +598,8 @@ class _ChecklistState extends State<Checklist> {
                         ),
                         SizedBox(width: ScreenUtil().setWidth(20),),
                         SizedBox(
-                          width: ScreenUtil().setWidth(60),
-                          height: ScreenUtil().setHeight(60),
+                          width: ScreenUtil().setWidth(75),
+                          height: ScreenUtil().setHeight(75),
                           child: Image.asset('images/pear.png',fit: BoxFit.cover,),
                         ),
                       ],

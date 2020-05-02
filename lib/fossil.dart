@@ -73,6 +73,48 @@ class _FossilsState extends State<Fossils> {
     });
   }
 
+  onOwlPress(){
+    if(newDonated.contains(email)){
+      newDonated.remove(email);
+      setState(() {
+        isDonated = false;
+      });
+      collectionReference.document(infoName).updateData({
+        'donated': newDonated
+      });
+    }
+    else{
+      newDonated.add(email);
+      setState(() {
+        isDonated = true;
+      });
+      collectionReference.document(infoName).updateData({
+        'donated': newDonated
+      });
+    }
+  }
+
+  onCaughtPress(){
+    if(newCaught.contains(email)){
+      newCaught.remove(email);
+      setState(() {
+        isCaught = false;
+      });
+      collectionReference.document(infoName).updateData({
+        'caught': newCaught
+      });
+    }
+    else{
+      newCaught.add(email);
+      setState(() {
+        isCaught = true;
+      });
+      collectionReference.document(infoName).updateData({
+        'caught': newCaught
+      });
+    }
+  }
+
   Widget _floatingCollapsed(){
     return Container(
       decoration: BoxDecoration(
@@ -211,34 +253,45 @@ class _FossilsState extends State<Fossils> {
                   Row(
                     children: <Widget>[
                       SizedBox(width: ScreenUtil().setWidth(200),),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Image.asset(isCaught?'images/shovel.png':'images/shovelDe.png')),
+                      GestureDetector(
+                        onTap: ()=>onCaughtPress(),
+                        child: CircleAvatar(
+                          backgroundColor: Color(0xff75CBB5),
+                          radius: 15,
+                          child: SizedBox(
+                              width: ScreenUtil().setWidth(40),
+                              height: ScreenUtil().setHeight(40),
+                              child: Image.asset(isCaught?'images/shovel.png':'images/shovelDe.png')),
+                        ),
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
-                      SizedBox(
-                          width: ScreenUtil().setWidth(230),
-                          child: CustomText(text: isCaught?'Caught':'Not Caught',size: ScreenUtil().setSp(32),)),
+                      GestureDetector(
+                        onTap: ()=>onCaughtPress(),
+                        child: SizedBox(
+                            width: ScreenUtil().setWidth(230),
+                            child: CustomText(text: isCaught?'Caught':'Not Caught',size: ScreenUtil().setSp(32),)),
+                      ),
                     ],
                   ),
                   SizedBox(height: ScreenUtil().setHeight(20),),
                   Row(
                     children: <Widget>[
                       SizedBox(width: ScreenUtil().setWidth(200),),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Image.asset(isDonated?'images/owl.png':'images/owlDe.png')),
+                      GestureDetector(
+                        onTap: ()=>onOwlPress(),
+                        child: CircleAvatar(
+                          backgroundColor: Color(0xff75CBB5),
+                          radius: 15,
+                          child: SizedBox(
+                              width: ScreenUtil().setWidth(40),
+                              height: ScreenUtil().setHeight(40),
+                              child: Image.asset(isDonated?'images/owl.png':'images/owlDe.png')),
+                        ),
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
-                      CustomText(text: isDonated?'Donated':'Not Donated',size: ScreenUtil().setSp(32),)
+                      GestureDetector(
+                          onTap: ()=>onOwlPress(),
+                          child: CustomText(text: isDonated?'Donated':'Not Donated',size: ScreenUtil().setSp(32),))
                     ],
                   ),
                 ],

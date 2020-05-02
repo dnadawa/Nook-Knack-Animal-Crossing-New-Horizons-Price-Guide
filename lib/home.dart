@@ -128,7 +128,7 @@ class _HomeState extends State<Home> {
                   width: ScreenUtil().setWidth(150),
                   height: ScreenUtil().setHeight(150),
                   child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(ScreenUtil().setWidth(50)),
                       child: Image.asset('images/logo.png')),
                 ),
                 SizedBox(height: ScreenUtil().setHeight(50),),
@@ -136,7 +136,7 @@ class _HomeState extends State<Home> {
                 CustomText(text: 'Catch it. Sell it. Track it.',size: ScreenUtil().setSp(35),bold: false,),
                 SizedBox(height: ScreenUtil().setHeight(50),),
                 CustomText(text: 'Welcome back,',size: ScreenUtil().setSp(60),),
-                CustomText(text: 'What did you catch ?',size: ScreenUtil().setSp(35),bold: false,),
+                CustomText(text: 'What did you catch?',size: ScreenUtil().setSp(35),bold: false,),
                 Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(100),endIndent:ScreenUtil().setWidth(100),height: 30,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

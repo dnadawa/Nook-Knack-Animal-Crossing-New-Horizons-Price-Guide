@@ -148,10 +148,10 @@ class _SettingsState extends State<Settings> {
                     }
 
                     await Firestore.instance.collection('users').document(email).updateData({
-                      'house': 0,
-                      'ramp': 0,
-                      'bridge': 0,
-                      'turnip': 0,
+                      'house': '0',
+                      'ramp': '0',
+                      'bridge': '0',
+                      'turnip': '0',
                       'apple': false,
                       'cherry': false,
                       'orange': false,

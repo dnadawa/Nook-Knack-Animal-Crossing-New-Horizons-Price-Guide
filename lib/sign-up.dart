@@ -41,10 +41,10 @@ class SignUp extends StatelessWidget {
 
         await collectionReference.document(email.text).setData({
           'email': email.text,
-          'house': 0,
-          'ramp': 0,
-          'bridge': 0,
-          'turnip': 0,
+          'house': '0',
+          'ramp': '0',
+          'bridge': '0',
+          'turnip': '0',
           'apple': false,
           'cherry': false,
           'orange': false,
@@ -89,7 +89,7 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: false);
+    ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: true);
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -147,7 +147,7 @@ class SignUp extends StatelessWidget {
                       );
                     },
                     child: CustomText(text: 'Already have an account? Sign in',size: ScreenUtil().setSp(30),)),
-                SizedBox(height: ScreenUtil().setHeight(90),),
+                SizedBox(height: ScreenUtil().setHeight(60),),
                 GestureDetector(
                     onTap: ()=>showAlertDialog(context),
                     child: CustomText(text: 'Why sign in?',size: ScreenUtil().setSp(30),dec: TextDecoration.underline,)),

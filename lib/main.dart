@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nookknack/checklist.dart';
 import 'package:nookknack/home.dart';
 import 'package:nookknack/sign-in.dart';
 import 'package:nookknack/splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'fish.dart';
 
 void main(){
   runApp(MaterialApp(

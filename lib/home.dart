@@ -218,7 +218,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
                       width: ScreenUtil().setWidth(50),
-                      child: Image.asset('images/homeOwl.png'),
+                      child: Image.asset('images/owl.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
                     SizedBox(
@@ -228,7 +228,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
                       width: ScreenUtil().setWidth(50),
-                      child: Image.asset('images/homeNet.png'),
+                      child: Image.asset('images/net.png'),
                     ),
                   ],
                 ),
@@ -251,7 +251,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
                       width: ScreenUtil().setWidth(50),
-                      child: Image.asset('images/homeOwl.png'),
+                      child: Image.asset('images/owl.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
                     SizedBox(
@@ -261,7 +261,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
                       width: ScreenUtil().setWidth(50),
-                      child: Image.asset('images/homeHook.png'),
+                      child: Image.asset('images/hook.png'),
                     ),
                   ],
                 ),
@@ -284,7 +284,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
                       width: ScreenUtil().setWidth(50),
-                      child: Image.asset('images/homeOwl.png'),
+                      child: Image.asset('images/owl.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
                     SizedBox(
@@ -294,7 +294,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
                       width: ScreenUtil().setWidth(50),
-                      child: Image.asset('images/homeShovel.png'),
+                      child: Image.asset('images/shovel.png'),
                     ),
                   ],
                 ),

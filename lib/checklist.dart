@@ -1,11 +1,8 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:nookknack/widgets/button.dart';
 import 'package:nookknack/widgets/checklist-item.dart';
 import 'package:nookknack/widgets/custom-text.dart';
 import 'package:nookknack/widgets/inputfield.dart';
@@ -39,6 +36,34 @@ class _ChecklistState extends State<Checklist> {
   bool lilly3 = false;
   bool rose1 = false;
   bool rose2 = false;
+  bool rose3 = false;
+  bool rose4 = false;
+  bool rose5 = false;
+  bool rose6 = false;
+  bool rose7 = false;
+  bool cosmos1 = false;
+  bool cosmos2 = false;
+  bool cosmos3 = false;
+  bool hyacints1 = false;
+  bool hyacints2 = false;
+  bool hyacints3 = false;
+  bool hyacints4 = false;
+  bool mums1 = false;
+  bool mums2 = false;
+  bool mums3 = false;
+  bool pansies1 = false;
+  bool pansies2 = false;
+  bool pansies3 = false;
+  bool pansies4 = false;
+  bool tulips1 = false;
+  bool tulips2 = false;
+  bool tulips3 = false;
+  bool tulips4 = false;
+  bool windflowers1 = false;
+  bool windflowers2 = false;
+  bool windflowers3 = false;
+  bool windflowers4 = false;
+  bool windflowers5 = false;
 
   bool list1 = false;
   bool list2 = false;
@@ -60,9 +85,10 @@ class _ChecklistState extends State<Checklist> {
   getData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     email = prefs.getString('email');
-//    var sub = await Firestore.instance.collection('users').where('email',isEqualTo: email).getDocuments();
-//    var list = sub.documents;
-    setState(() {
+    subscription = Firestore.instance.collection('users').where('email',isEqualTo: email).snapshots().listen((datasnapshot){
+      setState(() {
+        paperlist = datasnapshot.documents;
+
         turnip.text = paperlist[0]['turnip'].toString();
         house.text = paperlist[0]['house'].toString();
         ramp.text = paperlist[0]['ramp'].toString();
@@ -75,11 +101,40 @@ class _ChecklistState extends State<Checklist> {
         coconut = paperlist[0]['coconut'];
         pear = paperlist[0]['pear'];
 
-        lilly1 = paperlist[0]['lilly1'];
-        lilly2 = paperlist[0]['lilly2'];
-        lilly3 = paperlist[0]['lilly3'];
-        rose1 = paperlist[0]['rose1'];
-        rose2 = paperlist[0]['rose2'];
+        lilly1 = paperlist[0]['lilly1']??false;
+        lilly2 = paperlist[0]['lilly2']??false;
+        lilly3 = paperlist[0]['lilly3']??false;
+        rose1 = paperlist[0]['rose1']??false;
+        rose2 = paperlist[0]['rose2']??false;
+        rose3 = paperlist[0]['rose3']??false;
+        rose4 = paperlist[0]['rose4']??false;
+        rose5 = paperlist[0]['rose5']??false;
+        rose6 = paperlist[0]['rose6']??false;
+        rose7 = paperlist[0]['rose7']??false;
+        cosmos1 = paperlist[0]['cosmos1']??false;
+        cosmos2 = paperlist[0]['cosmos2']??false;
+        cosmos3 = paperlist[0]['cosmos3']??false;
+        hyacints1 = paperlist[0]['hyacints1']??false;
+        hyacints2 = paperlist[0]['hyacints2']??false;
+        hyacints3 = paperlist[0]['hyacints3']??false;
+        hyacints4 = paperlist[0]['hyacints4']??false;
+        mums1 = paperlist[0]['mums1']??false;
+        mums2 = paperlist[0]['mums2']??false;
+        mums3 = paperlist[0]['mums3']??false;
+        pansies1 = paperlist[0]['pansies1']??false;
+        pansies2 = paperlist[0]['pansies2']??false;
+        pansies3 = paperlist[0]['pansies3']??false;
+        pansies4 = paperlist[0]['pansies4']??false;
+        tulips1 = paperlist[0]['tulips1']??false;
+        tulips2 = paperlist[0]['tulips2']??false;
+        tulips3 = paperlist[0]['tulips3']??false;
+        tulips4 = paperlist[0]['tulips4']??false;
+        windflowers1 = paperlist[0]['windflowers1']??false;
+        windflowers2 = paperlist[0]['windflowers2']??false;
+        windflowers3 = paperlist[0]['windflowers3']??false;
+        windflowers4 = paperlist[0]['windflowers4']??false;
+        windflowers5 = paperlist[0]['windflowers5']??false;
+
 
         list1 = paperlist[0]['list1'];
         list2 = paperlist[0]['list2'];
@@ -97,6 +152,7 @@ class _ChecklistState extends State<Checklist> {
         list14 = paperlist[0]['list14'];
         list15 = paperlist[0]['list15'];
         list16 = paperlist[0]['list16'];
+      });
     });
   }
 
@@ -104,12 +160,8 @@ class _ChecklistState extends State<Checklist> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    subscription = Firestore.instance.collection('users').where('email',isEqualTo: email).snapshots().listen((datasnapshot){
-      setState(() {
-        paperlist = datasnapshot.documents;
-      });
-    });
     getData();
+    print('init state called');
   }
   @override
   Widget build(BuildContext context) {
@@ -706,7 +758,7 @@ class _ChecklistState extends State<Checklist> {
                         SizedBox(
                           width: ScreenUtil().setWidth(400),
                           height: ScreenUtil().setHeight(80),
-                          child: Image.asset('images/roses1.png',fit: BoxFit.contain,),
+                          child: Image.asset('images/Roses1.png',fit: BoxFit.contain,),
                         ),
                         SizedBox(width: ScreenUtil().setWidth(50),),
                         GestureDetector(
@@ -731,7 +783,7 @@ class _ChecklistState extends State<Checklist> {
                         SizedBox(
                           width: ScreenUtil().setWidth(400),
                           height: ScreenUtil().setHeight(80),
-                          child: Image.asset('images/roses2.png',fit: BoxFit.contain,),
+                          child: Image.asset('images/Roses2.png',fit: BoxFit.contain,),
                         ),
                         SizedBox(width: ScreenUtil().setWidth(50),),
                         GestureDetector(
@@ -749,6 +801,726 @@ class _ChecklistState extends State<Checklist> {
                         ),
                       ],
                     ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Roses3.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'rose3': !rose3
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: rose3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Roses4.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'rose4': !rose4
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: rose4?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Roses5.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'rose5': !rose5
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: rose5?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Roses6.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'rose6': !rose6
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: rose6?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Roses7.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'rose7': !rose7
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: rose7?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+
+                    CustomText(text: 'Cosmos',size: ScreenUtil().setSp(35),),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Cosmos1.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'cosmos1': !cosmos1
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: cosmos1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Cosmos2.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'cosmos2': !cosmos2
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: cosmos2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Cosmos3.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'cosmos3': !cosmos3
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: cosmos3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+
+
+                    CustomText(text: 'Hyacints',size: ScreenUtil().setSp(35),),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Hyacints1.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'hyacints1': !hyacints1
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: hyacints1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Hyacints2.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'hyacints2': !hyacints2
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: hyacints2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Hyacints3.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'hyacints3': !hyacints3
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: hyacints3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Hyacints4.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'hyacints4': !hyacints4
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: hyacints4?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+
+                    CustomText(text: 'Mums',size: ScreenUtil().setSp(35),),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Mums1.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'mums1': !mums1
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: mums1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Mums2.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'mums2': !mums2
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: mums2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Mums3.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'mums3': !mums3
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: mums3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+
+                    CustomText(text: 'Pansies',size: ScreenUtil().setSp(35),),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Pansies1.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'pansies1': !pansies1
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: pansies1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Pansies2.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'pansies2': !pansies2
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: pansies2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Pansies3.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'pansies3': !pansies3
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: pansies3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Pansies4.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'pansies4': !pansies4
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: pansies4?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+
+                    CustomText(text: 'Tulips',size: ScreenUtil().setSp(35),),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Tulips1.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'tulips1': !tulips1
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: tulips1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Tulips2.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'tulips2': !tulips2
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: tulips2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Tulips3.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'tulips3': !tulips3
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: tulips3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Tulips4.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'tulips4': !tulips4
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: tulips4?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+
+                    CustomText(text: 'Windflowers',size: ScreenUtil().setSp(35),),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Windflowers1.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'windflowers1': !windflowers1
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: windflowers1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Windflowers2.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'windflowers2': !windflowers2
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: windflowers2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Windflowers3.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'windflowers3': !windflowers3
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: windflowers3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Windflowers4.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'windflowers4': !windflowers4
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: windflowers4?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: ScreenUtil().setWidth(400),
+                          height: ScreenUtil().setHeight(80),
+                          child: Image.asset('images/Windflowers5.png',fit: BoxFit.contain,),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        GestureDetector(
+                          onTap: () async {
+                            await Firestore.instance.collection('users').document(email).updateData({
+                              'windflowers5': !windflowers5
+                            });
+                            getData();
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Color(0xffEFE8BD),
+                            radius: ScreenUtil().setWidth(22),
+                            child: windflowers5?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(15),),
                   ],
                 ),
               ],

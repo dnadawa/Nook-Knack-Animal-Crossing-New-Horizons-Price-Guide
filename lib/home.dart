@@ -101,7 +101,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: false);
+    ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: true);
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -116,7 +116,7 @@ class _HomeState extends State<Home> {
                 Align(
                     alignment: Alignment.topLeft,
                     child: Padding(
-                      padding: EdgeInsets.all(ScreenUtil().setWidth(20)),
+                      padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
                       child: IconButton(icon: Icon(Icons.dehaze,color: Colors.white,), onPressed: (){
                         Navigator.push(
                           context,
@@ -127,14 +127,12 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   width: ScreenUtil().setWidth(150),
                   height: ScreenUtil().setHeight(150),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(ScreenUtil().setWidth(50)),
-                      child: Image.asset('images/logo.png')),
+                  child: Image.asset('images/logo.png'),
                 ),
-                SizedBox(height: ScreenUtil().setHeight(50),),
+                SizedBox(height: ScreenUtil().setHeight(40),),
                 CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(70),),
                 CustomText(text: 'Catch it. Sell it. Track it.',size: ScreenUtil().setSp(35),bold: false,),
-                SizedBox(height: ScreenUtil().setHeight(50),),
+                SizedBox(height: ScreenUtil().setHeight(40),),
                 CustomText(text: 'Welcome back,',size: ScreenUtil().setSp(60),),
                 CustomText(text: 'What did you catch?',size: ScreenUtil().setSp(35),bold: false,),
                 Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(100),endIndent:ScreenUtil().setWidth(100),height: 30,),
@@ -197,7 +195,7 @@ class _HomeState extends State<Home> {
                   ),
                 ],
                 ),
-                SizedBox(height: ScreenUtil().setHeight(50),),
+                SizedBox(height: ScreenUtil().setHeight(40),),
                 CustomText(text: 'Overall Progress',size: ScreenUtil().setSp(60),),
                 Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(100),endIndent:ScreenUtil().setWidth(100),height: 30,),
                 Row(
@@ -218,7 +216,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
                       width: ScreenUtil().setWidth(50),
-                      child: Image.asset('images/owl.png'),
+                      child: Image.asset('images/homeOwl.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
                     SizedBox(
@@ -228,7 +226,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
                       width: ScreenUtil().setWidth(50),
-                      child: Image.asset('images/net.png'),
+                      child: Image.asset('images/homeNet.png'),
                     ),
                   ],
                 ),
@@ -251,7 +249,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
                       width: ScreenUtil().setWidth(50),
-                      child: Image.asset('images/owl.png'),
+                      child: Image.asset('images/homeOwl.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
                     SizedBox(
@@ -261,7 +259,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
                       width: ScreenUtil().setWidth(50),
-                      child: Image.asset('images/hook.png'),
+                      child: Image.asset('images/homeHook.png'),
                     ),
                   ],
                 ),
@@ -284,7 +282,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
                       width: ScreenUtil().setWidth(50),
-                      child: Image.asset('images/owl.png'),
+                      child: Image.asset('images/homeOwl.png'),
                     ),
                     SizedBox(width: ScreenUtil().setWidth(40),),
                     SizedBox(
@@ -294,7 +292,7 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: ScreenUtil().setHeight(50),
                       width: ScreenUtil().setWidth(50),
-                      child: Image.asset('images/shovel.png'),
+                      child: Image.asset('images/homeShovel.png'),
                     ),
                   ],
                 ),

@@ -19,7 +19,7 @@ class MonthBox extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
             color: color
         ),
-        child: Center(child: CustomText(text: text,color: color==Color(0xff78C9B7)?Colors.grey:Colors.white,)),
+        child: Center(child: CustomText(text: text,color: color==Color(0xff78C9B7)?Colors.white:Colors.grey,)),
       ),
     );
   }

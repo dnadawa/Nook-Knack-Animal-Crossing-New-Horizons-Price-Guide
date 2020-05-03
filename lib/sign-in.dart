@@ -168,9 +168,7 @@ class SignIn extends StatelessWidget {
                   SizedBox(
                     width: ScreenUtil().setWidth(150),
                     height: ScreenUtil().setHeight(150),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(50)),
-                        child: Image.asset('images/logo.png')),
+                    child: Image.asset('images/logo.png'),
                   ),
                   SizedBox(height: ScreenUtil().setHeight(30),),
                   CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(70),),

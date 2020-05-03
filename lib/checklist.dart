@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:nookknack/widgets/button.dart';
 import 'package:nookknack/widgets/checklist-item.dart';
 import 'package:nookknack/widgets/custom-text.dart';
 import 'package:nookknack/widgets/inputfield.dart';
@@ -197,26 +198,6 @@ class _ChecklistState extends State<Checklist> {
                     ),
                   ),
                   children: <Widget>[
-//                    Row(
-//                      children: <Widget>[
-//                        SizedBox(width: ScreenUtil().setWidth(50),),
-//                        GestureDetector(
-//                          onTap: () async {
-//                            await Firestore.instance.collection('users').document(email).updateData({
-//                              'list1': !list1
-//                            });
-//                            getData();
-//                          },
-//                          child: CircleAvatar(
-//                            backgroundColor: Color(0xffEFE8BD),
-//                            radius: ScreenUtil().setWidth(22),
-//                            child: list1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
-//                          ),
-//                        ),
-//                        SizedBox(width: ScreenUtil().setWidth(40),),
-//                        CustomText(text: 'Check mail',)
-//                      ],
-//                    ),
                     ChecklistItem(
                       onTap: () async {
                         await Firestore.instance.collection('users').document(email).updateData({
@@ -393,6 +374,30 @@ class _ChecklistState extends State<Checklist> {
                       list: list16,
                     ),
                     SizedBox(height: ScreenUtil().setHeight(15),),
+                    SizedBox(
+                        width: ScreenUtil().setWidth(300),
+                        height: ScreenUtil().setHeight(100),
+                        child: Button(text: 'Reset Tasks',color: Color(0xff75CBB5),isBorder: false,onclick: () async {
+                          await Firestore.instance.collection('users').document(email).updateData({
+                            'list1': false,
+                            'list2': false,
+                            'list3': false,
+                            'list4': false,
+                            'list5': false,
+                            'list6': false,
+                            'list7': false,
+                            'list8': false,
+                            'list9': false,
+                            'list10': false,
+                            'list11': false,
+                            'list12': false,
+                            'list13': false,
+                            'list14': false,
+                            'list15': false,
+                            'list16': false,
+                          });
+                          getData();
+                        },))
 
                   ],
                 ),

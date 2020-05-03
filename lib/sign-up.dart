@@ -110,9 +110,7 @@ class SignUp extends StatelessWidget {
                 SizedBox(
                   width: ScreenUtil().setWidth(150),
                   height: ScreenUtil().setHeight(150),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset('images/logo.png')),
+                  child: Image.asset('images/logo.png'),
                 ),
                 SizedBox(height: ScreenUtil().setHeight(50),),
                 CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(70),),

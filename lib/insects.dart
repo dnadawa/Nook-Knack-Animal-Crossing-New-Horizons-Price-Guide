@@ -58,6 +58,8 @@ class _InsectsState extends State<Insects> {
   bool isDonated = false;
   bool isCaught = false;
   bool isModel = false;
+  bool isDonatedSelected = false;
+  bool isCaughtSelected = false;
   String location;
   String email;
   List<String> nameList = [];
@@ -418,12 +420,12 @@ class _InsectsState extends State<Insects> {
                             )),
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
-                      MonthBox(text: 'Jan',color: jan==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Feb',color: feb==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Mar',color: mar==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Apr',color: apr==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'May',color: may==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Jun',color: jun==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
+                      MonthBox(text: 'Jan',color: jan==true?Color(0xff78C9B7):Color(0xffBADDD9),),
+                      MonthBox(text: 'Feb',color: feb==true?Color(0xff78C9B7):Color(0xffBADDD9),),
+                      MonthBox(text: 'Mar',color: mar==true?Color(0xff78C9B7):Color(0xffBADDD9),),
+                      MonthBox(text: 'Apr',color: apr==true?Color(0xff78C9B7):Color(0xffBADDD9),),
+                      MonthBox(text: 'May',color: may==true?Color(0xff78C9B7):Color(0xffBADDD9),),
+                      MonthBox(text: 'Jun',color: jun==true?Color(0xff78C9B7):Color(0xffBADDD9),),
                     ],
                   ),
                   SizedBox(height: ScreenUtil().setHeight(10),),
@@ -435,12 +437,12 @@ class _InsectsState extends State<Insects> {
                         radius: 15,
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
-                      MonthBox(text: 'Jul',color: jul==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Aug',color: aug==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Sep',color: sep==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Oct',color: oct==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Nov',color: nov==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
-                      MonthBox(text: 'Dec',color: dec==false?Color(0xff78C9B7):Color(0xffBBDDDA),),
+                      MonthBox(text: 'Jul',color: jul==true?Color(0xff78C9B7):Color(0xffBADDD9),),
+                      MonthBox(text: 'Aug',color: aug==true?Color(0xff78C9B7):Color(0xffBADDD9),),
+                      MonthBox(text: 'Sep',color: sep==true?Color(0xff78C9B7):Color(0xffBADDD9),),
+                      MonthBox(text: 'Oct',color: oct==true?Color(0xff78C9B7):Color(0xffBADDD9),),
+                      MonthBox(text: 'Nov',color: nov==true?Color(0xff78C9B7):Color(0xffBADDD9),),
+                      MonthBox(text: 'Dec',color: dec==true?Color(0xff78C9B7):Color(0xffBADDD9),),
                     ],
                   ),
                   //SizedBox(height: ScreenUtil().setHeight(100),)
@@ -579,7 +581,7 @@ class _InsectsState extends State<Insects> {
     setState(() {
       _focus.addListener(_onFocusChange);
     });
-    subscription = collectionReference..where('type',isEqualTo: 'insect').orderBy('name').snapshots().listen((datasnapshot){
+    subscription = collectionReference.where('type',isEqualTo: 'insect').orderBy('name').snapshots().listen((datasnapshot){
       setState(() {
         fishlist = datasnapshot.documents;
       });
@@ -791,18 +793,29 @@ class _InsectsState extends State<Insects> {
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: GestureDetector(
                       onTap: (){
-                        subscription = collectionReference.where('donated',arrayContains: email).where('type',isEqualTo: 'insect').orderBy('name').snapshots().listen((datasnapshot){
-                          setState(() {
-                            fishlist = datasnapshot.documents;
+                        if(!isDonatedSelected){
+                          subscription = collectionReference.where('donated',arrayContains: email).where('type',isEqualTo: 'insect').orderBy('name').snapshots().listen((datasnapshot){
+                            setState(() {
+                              fishlist = datasnapshot.documents;
+                            });
+                            for(int i=0;i<fishlist.length;i++){
+                              select.add(false);
+                              nameList.add(fishlist[i].data['name']);
+                            }
                           });
-
-                          for(int i=0;i<fishlist.length;i++){
-                            select.add(false);
-                            nameList.add(fishlist[i].data['name']);
-                          }
-
-
-                        });
+                        }
+                        else{
+                          subscription = collectionReference.where('type',isEqualTo: 'insect').orderBy('name').snapshots().listen((datasnapshot){
+                            setState(() {
+                              fishlist = datasnapshot.documents;
+                            });
+                            for(int i=0;i<fishlist.length;i++){
+                              select.add(false);
+                              nameList.add(fishlist[i].data['name']);
+                            }
+                          });
+                        }
+                        isDonatedSelected = !isDonatedSelected;
                       },
                       child: Container(
                         height: ScreenUtil().setHeight(75),
@@ -829,18 +842,31 @@ class _InsectsState extends State<Insects> {
                     padding: const EdgeInsets.only(right: 5),
                     child: GestureDetector(
                       onTap: (){
-                        subscription = collectionReference.where('caught', arrayContains: email).where('type',isEqualTo: 'insect').orderBy('name').snapshots().listen((datasnapshot){
-                          setState(() {
-                            fishlist = datasnapshot.documents;
+                        if(!isCaughtSelected){
+                          subscription = collectionReference.where('caught', arrayContains: email).where('type',isEqualTo: 'insect').orderBy('name').snapshots().listen((datasnapshot){
+                            setState(() {
+                              fishlist = datasnapshot.documents;
+                            });
+
+                            for(int i=0;i<fishlist.length;i++){
+                              select.add(false);
+                              nameList.add(fishlist[i].data['name']);
+                            }
                           });
+                        }
+                        else{
+                          subscription = collectionReference.where('type',isEqualTo: 'insect').orderBy('name').snapshots().listen((datasnapshot){
+                            setState(() {
+                              fishlist = datasnapshot.documents;
+                            });
 
-                          for(int i=0;i<fishlist.length;i++){
-                            select.add(false);
-                            nameList.add(fishlist[i].data['name']);
-                          }
-
-
-                        });
+                            for(int i=0;i<fishlist.length;i++){
+                              select.add(false);
+                              nameList.add(fishlist[i].data['name']);
+                            }
+                          });
+                        }
+                        isCaughtSelected = !isCaughtSelected;
                       },
                       child: Container(
                         height: ScreenUtil().setHeight(75),

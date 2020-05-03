@@ -58,7 +58,7 @@ class _SettingsState extends State<Settings> {
   }
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: false);
+    ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: true);
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -73,7 +73,7 @@ class _SettingsState extends State<Settings> {
                 Align(
                     alignment: Alignment.topLeft,
                     child: Padding(
-                      padding: EdgeInsets.all(ScreenUtil().setWidth(20)),
+                      padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
                       child: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.white,), onPressed: (){
                         Navigator.push(
                           context,
@@ -84,19 +84,17 @@ class _SettingsState extends State<Settings> {
                 SizedBox(
                   width: ScreenUtil().setWidth(150),
                   height: ScreenUtil().setHeight(150),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset('images/logo.png')),
+                  child: Image.asset('images/logo.png'),
                 ),
-                SizedBox(height: ScreenUtil().setHeight(50),),
+                SizedBox(height: ScreenUtil().setHeight(30),),
                 CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(70),),
                 CustomText(text: 'Catch it. Sell it. Track it.',size: ScreenUtil().setSp(35),bold: false,),
-                SizedBox(height: ScreenUtil().setHeight(50),),
+                SizedBox(height: ScreenUtil().setHeight(40),),
                 CustomText(text: 'Settings',size: ScreenUtil().setSp(60),),
                 CustomText(text: 'What did you need ?',size: ScreenUtil().setSp(35),bold: false,),
-                Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(100),endIndent:ScreenUtil().setWidth(100),height: 30,),
+                Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(100),endIndent:ScreenUtil().setWidth(100),height: 20,),
                 CustomText(text: 'Hemisphere?',size: ScreenUtil().setSp(45)),
-                SizedBox(height: ScreenUtil().setHeight(40),),
+                SizedBox(height: ScreenUtil().setHeight(30),),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal :ScreenUtil().setWidth(50)),
                   child: Button(text: 'Northern',color: nColor,isBorder: nBorder,onclick:() async {
@@ -110,13 +108,13 @@ class _SettingsState extends State<Settings> {
                 SizedBox(height: ScreenUtil().setHeight(30),),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(50)),
-                  child: Button(text: 'Sothern',color: sColor,isBorder: sBorder,onclick: () async {
+                  child: Button(text: 'Southern',color: sColor,isBorder: sBorder,onclick: () async {
                     SharedPreferences prefs = await SharedPreferences.getInstance();
                     prefs.setString('location', 's');
                     getDetails();
                   }),
                 ),
-                SizedBox(height: ScreenUtil().setHeight(70),),
+                SizedBox(height: ScreenUtil().setHeight(50),),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(50)),
                   child: Button(text: 'Reset all data',color: Colors.transparent,onclick: () async {

@@ -36,6 +36,8 @@ class _FossilsState extends State<Fossils> {
   var index;
   bool isDonated = false;
   bool isCaught = false;
+  bool isDonatedSelected = false;
+  bool isCaughtSelected = false;
   String email;
   List<String> nameList = [];
   TextEditingController name = TextEditingController();
@@ -575,18 +577,29 @@ class _FossilsState extends State<Fossils> {
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: GestureDetector(
                       onTap: (){
-                        subscription = collectionReference.where('donated',arrayContains: email).where('type',isEqualTo: 'fossil').orderBy('name').snapshots().listen((datasnapshot){
-                          setState(() {
-                            fishlist = datasnapshot.documents;
+                        if(!isDonatedSelected){
+                          subscription = collectionReference.where('donated',arrayContains: email).where('type',isEqualTo: 'fossil').orderBy('name').snapshots().listen((datasnapshot){
+                            setState(() {
+                              fishlist = datasnapshot.documents;
+                            });
+                            for(int i=0;i<fishlist.length;i++){
+                              select.add(false);
+                              nameList.add(fishlist[i].data['name']);
+                            }
                           });
-
-                          for(int i=0;i<fishlist.length;i++){
-                            select.add(false);
-                            nameList.add(fishlist[i].data['name']);
-                          }
-
-
-                        });
+                        }
+                        else{
+                          subscription = collectionReference.where('type',isEqualTo: 'fossil').orderBy('name').snapshots().listen((datasnapshot){
+                            setState(() {
+                              fishlist = datasnapshot.documents;
+                            });
+                            for(int i=0;i<fishlist.length;i++){
+                              select.add(false);
+                              nameList.add(fishlist[i].data['name']);
+                            }
+                          });
+                        }
+                        isDonatedSelected = !isDonatedSelected;
                       },
                       child: Container(
                         height: ScreenUtil().setHeight(75),
@@ -613,18 +626,31 @@ class _FossilsState extends State<Fossils> {
                     padding: const EdgeInsets.only(right: 5),
                     child: GestureDetector(
                       onTap: (){
-                        subscription = collectionReference.where('caught', arrayContains: email).where('type',isEqualTo: 'fossil').orderBy('name').snapshots().listen((datasnapshot){
-                          setState(() {
-                            fishlist = datasnapshot.documents;
+                        if(!isCaughtSelected){
+                          subscription = collectionReference.where('caught', arrayContains: email).where('type',isEqualTo: 'fossil').orderBy('name').snapshots().listen((datasnapshot){
+                            setState(() {
+                              fishlist = datasnapshot.documents;
+                            });
+
+                            for(int i=0;i<fishlist.length;i++){
+                              select.add(false);
+                              nameList.add(fishlist[i].data['name']);
+                            }
                           });
+                        }
+                        else{
+                          subscription = collectionReference.where('type',isEqualTo: 'fossil').orderBy('name').snapshots().listen((datasnapshot){
+                            setState(() {
+                              fishlist = datasnapshot.documents;
+                            });
 
-                          for(int i=0;i<fishlist.length;i++){
-                            select.add(false);
-                            nameList.add(fishlist[i].data['name']);
-                          }
-
-
-                        });
+                            for(int i=0;i<fishlist.length;i++){
+                              select.add(false);
+                              nameList.add(fishlist[i].data['name']);
+                            }
+                          });
+                        }
+                        isCaughtSelected = !isCaughtSelected;
                       },
                       child: Container(
                         height: ScreenUtil().setHeight(75),

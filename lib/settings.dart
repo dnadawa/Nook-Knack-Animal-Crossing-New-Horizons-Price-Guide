@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nookknack/home.dart';
 import 'package:nookknack/route-animation.dart';
 import 'package:nookknack/sign-in.dart';
@@ -173,10 +175,10 @@ class _SettingsState extends State<Settings> {
                       child: Image.asset('images/logo.png'),
                     ),
                     SizedBox(height: ScreenUtil().setHeight(30),),
-                    CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(70),),
+                    CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(80),),
                     CustomText(text: 'Catch it. Sell it. Track it.',size: ScreenUtil().setSp(35),bold: false,),
                     SizedBox(height: ScreenUtil().setHeight(40),),
-                    CustomText(text: 'Settings',size: ScreenUtil().setSp(60),),
+                    CustomText(text: 'Settings',size: ScreenUtil().setSp(50),),
                     CustomText(text: 'What did you need?',size: ScreenUtil().setSp(35),bold: false,),
                     Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(100),endIndent:ScreenUtil().setWidth(100),height: 20,),
                     CustomText(text: 'Hemisphere?',size: ScreenUtil().setSp(45)),
@@ -209,7 +211,16 @@ class _SettingsState extends State<Settings> {
                     Padding(
                       padding:  EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(50)),
                       child: Button(text: 'Logout',color: Colors.transparent,isSettings: true,onclick: () async {
+                        final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+                        final GoogleSignIn googleSignIn = new GoogleSignIn();
                         SharedPreferences prefs = await SharedPreferences.getInstance();
+                        var mode = prefs.getString('mode');
+                        if(mode=='email'){
+                          await firebaseAuth.signOut();
+                        }
+                        else{
+                          await googleSignIn.signOut();
+                        }
                         prefs.setString('email', null);
                         Navigator.push(
                           context,

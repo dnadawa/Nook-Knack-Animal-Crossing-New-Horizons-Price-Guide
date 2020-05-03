@@ -25,7 +25,7 @@ class SignIn extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("Why sign in?"),
-          content: Text("Signin will allow you to save your progress across multiple devices and reduce the risk of data loss"),
+          content: Text("Sign in allows you to save your progress across multiple devices and reduces the risk of data loss"),
           actions: [
             FlatButton(
               child: Text("OK"),
@@ -45,6 +45,7 @@ class SignIn extends StatelessWidget {
       print(user.uid);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('email', user.email);
+      prefs.setString('mode', 'email');
       Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context){
         return Home();}));
     }
@@ -129,6 +130,7 @@ class SignIn extends StatelessWidget {
         });
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('email', user.email);
+        prefs.setString('mode', 'google');
 
         Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context){
           return Home();}));
@@ -171,7 +173,7 @@ class SignIn extends StatelessWidget {
                     child: Image.asset('images/logo.png'),
                   ),
                   SizedBox(height: ScreenUtil().setHeight(30),),
-                  CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(70),),
+                  CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(80),),
                   CustomText(text: 'Catch it. Sell it. Track it.',size: ScreenUtil().setSp(35),bold: false,),
                   SizedBox(height: ScreenUtil().setHeight(30),),
                   CustomText(text: 'Log into your account',size: ScreenUtil().setSp(50),),

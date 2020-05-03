@@ -20,7 +20,7 @@ class SignUp extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("Why sign in?"),
-          content: Text("Signin will allow you to save your progress across multiple devices and reduce the risk of data loss"),
+          content: Text("Sign in allows you to save your progress across multiple devices and reduces the risk of data loss"),
           actions: [
             FlatButton(
               child: Text("OK"),
@@ -113,10 +113,10 @@ class SignUp extends StatelessWidget {
                   child: Image.asset('images/logo.png'),
                 ),
                 SizedBox(height: ScreenUtil().setHeight(50),),
-                CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(70),),
+                CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(80),),
                 CustomText(text: 'Catch it. Sell it. Track it.',size: ScreenUtil().setSp(35),bold: false,),
                 SizedBox(height: ScreenUtil().setHeight(80),),
-                CustomText(text: 'Create an account',size: ScreenUtil().setSp(60),),
+                CustomText(text: 'Create an account',size: ScreenUtil().setSp(50),),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(100)),
                   child: InputField(hint: 'Email',type: TextInputType.emailAddress,controller: email,),

@@ -260,7 +260,7 @@ class _FishState extends State<Fish> {
 
   Widget _floatingPanel(){
     return Container(
-      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(280)),
+      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(250)),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
           image: DecorationImage(image: AssetImage('images/fishback.png'),fit: BoxFit.fill)
@@ -390,7 +390,7 @@ class _FishState extends State<Fish> {
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
                       SizedBox(
-                          width: ScreenUtil().setWidth(125),
+                          width: ScreenUtil().setWidth(100),
                           child: CustomText(text: infoLocation,size: ScreenUtil().setSp(30),)),
                       CircleAvatar(
                         backgroundColor: Color(0xff75CBB5),
@@ -402,7 +402,7 @@ class _FishState extends State<Fish> {
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
                       SizedBox(
-                          width: ScreenUtil().setWidth(125),
+                          width: ScreenUtil().setWidth(105),
                           child: CustomText(text: infoShadow,size: ScreenUtil().setSp(30),)),
                       CircleAvatar(
                         backgroundColor: Color(0xff75CBB5),
@@ -414,8 +414,8 @@ class _FishState extends State<Fish> {
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
                       SizedBox(
-                          width: ScreenUtil().setWidth(125),
-                          child: CustomText(text: infoTime,size: ScreenUtil().setSp(24),)),
+                          width: ScreenUtil().setWidth(175),
+                          child: CustomText(text: infoTime,size: ScreenUtil().setSp(30),)),
                     ],
                   ),
                   SizedBox(height: ScreenUtil().setHeight(20),),
@@ -640,8 +640,8 @@ class _FishState extends State<Fish> {
                           child: CircleAvatar(
                             backgroundColor: Color(0xff75CBB5),
                             child: SizedBox(
-                              width: ScreenUtil().setWidth(40),
-                              height: ScreenUtil().setHeight(40),
+                              width: ScreenUtil().setWidth(50),
+                              height: ScreenUtil().setHeight(50),
                               child: Image.asset('images/homeHouse.png'),
                             ),
                           ),
@@ -654,10 +654,11 @@ class _FishState extends State<Fish> {
                         height: ScreenUtil().setHeight(80),
                         child: TextField(
                           focusNode: _focus,
-                          style: TextStyle(color: Colors.white,fontSize: 20,height: 1.4),
+                          textAlignVertical: TextAlignVertical.center,
+                          style: TextStyle(color: Colors.white,fontSize: 20,height: ScreenUtil().setHeight(3.2)),
                           controller: name,
                           decoration: InputDecoration(
-                            hintStyle: TextStyle(color: Colors.white,fontSize: 20,height: 1.4),
+                            hintStyle: TextStyle(color: Colors.white,fontSize: 20,height: ScreenUtil().setHeight(3.2)),
                             hintText: 'Search...',
                             suffixIcon: IconButton(icon: Icon(Icons.clear,color: Colors.white,), onPressed: (){setState(() {
                               name.clear();

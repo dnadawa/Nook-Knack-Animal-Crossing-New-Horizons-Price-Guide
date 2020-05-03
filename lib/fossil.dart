@@ -455,8 +455,8 @@ class _FossilsState extends State<Fossils> {
                           child: CircleAvatar(
                             backgroundColor: Color(0xff75CBB5),
                             child: SizedBox(
-                              width: ScreenUtil().setWidth(40),
-                              height: ScreenUtil().setHeight(40),
+                              width: ScreenUtil().setWidth(50),
+                              height: ScreenUtil().setHeight(50),
                               child: Image.asset('images/homeHouse.png'),
                             ),
                           ),
@@ -469,10 +469,10 @@ class _FossilsState extends State<Fossils> {
                         height: ScreenUtil().setHeight(80),
                         child: TextField(
                           focusNode: _focus,
-                          style: TextStyle(color: Colors.white,fontSize: 20,height: 1.4),
+                          style: TextStyle(color: Colors.white,fontSize: 20,height: ScreenUtil().setHeight(3.2)),
                           controller: name,
                           decoration: InputDecoration(
-                            hintStyle: TextStyle(color: Colors.white,fontSize: 20,height: 1.4),
+                            hintStyle: TextStyle(color: Colors.white,fontSize: 20,height: ScreenUtil().setHeight(3.2)),
                             hintText: 'Search...',
                             suffixIcon: IconButton(icon: Icon(Icons.clear,color: Colors.white,), onPressed: (){setState(() {
                               name.clear();

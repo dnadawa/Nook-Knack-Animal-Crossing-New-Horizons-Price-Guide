@@ -126,10 +126,10 @@ class _HomeState extends State<Home> {
                       child: Image.asset('images/logo.png'),
                     ),
                     SizedBox(height: ScreenUtil().setHeight(40),),
-                    CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(70),),
+                    CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(80),),
                     CustomText(text: 'Catch it. Sell it. Track it.',size: ScreenUtil().setSp(35),bold: false,),
                     SizedBox(height: ScreenUtil().setHeight(40),),
-                    CustomText(text: 'Welcome back,',size: ScreenUtil().setSp(60),),
+                    CustomText(text: 'Welcome back,',size: ScreenUtil().setSp(50),),
                     CustomText(text: 'What did you find?',size: ScreenUtil().setSp(35),bold: false,),
                     Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(100),endIndent:ScreenUtil().setWidth(100),height: 30,),
                     Row(
@@ -192,7 +192,7 @@ class _HomeState extends State<Home> {
                     ],
                     ),
                     SizedBox(height: ScreenUtil().setHeight(40),),
-                    CustomText(text: 'Overall Progress',size: ScreenUtil().setSp(60),),
+                    CustomText(text: 'Overall Progress',size: ScreenUtil().setSp(50),),
                     Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(100),endIndent:ScreenUtil().setWidth(100),height: 30,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,

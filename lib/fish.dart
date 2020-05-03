@@ -19,7 +19,7 @@ class Fish extends StatefulWidget {
 }
 
 class _FishState extends State<Fish> {
-  final CollectionReference collectionReference  = Firestore.instance.collection("test");
+  final CollectionReference collectionReference  = Firestore.instance.collection("all");
   FocusNode _focus = new FocusNode();
   var fishlist;
   var subscription;
@@ -561,8 +561,8 @@ class _FishState extends State<Fish> {
     setState(() {
       _focus.addListener(_onFocusChange);
     });
-    subscription = collectionReference..where('type',isEqualTo: 'fish').orderBy('name').snapshots().listen((datasnapshot){
-      setState(() {
+    subscription = collectionReference.where('type',isEqualTo: 'fish').orderBy('name').snapshots().listen((datasnapshot){
+    setState(() {
         fishlist = datasnapshot.documents;
       });
 
@@ -1038,8 +1038,9 @@ class _FishState extends State<Fish> {
                     );
                   },
                 ): new Center(child: CircularProgressIndicator()),
-              )
+              ),
 
+              SizedBox(height: ScreenUtil().setHeight(60),),
 
 
             ],

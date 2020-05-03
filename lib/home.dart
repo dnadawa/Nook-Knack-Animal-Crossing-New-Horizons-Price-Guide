@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
     var sub = await Firestore.instance.collection('users').where('email',isEqualTo: email).getDocuments();
     var list = sub.documents;
 
-    var fishSub = await Firestore.instance.collection('test').where('type',isEqualTo:'fish').getDocuments();
+    var fishSub = await Firestore.instance.collection('all').where('type',isEqualTo:'fish').getDocuments();
     fishList = fishSub.documents;
 
     var insectSub = await Firestore.instance.collection('test').where('type', isEqualTo: 'insect').getDocuments();

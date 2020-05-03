@@ -417,7 +417,7 @@ class _ChecklistState extends State<Checklist> {
                         children: <Widget>[
                           SizedBox(width: ScreenUtil().setWidth(145),),
                           Container(
-                              width: ScreenUtil().setWidth(220),
+                              width: ScreenUtil().setWidth(80),
                               child: InputField(hint: '0',isChecklist: true,type: TextInputType.number,controller: turnip,
                               onSubmit: (x) async {
                                 await Firestore.instance.collection('users').document(email).updateData({
@@ -685,7 +685,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/row1.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -710,7 +710,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/row2.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -735,7 +735,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/row3.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -764,7 +764,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Roses1.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -789,7 +789,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Roses2.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -814,7 +814,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Roses3.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -839,7 +839,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Roses4.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -864,7 +864,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Roses5.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -889,7 +889,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Roses6.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -914,7 +914,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Roses7.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -942,7 +942,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Cosmos1.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -967,7 +967,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Cosmos2.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -992,7 +992,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Cosmos3.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1011,7 +1011,7 @@ class _ChecklistState extends State<Checklist> {
                     SizedBox(height: ScreenUtil().setHeight(15),),
 
 
-                    CustomText(text: 'Hyacints',size: ScreenUtil().setSp(35),),
+                    CustomText(text: 'Hyacinth',size: ScreenUtil().setSp(35),),
                     SizedBox(height: ScreenUtil().setHeight(15),),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -1021,7 +1021,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Hyacints1.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1046,7 +1046,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Hyacints2.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1071,7 +1071,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Hyacints3.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1096,7 +1096,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Hyacints4.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1124,7 +1124,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Mums1.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1149,7 +1149,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Mums2.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1174,7 +1174,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Mums3.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1202,7 +1202,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Pansies1.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1227,7 +1227,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Pansies2.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1252,7 +1252,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Pansies3.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1277,7 +1277,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Pansies4.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1305,7 +1305,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Tulips1.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1330,7 +1330,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Tulips2.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1355,7 +1355,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Tulips3.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1380,7 +1380,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Tulips4.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1408,7 +1408,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Windflowers1.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1433,7 +1433,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Windflowers2.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1458,7 +1458,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Windflowers3.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1483,7 +1483,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Windflowers4.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({
@@ -1508,7 +1508,7 @@ class _ChecklistState extends State<Checklist> {
                           height: ScreenUtil().setHeight(80),
                           child: Image.asset('images/Windflowers5.png',fit: BoxFit.contain,),
                         ),
-                        SizedBox(width: ScreenUtil().setWidth(50),),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
                         GestureDetector(
                           onTap: () async {
                             await Firestore.instance.collection('users').document(email).updateData({

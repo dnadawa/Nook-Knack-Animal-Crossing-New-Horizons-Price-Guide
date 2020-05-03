@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nookknack/route-animation.dart';
 import 'package:nookknack/sign-up.dart';
-import 'package:nookknack/widgets/button.dart';
 import 'package:nookknack/widgets/custom-text.dart';
 import 'package:nookknack/widgets/inputfield.dart';
 import 'package:nookknack/widgets/toast.dart';
@@ -165,6 +164,7 @@ class SignIn extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  SizedBox(height: ScreenUtil().setHeight(30),),
                   SizedBox(
                     width: ScreenUtil().setWidth(150),
                     height: ScreenUtil().setHeight(150),
@@ -174,13 +174,13 @@ class SignIn extends StatelessWidget {
                   CustomText(text: 'Nook Knack',size: ScreenUtil().setSp(70),),
                   CustomText(text: 'Catch it. Sell it. Track it.',size: ScreenUtil().setSp(35),bold: false,),
                   SizedBox(height: ScreenUtil().setHeight(30),),
-                  CustomText(text: 'Log into your account',size: ScreenUtil().setSp(55),),
+                  CustomText(text: 'Log into your account',size: ScreenUtil().setSp(50),),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(60)),
+                    padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(100)),
                     child: InputField(hint: 'Email',type: TextInputType.emailAddress,controller: email,),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(60)),
+                    padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(100)),
                     child: InputField(hint: 'Password',ispassword: true,controller: password,),
                   ),
                   SizedBox(height: ScreenUtil().setHeight(40),),
@@ -188,9 +188,9 @@ class SignIn extends StatelessWidget {
                       onTap: ()=>resetPassword(),
                       child: CustomText(text: 'Forgot Password',size: ScreenUtil().setSp(30),dec: TextDecoration.underline,)),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(60),ScreenUtil().setWidth(40),ScreenUtil().setWidth(60),ScreenUtil().setWidth(50)),
+                    padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(60),ScreenUtil().setWidth(30),ScreenUtil().setWidth(60),ScreenUtil().setWidth(30)),
                     child: SizedBox(
-                      width: double.infinity,
+                      width: ScreenUtil().setWidth(500),
                       child: RaisedButton(
                         elevation: 0,
                         onPressed: ()=>signInWithEmail(context),
@@ -199,7 +199,6 @@ class SignIn extends StatelessWidget {
                         ),
                         color: Color(0xff75CBB5),
                         textColor: Colors.white,
-                        padding: EdgeInsets.all(15),
                         child: CustomText(text: 'Log in',size: 18,),
                       ),
                     ),
@@ -211,13 +210,46 @@ class SignIn extends StatelessWidget {
                           MyCustomRoute(builder: (context) => SignUp()),
                         );
                       },
-                      child: CustomText(text: "Don't have an account? Sign Up",size: ScreenUtil().setSp(30),)),
+                      child:RichText(
+                          text: TextSpan(
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: ScreenUtil().setSp(30),
+                              fontWeight: FontWeight.bold
+                            ),
+                        children: <TextSpan>[
+                          TextSpan(text: "Don't have an account? "),
+                          TextSpan(text: "Sign Up",style: TextStyle(decoration: TextDecoration.underline))
+                        ]
+                      )
+                      )
+                  ),
                   SizedBox(height: ScreenUtil().setHeight(30),),
                   CustomText(text: 'OR',size: 20,),
-                  SizedBox(height: ScreenUtil().setHeight(30),),
+                  SizedBox(height: ScreenUtil().setHeight(20),),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(60)),
-                    child: Button(text: 'Continue with Google',color: Colors.transparent,icon: FontAwesomeIcons.google,social: true,onclick: ()=>signInWithGoogle(context),),
+                    child:SizedBox(
+                      width: ScreenUtil().setWidth(500),
+                      child: RaisedButton(
+                        elevation: 0,
+                        onPressed: ()=>signInWithGoogle(context),
+                        shape:RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            side: BorderSide(color: Colors.white,width: 2)
+                        ),
+                        color: Colors.transparent,
+                        textColor: Colors.white,
+                          child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(FontAwesomeIcons.google,color: Colors.white,size: ScreenUtil().setHeight(35),),
+                            SizedBox(width: 10,),
+                            Text('Continue with Google',style: TextStyle(fontSize: 18,color: Colors.white,fontWeight: FontWeight.w900),)
+                          ],
+                        )
+                      ),
+                    ),
                   ),
                   SizedBox(height: ScreenUtil().setHeight(20),),
                   GestureDetector(

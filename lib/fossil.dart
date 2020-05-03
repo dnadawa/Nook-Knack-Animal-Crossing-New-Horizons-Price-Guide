@@ -466,7 +466,7 @@ class _FossilsState extends State<Fossils> {
                     Expanded(
                       flex: 10,
                       child: SizedBox(
-                        height: ScreenUtil().setHeight(75),
+                        height: ScreenUtil().setHeight(80),
                         child: TextField(
                           focusNode: _focus,
                           style: TextStyle(color: Colors.white,fontSize: 20,height: 1.4),
@@ -474,6 +474,10 @@ class _FossilsState extends State<Fossils> {
                           decoration: InputDecoration(
                             hintStyle: TextStyle(color: Colors.white,fontSize: 20,height: 1.4),
                             hintText: 'Search...',
+                            suffixIcon: IconButton(icon: Icon(Icons.clear,color: Colors.white,), onPressed: (){setState(() {
+                              name.clear();
+                              _focus.unfocus();
+                            });}),
                             contentPadding: EdgeInsets.fromLTRB(10,0,0,0),
                             filled: true,
                             fillColor: Color(0xff75CBB5),
@@ -493,6 +497,8 @@ class _FossilsState extends State<Fossils> {
                               newNameList.clear();
                               newPriceList.clear();
                               newImageList.clear();
+                              caughtList.clear();
+                              donatedList.clear();
                               for(int j=0;j<nameList.length;j++){
                                 if(nameList[j].contains(x[0].toUpperCase()+x.substring(1))){
                                   print('there is a match ${nameList[j]}');
@@ -580,23 +586,25 @@ class _FossilsState extends State<Fossils> {
                         if(!isDonatedSelected){
                           subscription = collectionReference.where('donated',arrayContains: email).where('type',isEqualTo: 'fossil').orderBy('name').snapshots().listen((datasnapshot){
                             setState(() {
+                              nameList.clear();
                               fishlist = datasnapshot.documents;
+                              for(int i=0;i<fishlist.length;i++){
+                                select.add(false);
+                                nameList.add(fishlist[i].data['name']);
+                              }
                             });
-                            for(int i=0;i<fishlist.length;i++){
-                              select.add(false);
-                              nameList.add(fishlist[i].data['name']);
-                            }
                           });
                         }
                         else{
                           subscription = collectionReference.where('type',isEqualTo: 'fossil').orderBy('name').snapshots().listen((datasnapshot){
                             setState(() {
+                              nameList.clear();
                               fishlist = datasnapshot.documents;
+                              for(int i=0;i<fishlist.length;i++){
+                                select.add(false);
+                                nameList.add(fishlist[i].data['name']);
+                              }
                             });
-                            for(int i=0;i<fishlist.length;i++){
-                              select.add(false);
-                              nameList.add(fishlist[i].data['name']);
-                            }
                           });
                         }
                         isDonatedSelected = !isDonatedSelected;
@@ -629,25 +637,25 @@ class _FossilsState extends State<Fossils> {
                         if(!isCaughtSelected){
                           subscription = collectionReference.where('caught', arrayContains: email).where('type',isEqualTo: 'fossil').orderBy('name').snapshots().listen((datasnapshot){
                             setState(() {
+                              nameList.clear();
                               fishlist = datasnapshot.documents;
+                              for(int i=0;i<fishlist.length;i++){
+                                select.add(false);
+                                nameList.add(fishlist[i].data['name']);
+                              }
                             });
-
-                            for(int i=0;i<fishlist.length;i++){
-                              select.add(false);
-                              nameList.add(fishlist[i].data['name']);
-                            }
                           });
                         }
                         else{
                           subscription = collectionReference.where('type',isEqualTo: 'fossil').orderBy('name').snapshots().listen((datasnapshot){
                             setState(() {
+                              nameList.clear();
                               fishlist = datasnapshot.documents;
+                              for(int i=0;i<fishlist.length;i++){
+                                select.add(false);
+                                nameList.add(fishlist[i].data['name']);
+                              }
                             });
-
-                            for(int i=0;i<fishlist.length;i++){
-                              select.add(false);
-                              nameList.add(fishlist[i].data['name']);
-                            }
                           });
                         }
                         isCaughtSelected = !isCaughtSelected;

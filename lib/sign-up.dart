@@ -118,30 +118,29 @@ class SignUp extends StatelessWidget {
                 SizedBox(height: ScreenUtil().setHeight(80),),
                 CustomText(text: 'Create an account',size: ScreenUtil().setSp(60),),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(60)),
+                  padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(100)),
                   child: InputField(hint: 'Email',type: TextInputType.emailAddress,controller: email,),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(60)),
+                  padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(100)),
                   child: InputField(hint: 'Password',ispassword: true,controller: password,),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(60),ScreenUtil().setWidth(100),ScreenUtil().setWidth(60),ScreenUtil().setWidth(70)),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: RaisedButton(
-                      elevation: 0,
-                      onPressed: ()=>signUp(),
-                      shape:RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      color: Color(0xff75CBB5),
-                      textColor: Colors.white,
-                      padding: EdgeInsets.all(15),
-                      child: CustomText(text: 'Create an account',size: 18,),
-                    ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(ScreenUtil().setWidth(60),ScreenUtil().setWidth(30),ScreenUtil().setWidth(60),ScreenUtil().setWidth(30)),
+              child: SizedBox(
+                width: ScreenUtil().setWidth(500),
+                child: RaisedButton(
+                  elevation: 0,
+                  onPressed: ()=>signUp(),
+                  shape:RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
                   ),
+                  color: Color(0xff75CBB5),
+                  textColor: Colors.white,
+                  child: CustomText(text: 'Create an account',size: 18,),
                 ),
+              ),
+            ),
                 GestureDetector(
                     onTap: (){
                       Navigator.push(
@@ -149,7 +148,19 @@ class SignUp extends StatelessWidget {
                         MyCustomRoute(builder: (context) => SignIn()),
                       );
                     },
-                    child: CustomText(text: 'Already have an account? Sign in',size: ScreenUtil().setSp(30),)),
+                    child: RichText(
+                        text: TextSpan(
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: ScreenUtil().setSp(30),
+                                fontWeight: FontWeight.bold
+                            ),
+                            children: <TextSpan>[
+                              TextSpan(text: "Already have an account? "),
+                              TextSpan(text: "Sign In",style: TextStyle(decoration: TextDecoration.underline))
+                            ]
+                        )
+                    )),
                 SizedBox(height: ScreenUtil().setHeight(60),),
                 GestureDetector(
                     onTap: ()=>showAlertDialog(context),

@@ -21,6 +21,7 @@ class _SettingsState extends State<Settings> {
   Color sColor;
   bool nBorder;
   bool sBorder;
+
   getDetails() async {
     SharedPreferences prefs= await SharedPreferences.getInstance();
     var location = prefs.getString('location');
@@ -48,6 +49,99 @@ class _SettingsState extends State<Settings> {
         nBorder = true;
       });
     }
+  }
+
+  showAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Reset all data"),
+          content: Text("Are you sure?"),
+          actions: [
+            FlatButton(
+              child: Text("YES"),
+              onPressed: () async {
+                ToastBar(color: Colors.orange,text: 'Please wait...').show();
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.setString('location', 'n');
+                String email = prefs.getString('email');
+                CollectionReference colref = Firestore.instance.collection('test');
+                var caughtsub = await colref.where('caught',arrayContains: email).getDocuments();
+                var caughtlist = caughtsub.documents;
+
+                for(int i=0;i<caughtlist.length;i++){
+                  List<String> List1 = List<String>.from(caughtlist[i]['caught']);
+                  List1.remove(email);
+                  await colref.document(caughtlist[i].documentID).updateData({
+                    'caught': List1
+                  });
+                }
+
+                var donatesub = await colref.where('donated',arrayContains: email).getDocuments();
+                var donatelist = donatesub.documents;
+
+                for(int i=0;i<donatelist.length;i++){
+                  List<String> List1 = List<String>.from(donatelist[i]['caught']);
+                  List1.remove(email);
+                  await colref.document(donatelist[i].documentID).updateData({
+                    'donated': List1
+                  });
+                }
+
+                await Firestore.instance.collection('users').document(email).updateData({
+                  'house': '0',
+                  'ramp': '0',
+                  'bridge': '0',
+                  'turnip': '0',
+                  'apple': false,
+                  'cherry': false,
+                  'orange': false,
+                  'peach': false,
+                  'coconut': false,
+                  'pear': false,
+                  'lilly1': false,
+                  'lilly2': false,
+                  'lilly3': false,
+                  'rose1': false,
+                  'rose2': false,
+                  'rose3': false,
+                  'rose4': false,
+                  'rose5': false,
+                  'rose6': false,
+                  'rose7': false,
+                  'list1': false,
+                  'list2': false,
+                  'list3': false,
+                  'list4': false,
+                  'list5': false,
+                  'list6': false,
+                  'list7': false,
+                  'list8': false,
+                  'list9': false,
+                  'list10': false,
+                  'list11': false,
+                  'list12': false,
+                  'list13': false,
+                  'list14': false,
+                  'list15': false,
+                  'list16': false,
+                });
+
+                ToastBar(text: 'All Done!',color: Colors.green).show();
+
+              },
+            ),
+            FlatButton(
+              child: Text("NO"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -83,7 +177,7 @@ class _SettingsState extends State<Settings> {
                     CustomText(text: 'Catch it. Sell it. Track it.',size: ScreenUtil().setSp(35),bold: false,),
                     SizedBox(height: ScreenUtil().setHeight(40),),
                     CustomText(text: 'Settings',size: ScreenUtil().setSp(60),),
-                    CustomText(text: 'What did you need ?',size: ScreenUtil().setSp(35),bold: false,),
+                    CustomText(text: 'What did you need?',size: ScreenUtil().setSp(35),bold: false,),
                     Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(100),endIndent:ScreenUtil().setWidth(100),height: 20,),
                     CustomText(text: 'Hemisphere?',size: ScreenUtil().setSp(45)),
                     SizedBox(height: ScreenUtil().setHeight(30),),
@@ -106,79 +200,10 @@ class _SettingsState extends State<Settings> {
                         getDetails();
                       }),
                     ),
-                    SizedBox(height: ScreenUtil().setHeight(50),),
+                    Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(100),endIndent:ScreenUtil().setWidth(100),height: ScreenUtil().setHeight(80),),
                     Padding(
                       padding:  EdgeInsets.symmetric(horizontal:ScreenUtil().setWidth(50)),
-                      child: Button(text: 'Reset all data',color: Colors.transparent,isSettings: true,onclick: () async {
-                        ToastBar(color: Colors.orange,text: 'Please wait...').show();
-                        SharedPreferences prefs = await SharedPreferences.getInstance();
-                        prefs.setString('location', 'n');
-                        String email = prefs.getString('email');
-                        CollectionReference colref = Firestore.instance.collection('test');
-                        var caughtsub = await colref.where('caught',arrayContains: email).getDocuments();
-                        var caughtlist = caughtsub.documents;
-
-                        for(int i=0;i<caughtlist.length;i++){
-                          List<String> List1 = List<String>.from(caughtlist[i]['caught']);
-                          List1.remove(email);
-                          await colref.document(caughtlist[i].documentID).updateData({
-                            'caught': List1
-                          });
-                        }
-
-                        var donatesub = await colref.where('donated',arrayContains: email).getDocuments();
-                        var donatelist = donatesub.documents;
-
-                        for(int i=0;i<donatelist.length;i++){
-                          List<String> List1 = List<String>.from(donatelist[i]['caught']);
-                          List1.remove(email);
-                          await colref.document(donatelist[i].documentID).updateData({
-                            'donated': List1
-                          });
-                        }
-
-                        await Firestore.instance.collection('users').document(email).updateData({
-                          'house': '0',
-                          'ramp': '0',
-                          'bridge': '0',
-                          'turnip': '0',
-                          'apple': false,
-                          'cherry': false,
-                          'orange': false,
-                          'peach': false,
-                          'coconut': false,
-                          'pear': false,
-                          'lilly1': false,
-                          'lilly2': false,
-                          'lilly3': false,
-                          'rose1': false,
-                          'rose2': false,
-                          'rose3': false,
-                          'rose4': false,
-                          'rose5': false,
-                          'rose6': false,
-                          'rose7': false,
-                          'list1': false,
-                          'list2': false,
-                          'list3': false,
-                          'list4': false,
-                          'list5': false,
-                          'list6': false,
-                          'list7': false,
-                          'list8': false,
-                          'list9': false,
-                          'list10': false,
-                          'list11': false,
-                          'list12': false,
-                          'list13': false,
-                          'list14': false,
-                          'list15': false,
-                          'list16': false,
-                        });
-
-                        ToastBar(text: 'All Done!',color: Colors.green).show();
-
-                      }),
+                      child: Button(text: 'Reset all data',color: Colors.transparent,isSettings: true,onclick: ()=>showAlertDialog(context)),
                     ),
                     SizedBox(height: ScreenUtil().setHeight(30),),
                     Padding(

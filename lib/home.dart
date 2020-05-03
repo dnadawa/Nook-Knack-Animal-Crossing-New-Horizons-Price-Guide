@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:nookknack/checklist.dart';
 import 'package:nookknack/fossil.dart';
 import 'package:nookknack/insects.dart';
 import 'package:nookknack/route-animation.dart';
@@ -373,14 +374,40 @@ class _HomeState extends State<Home> {
               Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
-                    padding: EdgeInsets.all(ScreenUtil().setWidth(20)),
-                    child: IconButton(icon: Icon(Icons.dehaze,color: Colors.white,), onPressed: (){
-                      Navigator.push(
-                        context,
-                        MyCustomRoute(builder: (context) => Settings()),
-                      );
-                    }),
+                    padding: EdgeInsets.all(ScreenUtil().setWidth(40)),
+                    child: Row(
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MyCustomRoute(builder: (context) => Settings()),
+                            );
+                          },
+                          child: SizedBox(
+                            width: ScreenUtil().setWidth(50),
+                            height: ScreenUtil().setHeight(50),
+                            child: Image.asset('images/settings.png'),
+                          ),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(40),),
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MyCustomRoute(builder: (context) => Checklist()),
+                            );
+                          },
+                          child: SizedBox(
+                            width: ScreenUtil().setWidth(50),
+                            height: ScreenUtil().setHeight(50),
+                            child: Image.asset('images/list.png'),
+                          ),
+                        )
+                      ],
+                    ),
                   )),
+
             ],
           ),
 

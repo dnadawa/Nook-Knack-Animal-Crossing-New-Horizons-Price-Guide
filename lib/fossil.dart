@@ -211,7 +211,7 @@ class _FossilsState extends State<Fossils> {
 
   Widget _floatingPanel(){
     return Container(
-      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(430)),
+      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(370)),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
           image: DecorationImage(image: AssetImage('images/fossilback.png'),fit: BoxFit.fill)
@@ -271,7 +271,7 @@ class _FossilsState extends State<Fossils> {
                         onTap: ()=>onCaughtPress(),
                         child: SizedBox(
                             width: ScreenUtil().setWidth(230),
-                            child: CustomText(text: isCaught?'Caught':'Not Caught',size: ScreenUtil().setSp(32),)),
+                            child: CustomText(text: isCaught?'Found':'Not Found',size: ScreenUtil().setSp(32),)),
                       ),
                     ],
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'custom-text.dart';
 
 class Button extends StatelessWidget {
@@ -9,13 +10,14 @@ class Button extends StatelessWidget {
   final bool social;
   final IconData icon;
   final bool isBorder;
+  final bool isSettings;
 
-  const Button({Key key, this.onclick, this.text, this.color: Colors.black, this.social=false, this.icon, this.isBorder=true}) : super(key: key);
+  const Button({Key key, this.onclick, this.text, this.color: Colors.black, this.social=false, this.icon, this.isBorder=true, this.isSettings=false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: isSettings==false?double.infinity:ScreenUtil().setWidth(320),
       child: RaisedButton(
         elevation: 0,
         onPressed: onclick,
@@ -25,7 +27,7 @@ class Button extends StatelessWidget {
         ),
         color: color,
         textColor: Colors.white,
-        padding: EdgeInsets.all(15),
+        padding: isSettings==false?EdgeInsets.all(15):EdgeInsets.all(0),
         child: social?Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

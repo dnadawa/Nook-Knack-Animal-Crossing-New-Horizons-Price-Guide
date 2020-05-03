@@ -166,7 +166,7 @@ class _ChecklistState extends State<Checklist> {
   }
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: false);
+    ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: true);
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -376,7 +376,6 @@ class _ChecklistState extends State<Checklist> {
                     SizedBox(height: ScreenUtil().setHeight(15),),
                     SizedBox(
                         width: ScreenUtil().setWidth(300),
-                        height: ScreenUtil().setHeight(100),
                         child: Button(text: 'Reset Tasks',color: Color(0xff75CBB5),isBorder: false,onclick: () async {
                           await Firestore.instance.collection('users').document(email).updateData({
                             'list1': false,
@@ -696,7 +695,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: lilly1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -721,7 +720,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: lilly2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -746,7 +745,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: lilly3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -775,7 +774,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: rose1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -800,7 +799,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: rose2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -825,7 +824,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: rose3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -850,7 +849,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: rose4?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -875,7 +874,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: rose5?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -900,7 +899,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: rose6?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -925,7 +924,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: rose7?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -953,7 +952,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: cosmos1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -978,7 +977,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: cosmos2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1003,7 +1002,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: cosmos3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1032,7 +1031,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: hyacints1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1057,7 +1056,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: hyacints2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1082,7 +1081,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: hyacints3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1107,7 +1106,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: hyacints4?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1135,7 +1134,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: mums1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1160,7 +1159,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: mums2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1185,7 +1184,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: mums3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1213,7 +1212,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: pansies1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1238,7 +1237,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: pansies2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1263,7 +1262,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: pansies3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1288,7 +1287,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: pansies4?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1316,7 +1315,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: tulips1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1341,7 +1340,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: tulips2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1366,7 +1365,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: tulips3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1391,7 +1390,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: tulips4?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1419,7 +1418,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: windflowers1?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1444,7 +1443,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: windflowers2?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1469,7 +1468,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: windflowers3?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1494,7 +1493,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: windflowers4?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),
@@ -1519,7 +1518,7 @@ class _ChecklistState extends State<Checklist> {
                           },
                           child: CircleAvatar(
                             backgroundColor: Color(0xffEFE8BD),
-                            radius: ScreenUtil().setWidth(22),
+                            radius: ScreenUtil().setWidth(28),
                             child: windflowers5?Icon(Icons.check,size: ScreenUtil().setWidth(40),color: Color(0xff75CBB5),):SizedBox.shrink(),
                           ),
                         ),

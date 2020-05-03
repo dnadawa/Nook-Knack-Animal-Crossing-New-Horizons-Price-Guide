@@ -13,14 +13,15 @@ class InputField extends StatelessWidget {
   final bool ispassword;
   final TextEditingController controller;
   final bool isChecklist;
+  final bool isHome;
   final Function(String) onSubmit;
 
-  const InputField({Key key, this.hint, this.type, this.ispassword=false, this.controller, this.isChecklist=false, this.onSubmit}) : super(key: key);
+  const InputField({Key key, this.hint, this.type, this.ispassword=false, this.controller, this.isChecklist=false, this.onSubmit, this.isHome=false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  !isChecklist?EdgeInsets.only(top: 20):EdgeInsets.all(0),
+      padding:  !isChecklist?EdgeInsets.only(top: 20):isHome?EdgeInsets.all(0):EdgeInsets.all(0),
       child: TextField(
         style: textStyle,
         cursorColor: Colors.white,

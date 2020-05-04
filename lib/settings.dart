@@ -68,7 +68,7 @@ class _SettingsState extends State<Settings> {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.setString('location', 'n');
                 String email = prefs.getString('email');
-                CollectionReference colref = Firestore.instance.collection('test');
+                CollectionReference colref = Firestore.instance.collection('all');
                 var caughtsub = await colref.where('caught',arrayContains: email).getDocuments();
                 var caughtlist = caughtsub.documents;
 
@@ -112,6 +112,30 @@ class _SettingsState extends State<Settings> {
                   'rose5': false,
                   'rose6': false,
                   'rose7': false,
+                  'rose7': false,
+                  'cosmos1': false,
+                  'cosmos2': false,
+                  'cosmos3': false,
+                  'hyacints1': false,
+                  'hyacints2': false,
+                  'hyacints3': false,
+                  'hyacints4': false,
+                  'mums1': false,
+                  'mums2': false,
+                  'mums3': false,
+                  'pansies1': false,
+                  'pansies2': false,
+                  'pansies3': false,
+                  'pansies4': false,
+                  'tulips1': false,
+                  'tulips2': false,
+                  'tulips3': false,
+                  'tulips4': false,
+                  'windflowers1': false,
+                  'windflowers2': false,
+                  'windflowers3': false,
+                  'windflowers4': false,
+                  'windflowers5': false,
                   'list1': false,
                   'list2': false,
                   'list3': false,

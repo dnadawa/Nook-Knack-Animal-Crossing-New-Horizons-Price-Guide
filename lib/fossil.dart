@@ -19,7 +19,7 @@ class Fossils extends StatefulWidget {
 }
 
 class _FossilsState extends State<Fossils> {
-  final CollectionReference collectionReference  = Firestore.instance.collection("test");
+  final CollectionReference collectionReference  = Firestore.instance.collection("all");
   FocusNode _focus = new FocusNode();
   var fishlist;
   var subscription;

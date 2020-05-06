@@ -19,7 +19,7 @@ class Insects extends StatefulWidget {
 }
 
 class _InsectsState extends State<Insects> {
-  final CollectionReference collectionReference  = Firestore.instance.collection("test");
+  final CollectionReference collectionReference  = Firestore.instance.collection("all");
   FocusNode _focus = new FocusNode();
   var fishlist;
   var subscription;
@@ -1066,8 +1066,8 @@ class _InsectsState extends State<Insects> {
                     );
                   },
                 ): new Center(child: CircularProgressIndicator()),
-              )
-
+              ),
+              SizedBox(height: ScreenUtil().setHeight(60),),
 
 
             ],

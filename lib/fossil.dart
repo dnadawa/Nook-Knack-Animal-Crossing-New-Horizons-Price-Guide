@@ -826,7 +826,8 @@ class _FossilsState extends State<Fossils> {
                     );
                   },
                 ): new Center(child: CircularProgressIndicator()),
-              )
+              ),
+              SizedBox(height: ScreenUtil().setHeight(60),),
             ],
           ),
         ),

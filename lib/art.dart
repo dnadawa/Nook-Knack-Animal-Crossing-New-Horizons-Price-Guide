@@ -3,82 +3,58 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:nookknack/checklist.dart';
+import 'package:nookknack/fish.dart';
 import 'package:nookknack/fossil.dart';
 import 'package:nookknack/home.dart';
 import 'package:nookknack/route-animation.dart';
 import 'package:nookknack/widgets/custom-text.dart';
-import 'package:nookknack/widgets/month.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'art.dart';
+
 import 'insects.dart';
 
 
-class Fish extends StatefulWidget {
+class Art extends StatefulWidget {
   @override
-  _FishState createState() => _FishState();
+  _ArtState createState() => _ArtState();
 }
 
-class _FishState extends State<Fish> {
+class _ArtState extends State<Art> {
   final CollectionReference collectionReference  = Firestore.instance.collection("all");
   FocusNode _focus = new FocusNode();
   var fishlist;
   var subscription;
-  String page='Fish';
+  String page = 'Art';
   String price = '0';
   String infoName = 'Loading...';
+  String infoDescription = '';
   String infoImage = '';
+  String infoImageForgery = '';
   String infoPrice = '0';
-  String infoCJ = '0';
-  String infoLocation = '';
-  String infoShadow = '';
-  String infoTime = '';
   List<bool> select = [];
   List newNameList = [];
   List newPriceList = [];
+  List newPDescriptionList = [];
   List newImageList = [];
-  List newCJList = [];
-  List newOceanList = [];
-  List newShadowList = [];
-  List newTimeList = [];
-  List<List> newMonthListN = [];
-  List<List> newMonthListS = [];
+  List newImageForgeryList = [];
   List<List> caughtList = [];
   List<List> donatedList = [];
-  List<List> modelList = [];
   var index;
-  bool jan = false;
-  bool feb = false;
-  bool mar = false;
-  bool apr = false;
-  bool may = false;
-  bool jun = false;
-  bool jul = false;
-  bool aug = false;
-  bool sep = false;
-  bool oct = false;
-  bool nov = false;
-  bool dec = false;
   bool isDonated = false;
   bool isCaught = false;
-  bool isModel = false;
   bool isDonatedSelected = false;
   bool isCaughtSelected = false;
-  String location;
   String email;
   List<String> nameList = [];
   TextEditingController name = TextEditingController();
   bool isFocused = false;
-  Color dotButtonColor = Color(0xffB6A977);
   PanelController panelController = PanelController();
   List newDonated;
   List newCaught;
-  List newModel;
   int donatedCount;
   int caughtCount;
   getList() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    location = prefs.getString('location');
     email = prefs.getString('email');
     panelController.hide();
   }
@@ -103,98 +79,6 @@ class _FishState extends State<Fish> {
     setState(() {
       isFocused = _focus.hasFocus;
     });
-  }
-
-  Widget _floatingCollapsed(){
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-          image: DecorationImage(image: AssetImage('images/fishback.png'),fit: BoxFit.fill)
-      ),
-      child: Stack(
-        children: <Widget>[
-          Center(
-            child: Padding(
-              padding: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    width: ScreenUtil().setWidth(100),
-                    child: Image.asset('images/handle.png'),
-                  ),
-                  SizedBox(height: ScreenUtil().setHeight(10),),
-                  CustomText(text:infoName,size: ScreenUtil().setSp(55),bold: false,),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, ScreenUtil().setHeight(20), ScreenUtil().setHeight(40), 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: (){
-                      if(newDonated.contains(email)){
-                        newDonated.remove(email);
-                        setState(() {
-                          isDonated = false;
-                        });
-                        collectionReference.document(infoName).updateData({
-                          'donated': newDonated
-                        });
-                      }
-                      else{
-                        newDonated.add(email);
-                        setState(() {
-                          isDonated = true;
-                        });
-                        collectionReference.document(infoName).updateData({
-                          'donated': newDonated
-                        });
-                      }
-                  },
-                  child: SizedBox(
-                    width: ScreenUtil().setWidth(50),
-                    height: ScreenUtil().setHeight(50),
-                    child: Image.asset(isDonated?'images/owl.png':'images/owlDe.png',),
-                  ),
-                ),
-                SizedBox(width: ScreenUtil().setWidth(20),),
-                GestureDetector(
-                  onTap: (){
-                    if(newCaught.contains(email)){
-                      newCaught.remove(email);
-                      setState(() {
-                        isCaught = false;
-                      });
-                      collectionReference.document(infoName).updateData({
-                        'caught': newCaught
-                      });
-                    }
-                    else{
-                      newCaught.add(email);
-                      setState(() {
-                        isCaught = true;
-                      });
-                      collectionReference.document(infoName).updateData({
-                        'caught': newCaught
-                      });
-                    }
-                  },
-                  child: SizedBox(
-                    width: ScreenUtil().setWidth(50),
-                    height: ScreenUtil().setHeight(50),
-                    child: Image.asset(isCaught?'images/hook.png':'images/hookDe.png',),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   onOwlPress(){
@@ -239,33 +123,11 @@ class _FishState extends State<Fish> {
     }
   }
 
-  onModelPress(){
-    if(newModel.contains(email)){
-      newModel.remove(email);
-      setState(() {
-        isModel = false;
-      });
-      collectionReference.document(infoName).updateData({
-        'model': newModel
-      });
-    }
-    else{
-      newModel.add(email);
-      setState(() {
-        isModel = true;
-      });
-      collectionReference.document(infoName).updateData({
-        'model': newModel
-      });
-    }
-  }
-
-  Widget _floatingPanel(){
+  Widget _floatingCollapsed(){
     return Container(
-      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(250)),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(40),
-          image: DecorationImage(image: AssetImage('images/fishback.png'),fit: BoxFit.fill)
+          borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+          image: DecorationImage(image: AssetImage('images/artback.png'),fit: BoxFit.fill)
       ),
       child: Stack(
         children: <Widget>[
@@ -280,15 +142,138 @@ class _FishState extends State<Fish> {
                     child: Image.asset('images/handle.png'),
                   ),
                   SizedBox(height: ScreenUtil().setHeight(10),),
-                  CustomText(text:infoName,size: ScreenUtil().setSp(55),bold: false,),
+                  Flexible(child: CustomText(text:infoName,size: ScreenUtil().setSp(55),bold: false,align: TextAlign.center,)),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, ScreenUtil().setHeight(20), ScreenUtil().setHeight(40), 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: (){
+                    if(newDonated.contains(email)){
+                      newDonated.remove(email);
+                      setState(() {
+                        isDonated = false;
+                      });
+                      collectionReference.document(infoName).updateData({
+                        'donated': newDonated
+                      });
+                    }
+                    else{
+                      newDonated.add(email);
+                      setState(() {
+                        isDonated = true;
+                      });
+                      collectionReference.document(infoName).updateData({
+                        'donated': newDonated
+                      });
+                    }
+                  },
+                  child: SizedBox(
+                    width: ScreenUtil().setWidth(50),
+                    height: ScreenUtil().setHeight(50),
+                    child: Image.asset(isDonated?'images/owl.png':'images/owlDe.png',),
+                  ),
+                ),
+                SizedBox(width: ScreenUtil().setWidth(20),),
+                GestureDetector(
+                  onTap: (){
+                    if(newCaught.contains(email)){
+                      newCaught.remove(email);
+                      setState(() {
+                        isCaught = false;
+                      });
+                      collectionReference.document(infoName).updateData({
+                        'caught': newCaught
+                      });
+                    }
+                    else{
+                      newCaught.add(email);
+                      setState(() {
+                        isCaught = true;
+                      });
+                      collectionReference.document(infoName).updateData({
+                        'caught': newCaught
+                      });
+                    }
+                  },
+                  child: SizedBox(
+                    width: ScreenUtil().setWidth(50),
+                    height: ScreenUtil().setHeight(50),
+                    child: Image.asset(isCaught?'images/frame.png':'images/frameDe.png',),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _floatingPanel(){
+    return Container(
+      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(150)),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(40),
+          image: DecorationImage(image: AssetImage('images/artback.png'),fit: BoxFit.fill)
+      ),
+      child: Stack(
+        children: <Widget>[
+          Center(
+            child: Padding(
+              padding: EdgeInsets.only(top: ScreenUtil().setHeight(20)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
                   SizedBox(
-                      width: ScreenUtil().setWidth(300),
-                      height: ScreenUtil().setHeight(200),
-                      child: Image.network(infoImage)
+                    width: ScreenUtil().setWidth(100),
+                    child: Image.asset('images/handle.png'),
+                  ),
+                  SizedBox(height: ScreenUtil().setHeight(10),),
+                  CustomText(text:infoName,size: ScreenUtil().setSp(55),bold: false,align: TextAlign.center,),
+                  SizedBox(height: ScreenUtil().setHeight(10),),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                            child: SizedBox(
+                                width: ScreenUtil().setWidth(200),
+                                height: ScreenUtil().setHeight(225),
+                                child: Image.network(infoImage,fit: BoxFit.cover,)
+                            ),
+                          ),
+                          SizedBox(height: ScreenUtil().setHeight(10),),
+                          CustomText(text: 'Genuine',)
+                        ],
+                      ),
+                      infoImageForgery!=''?SizedBox(width: ScreenUtil().setWidth(50),):SizedBox.shrink(),
+                      infoImageForgery!=''?Column(
+                        children: <Widget>[
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                            child: SizedBox(
+                                width: ScreenUtil().setWidth(200),
+                                height: ScreenUtil().setHeight(225),
+                                child: Image.network(infoImageForgery,fit: BoxFit.cover,)
+                            ),
+                          ),
+                          SizedBox(height: ScreenUtil().setHeight(10),),
+                          CustomText(text: 'Forgery',)
+                        ],
+                      ):SizedBox.shrink(),
+                    ],
                   ),
                   Row(
                     children: <Widget>[
-                      SizedBox(width: ScreenUtil().setWidth(30),),
+                      SizedBox(width: ScreenUtil().setWidth(40),),
                       CircleAvatar(
                         backgroundColor: Color(0xff75CBB5),
                         radius: 15,
@@ -299,24 +284,13 @@ class _FishState extends State<Fish> {
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
                       SizedBox(
-                          width: ScreenUtil().setWidth(230),
                           child: CustomText(text: '$infoPrice Bells',size: ScreenUtil().setSp(32),)),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: CustomText(text: 'CJ',bold: false,)),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10),),
-                      CustomText(text: '$infoCJ Bells',size: ScreenUtil().setSp(32),)
                     ],
                   ),
                   SizedBox(height: ScreenUtil().setHeight(20),),
                   Row(
                     children: <Widget>[
-                      SizedBox(width: ScreenUtil().setWidth(30),),
+                      SizedBox(width: ScreenUtil().setWidth(40),),
                       GestureDetector(
                         onTap: ()=>onCaughtPress(),
                         child: CircleAvatar(
@@ -325,15 +299,15 @@ class _FishState extends State<Fish> {
                           child: SizedBox(
                               width: ScreenUtil().setWidth(40),
                               height: ScreenUtil().setHeight(40),
-                              child: Image.asset(isCaught?'images/hook.png':'images/hookDe.png')),
+                              child: Image.asset(isCaught?'images/frame.png':'images/frameDe.png')),
                         ),
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
                       GestureDetector(
                         onTap: ()=>onCaughtPress(),
                         child: SizedBox(
-                            width: ScreenUtil().setWidth(230),
-                            child: CustomText(text: isCaught?'Caught':'Not Caught',size: ScreenUtil().setSp(32),)),
+                            width: ScreenUtil().setWidth(215),
+                            child: CustomText(text: isCaught?'Collected':'Not Collected',size: ScreenUtil().setSp(32),)),
                       ),
                       GestureDetector(
                         onTap: ()=>onOwlPress(),
@@ -349,119 +323,17 @@ class _FishState extends State<Fish> {
                       SizedBox(width: ScreenUtil().setWidth(10),),
                       GestureDetector(
                           onTap: ()=>onOwlPress(),
-                          child: CustomText(text: isDonated?'Donated':'Not Donated',size: ScreenUtil().setSp(32),))
-                    ],
-                  ),
-                  SizedBox(height: ScreenUtil().setHeight(20),),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(width: ScreenUtil().setWidth(30),),
-                      GestureDetector(
-                        onTap: ()=>onModelPress(),
-                        child: CircleAvatar(
-                          backgroundColor: Color(0xff75CBB5),
-                          radius: 15,
-                          child: SizedBox(
-                              width: ScreenUtil().setWidth(40),
-                              height: ScreenUtil().setHeight(40),
-                              child: Image.asset(isModel?'images/model.png':'images/modelDe.png')),
-                        ),
-                      ),
+                          child: CustomText(text: isDonated?'Donated':'Not Donated',size: ScreenUtil().setSp(32),)),
                       SizedBox(width: ScreenUtil().setWidth(10),),
-                      GestureDetector(
-                        onTap: ()=>onModelPress(),
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(300),
-                            child: CustomText(text: isModel?'Model':'No Model',size: ScreenUtil().setSp(32),)),
-                      ),
                     ],
                   ),
                   SizedBox(height: ScreenUtil().setHeight(20),),
-                  CustomText(text:'Info',size: ScreenUtil().setSp(50),bold: false,),
+                  CustomText(text:'Description',size: ScreenUtil().setSp(50),bold: false,),
                   SizedBox(height: ScreenUtil().setHeight(10),),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(width: ScreenUtil().setWidth(30),),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Image.asset('images/ocean.png')),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10),),
-                      SizedBox(
-                          width: ScreenUtil().setWidth(100),
-                          child: CustomText(text: infoLocation,size: ScreenUtil().setSp(30),)),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Image.asset('images/shadow.png')),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10),),
-                      SizedBox(
-                          width: ScreenUtil().setWidth(105),
-                          child: CustomText(text: infoShadow,size: ScreenUtil().setSp(30),)),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Image.asset('images/time.png')),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10),),
-                      SizedBox(
-                          width: ScreenUtil().setWidth(175),
-                          child: CustomText(text: infoTime,size: ScreenUtil().setSp(30),)),
-                    ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(20)),
+                    child: CustomText(text: infoDescription,size: ScreenUtil().setSp(30),align: TextAlign.center,),
                   ),
-                  SizedBox(height: ScreenUtil().setHeight(20),),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(width: ScreenUtil().setWidth(30),),
-                      CircleAvatar(
-                        backgroundColor: Color(0xff75CBB5),
-                        radius: 15,
-                        child: SizedBox(
-                            width: ScreenUtil().setWidth(40),
-                            height: ScreenUtil().setHeight(40),
-                            child: Padding(
-                              padding: EdgeInsets.all(2),
-                              child: Image.asset('images/calander.png'),
-                            )),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10),),
-                      MonthBox(text: 'Jan',color: jan==true?Color(0xff78C9B7):Color(0xffBADDD9),),
-                      MonthBox(text: 'Feb',color: feb==true?Color(0xff78C9B7):Color(0xffBADDD9),),
-                      MonthBox(text: 'Mar',color: mar==true?Color(0xff78C9B7):Color(0xffBADDD9),),
-                      MonthBox(text: 'Apr',color: apr==true?Color(0xff78C9B7):Color(0xffBADDD9),),
-                      MonthBox(text: 'May',color: may==true?Color(0xff78C9B7):Color(0xffBADDD9),),
-                      MonthBox(text: 'Jun',color: jun==true?Color(0xff78C9B7):Color(0xffBADDD9),),
-                    ],
-                  ),
-                  SizedBox(height: ScreenUtil().setHeight(10),),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(width: ScreenUtil().setWidth(30),),
-                      CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        radius: 15,
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10),),
-                      MonthBox(text: 'Jul',color: jul==true?Color(0xff78C9B7):Color(0xffBADDD9),),
-                      MonthBox(text: 'Aug',color: aug==true?Color(0xff78C9B7):Color(0xffBADDD9),),
-                      MonthBox(text: 'Sep',color: sep==true?Color(0xff78C9B7):Color(0xffBADDD9),),
-                      MonthBox(text: 'Oct',color: oct==true?Color(0xff78C9B7):Color(0xffBADDD9),),
-                      MonthBox(text: 'Nov',color: nov==true?Color(0xff78C9B7):Color(0xffBADDD9),),
-                      MonthBox(text: 'Dec',color: dec==true?Color(0xff78C9B7):Color(0xffBADDD9),),
-                    ],
-                  ),
-                  //SizedBox(height: ScreenUtil().setHeight(100),)
                 ],
               ),
             ),
@@ -473,7 +345,24 @@ class _FishState extends State<Fish> {
               children: <Widget>[
                 GestureDetector(
                   onTap: (){
-                    onOwlPress();
+                    if(newDonated.contains(email)){
+                      newDonated.remove(email);
+                      setState(() {
+                        isDonated = false;
+                      });
+                      collectionReference.document(infoName).updateData({
+                        'donated': newDonated
+                      });
+                    }
+                    else{
+                      newDonated.add(email);
+                      setState(() {
+                        isDonated = true;
+                      });
+                      collectionReference.document(infoName).updateData({
+                        'donated': newDonated
+                      });
+                    }
                   },
                   child: SizedBox(
                     width: ScreenUtil().setWidth(50),
@@ -484,12 +373,29 @@ class _FishState extends State<Fish> {
                 SizedBox(width: ScreenUtil().setWidth(20),),
                 GestureDetector(
                   onTap: (){
-                    onCaughtPress();
+                    if(newCaught.contains(email)){
+                      newCaught.remove(email);
+                      setState(() {
+                        isCaught = false;
+                      });
+                      collectionReference.document(infoName).updateData({
+                        'caught': newCaught
+                      });
+                    }
+                    else{
+                      newCaught.add(email);
+                      setState(() {
+                        isCaught = true;
+                      });
+                      collectionReference.document(infoName).updateData({
+                        'caught': newCaught
+                      });
+                    }
                   },
                   child: SizedBox(
                     width: ScreenUtil().setWidth(50),
                     height: ScreenUtil().setHeight(50),
-                    child: Image.asset(isCaught?'images/hook.png':'images/hookDe.png',),
+                    child: Image.asset(isCaught?'images/frame.png':'images/frameDe.png',),
                   ),
                 ),
               ],
@@ -500,61 +406,6 @@ class _FishState extends State<Fish> {
     );
   }
 
-  setMonths(List myList) async {
-    jan = false;
-    feb = false;
-    mar = false;
-    apr = false;
-    may = false;
-    jun = false;
-    jul = false;
-    aug = false;
-    sep = false;
-    oct = false;
-    nov = false;
-    dec = false;
-    for(int y=0;y<=myList.length;y++){
-        if(myList[y]=='jan'){
-          jan = true;
-        }
-        if(myList[y]=='feb'){
-          feb = true;
-        }
-        if(myList[y]=='mar'){
-          mar = true;
-        }
-        if(myList[y]=='apr'){
-          apr = true;
-        }
-        if(myList[y]=='may'){
-          may = true;
-        }
-        if(myList[y]=='jun'){
-          jun = true;
-        }
-        if(myList[y]=='jul'){
-          jul = true;
-        }
-        if(myList[y]=='aug'){
-          aug = true;
-        }
-        if(myList[y]=='sep'){
-          sep = true;
-        }
-        if(myList[y]=='oct'){
-          oct = true;
-        }
-        if(myList[y]=='nov'){
-          nov = true;
-        }
-        if(myList[y]=='dec'){
-          dec = true;
-        }
-      }
-  }
-
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -563,8 +414,8 @@ class _FishState extends State<Fish> {
     setState(() {
       _focus.addListener(_onFocusChange);
     });
-    subscription = collectionReference.where('type',isEqualTo: 'fish').orderBy('name').snapshots().listen((datasnapshot){
-    setState(() {
+    subscription = collectionReference..where('type',isEqualTo: 'art').orderBy('name').snapshots().listen((datasnapshot){
+      setState(() {
         fishlist = datasnapshot.documents;
       });
 
@@ -575,7 +426,7 @@ class _FishState extends State<Fish> {
 
       calculateCount();
     });
-    //Timer(Duration(milliseconds: 50), (){panelController.hide();});
+    //Timer(Duration(milliseconds: 100), (){panelController.hide();});
   }
 
   @override
@@ -595,7 +446,7 @@ class _FishState extends State<Fish> {
           controller: panelController,
           borderRadius: BorderRadius.circular(40),
           margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
-          maxHeight: ScreenUtil().setHeight(1275),
+          maxHeight: ScreenUtil().setHeight(1300),
           minHeight: ScreenUtil().setHeight(170),
           backdropEnabled: true,
           renderPanelSheet: false,
@@ -656,7 +507,6 @@ class _FishState extends State<Fish> {
                         height: ScreenUtil().setHeight(80),
                         child: TextField(
                           focusNode: _focus,
-                          textAlignVertical: TextAlignVertical.center,
                           style: TextStyle(color: Colors.white,fontSize: 20,height: ScreenUtil().setHeight(3.2)),
                           controller: name,
                           decoration: InputDecoration(
@@ -685,35 +535,25 @@ class _FishState extends State<Fish> {
                               newNameList.clear();
                               newPriceList.clear();
                               newImageList.clear();
-                              newCJList.clear();
-                              newOceanList.clear();
-                              newShadowList.clear();
-                              newTimeList.clear();
-                              newMonthListN.clear();
-                              newMonthListS.clear();
-                              donatedList.clear();
+                              newImageForgeryList.clear();
+                              newPDescriptionList.clear();
                               caughtList.clear();
-                              modelList.clear();
+                              donatedList.clear();
                               for(int j=0;j<nameList.length;j++){
                                 if(nameList[j].contains(x[0].toUpperCase()+x.substring(1))){
                                   print('there is a match ${nameList[j]}');
 //                                select[j] = true;
                                   newNameList.add(nameList[j]);
                                   newPriceList.add(fishlist[j].data['price']);
-                                  newImageList.add(fishlist[j].data['image']);
-                                  newCJList.add(fishlist[j].data['cj']);
-                                  newOceanList.add(fishlist[j].data['location']);
-                                  newShadowList.add(fishlist[j].data['shadow']);
-                                  newTimeList.add(fishlist[j].data['time']);
-                                  newMonthListN.add(fishlist[j].data['monthN']);
-                                  newMonthListS.add(fishlist[j].data['monthS']);
-                                  modelList.add(fishlist[j].data['model']);
+                                  newImageList.add(fishlist[j].data['genuine']);
+                                  newImageForgeryList.add(fishlist[j].data['forgery']);
+                                  newPDescriptionList.add(fishlist[j].data['description']);
                                   caughtList.add(fishlist[j].data['caught']);
                                   donatedList.add(fishlist[j].data['donated']);
                                 }
                               }
                             });
-                            },
+                          },
                         ),
                       ),
                     ),
@@ -759,7 +599,7 @@ class _FishState extends State<Fish> {
                                 SizedBox(
                                   width: ScreenUtil().setWidth(50),
                                   height: ScreenUtil().setHeight(50),
-                                  child: Image.asset('images/fish.png'),
+                                  child: Image.asset('images/fishDe.png'),
                                 ),
                                 SizedBox(width: ScreenUtil().setWidth(10),),
                                 CustomText(text: 'Fish',),
@@ -785,7 +625,7 @@ class _FishState extends State<Fish> {
                                 SizedBox(
                                   width: ScreenUtil().setWidth(50),
                                   height: ScreenUtil().setHeight(50),
-                                  child: Image.asset('images/artDe.png'),
+                                  child: Image.asset('images/art.png'),
                                 ),
                                 SizedBox(width: ScreenUtil().setWidth(10),),
                                 CustomText(text: 'Art',),
@@ -793,17 +633,19 @@ class _FishState extends State<Fish> {
                             ),value: 'Art',),
                         ],
                         onChanged:(newValue){
-                          page = newValue;
-                          if(page=='Art'){
-                            Navigator.push(
-                              context,
-                              MyCustomRoute(builder: (context) => Art()),
-                            );
-                          }
-                          else if(page=='Insect'){
+                          setState(() {
+                            page = newValue;
+                          });
+                          if(page=='Insect'){
                             Navigator.push(
                               context,
                               MyCustomRoute(builder: (context) => Insects()),
+                            );
+                          }
+                          else if(page=='Fish'){
+                            Navigator.push(
+                              context,
+                              MyCustomRoute(builder: (context) => Fish()),
                             );
                           }
                           else if(page=='Fossil'){
@@ -822,7 +664,7 @@ class _FishState extends State<Fish> {
                     child: GestureDetector(
                       onTap: (){
                         if(!isDonatedSelected){
-                          subscription = collectionReference.where('donated',arrayContains: email).where('type',isEqualTo: 'fish').orderBy('name').snapshots().listen((datasnapshot){
+                          subscription = collectionReference.where('donated',arrayContains: email).where('type',isEqualTo: 'art').orderBy('name').snapshots().listen((datasnapshot){
                             setState(() {
                               nameList.clear();
                               fishlist = datasnapshot.documents;
@@ -834,7 +676,7 @@ class _FishState extends State<Fish> {
                           });
                         }
                         else{
-                          subscription = collectionReference.where('type',isEqualTo: 'fish').orderBy('name').snapshots().listen((datasnapshot){
+                          subscription = collectionReference.where('type',isEqualTo: 'art').orderBy('name').snapshots().listen((datasnapshot){
                             setState(() {
                               nameList.clear();
                               fishlist = datasnapshot.documents;
@@ -873,7 +715,7 @@ class _FishState extends State<Fish> {
                     child: GestureDetector(
                       onTap: (){
                         if(!isCaughtSelected){
-                          subscription = collectionReference.where('caught', arrayContains: email).where('type',isEqualTo: 'fish').orderBy('name').snapshots().listen((datasnapshot){
+                          subscription = collectionReference.where('caught', arrayContains: email).where('type',isEqualTo: 'art').orderBy('name').snapshots().listen((datasnapshot){
                             setState(() {
                               nameList.clear();
                               fishlist = datasnapshot.documents;
@@ -885,7 +727,7 @@ class _FishState extends State<Fish> {
                           });
                         }
                         else{
-                          subscription = collectionReference.where('type',isEqualTo: 'fish').orderBy('name').snapshots().listen((datasnapshot){
+                          subscription = collectionReference.where('type',isEqualTo: 'art').orderBy('name').snapshots().listen((datasnapshot){
                             setState(() {
                               nameList.clear();
                               fishlist = datasnapshot.documents;
@@ -913,7 +755,7 @@ class _FishState extends State<Fish> {
                             SizedBox(
                                 width: ScreenUtil().setWidth(30),
                                 height: ScreenUtil().setHeight(30),
-                                child: Image.asset('images/homeHook.png')),
+                                child: Image.asset('images/homeFrame.png')),
                           ],
                         ),
                       ),
@@ -945,7 +787,7 @@ class _FishState extends State<Fish> {
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      childAspectRatio: 16.0/9.0,
+                      childAspectRatio: 1/1.3,
                       crossAxisSpacing: 8,
                       mainAxisSpacing: 8
                   ),
@@ -953,18 +795,13 @@ class _FishState extends State<Fish> {
                   padding: const EdgeInsets.all(10.0),
 
                   itemBuilder: (context,i){
-                    String url =  isFocused==false?fishlist[i].data['image']:newImageList[i];
+                    String url =  isFocused==false?fishlist[i].data['genuine']:newImageList[i];
+                    String forgeryurl =  isFocused==false?fishlist[i].data['forgery']:newImageForgeryList[i];
                     String newPrice =  isFocused==false?fishlist[i].data['price']:newPriceList[i];
+                    String newDescription =  isFocused==false?fishlist[i].data['description']:newPDescriptionList[i];
                     String newName =  isFocused==false?fishlist[i].data['name']:newNameList[i];
-                    String newCj =  isFocused==false?fishlist[i].data['cj']:newCJList[i];
-                    String newLocation =  isFocused==false?fishlist[i].data['location']:newOceanList[i];
-                    String newShadow =  isFocused==false?fishlist[i].data['shadow']:newShadowList[i];
-                    String newTime =  isFocused==false?fishlist[i].data['time']:newTimeList[i];
-                    List newMonthN =  isFocused==false?fishlist[i].data['monthN']:newMonthListN[i];
-                    List newMonthS =  isFocused==false?fishlist[i].data['monthS']:newMonthListS[i];
                     List donated =  isFocused==false?fishlist[i].data['donated']:donatedList[i];
                     List caught =  isFocused==false?fishlist[i].data['caught']:caughtList[i];
-                    List model =  isFocused==false?fishlist[i].data['model']:modelList[i];
                     List<String> newDonatedforBanner = List<String>.from(donated);
                     List<String> newCaughtforBanner = List<String>.from(caught);
                     bool donatedForBanner;
@@ -980,8 +817,8 @@ class _FishState extends State<Fish> {
                     }else{
                       caughtForBanner = false;
                     }
-                    
-                    
+
+
                     return Container(
                       decoration: BoxDecoration(
                         color: Color(0xff75CBB5),
@@ -992,7 +829,6 @@ class _FishState extends State<Fish> {
                           setState(() {
                             newDonated = List<String>.from(donated);
                             newCaught = List<String>.from(caught);
-                            newModel = List<String>.from(model);
                             if(newDonated.contains(email)){
                               isDonated = true;
                             }else{
@@ -1003,25 +839,12 @@ class _FishState extends State<Fish> {
                             }else{
                               isCaught = false;
                             }
-                            if(newModel.contains(email)){
-                              isModel = true;
-                            }else{
-                              isModel = false;
-                            }
                             for(int x=0;x<fishlist.length;x++){
                               if(x==i){
                                 continue;
                               }
                               select[x] = false;
                             }
-                            
-                            if(location==null||location=='n'){
-                              setMonths(newMonthN);
-                            }
-                            else{
-                              setMonths(newMonthS);
-                            }
-
 
                             if(select[i]==false){
                               select[i] = true;
@@ -1029,11 +852,9 @@ class _FishState extends State<Fish> {
                               name.text = newName;
                               infoName = newName;
                               infoImage = url;
+                              infoImageForgery = forgeryurl;
+                              infoDescription = newDescription;
                               infoPrice = newPrice;
-                              infoCJ = newCj;
-                              infoLocation = newLocation;
-                              infoShadow = newShadow;
-                              infoTime = newTime;
                               panelController.show();
                             }else{
                               select[i] = false;
@@ -1053,7 +874,13 @@ class _FishState extends State<Fish> {
                             children: <Widget>[
                               Align(
                                   alignment: Alignment.center,
-                                  child: Image.network(url,fit: BoxFit.contain,)),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: Container(
+                                        width: ScreenUtil().setWidth(220),
+                                        height: ScreenUtil().setHeight(286),
+                                        child: Image.network(url,fit: BoxFit.cover,)),
+                                  )),
                               Visibility(
                                 visible: caughtForBanner,
                                 child: Align(
@@ -1061,10 +888,10 @@ class _FishState extends State<Fish> {
                                   child: Padding(
                                     padding: EdgeInsets.only(right: ScreenUtil().setWidth(15)),
                                     child: Container(
-                                        width: ScreenUtil().setWidth(30),
-                                        height: ScreenUtil().setHeight(30),
+                                        width: ScreenUtil().setWidth(40),
+                                        height: ScreenUtil().setHeight(40),
                                         //color: Colors.green,
-                                        child: Center(child: Image.asset('images/bannerHook.png',fit: BoxFit.contain,))),
+                                        child: Center(child: Image.asset('images/bannerFrame.png',fit: BoxFit.contain,))),
                                   ),
                                 ),
                               ),
@@ -1073,10 +900,10 @@ class _FishState extends State<Fish> {
                                 child: Align(
                                   alignment: Alignment.topRight,
                                   child: Padding(
-                                    padding: EdgeInsets.only(right: ScreenUtil().setWidth(45)),
+                                    padding: EdgeInsets.only(right: ScreenUtil().setWidth(60)),
                                     child: Container(
-                                        width: ScreenUtil().setWidth(30),
-                                        height: ScreenUtil().setHeight(30),
+                                        width: ScreenUtil().setWidth(40),
+                                        height: ScreenUtil().setHeight(40),
                                         //color: Colors.green,
                                         child: Center(child: Image.asset('images/bannerOwl.png',fit: BoxFit.contain,))),
                                   ),
@@ -1090,10 +917,7 @@ class _FishState extends State<Fish> {
                   },
                 ): new Center(child: CircularProgressIndicator()),
               ),
-
               SizedBox(height: ScreenUtil().setHeight(60),),
-
-
             ],
           ),
         ),

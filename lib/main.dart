@@ -41,6 +41,7 @@ class _MyAppState extends State<MyApp> {
         accentColor: Colors.white,
         unselectedWidgetColor: Colors.white,
         dividerColor: Colors.white,
+        canvasColor: Color(0xff75CBB5),
         textTheme: GoogleFonts.varelaRoundTextTheme(
           Theme.of(context).textTheme,
         ),

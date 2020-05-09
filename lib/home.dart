@@ -10,7 +10,7 @@ import 'package:nookknack/settings.dart';
 import 'package:nookknack/widgets/custom-text.dart';
 import 'package:nookknack/widgets/inputfield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'art.dart';
 import 'fish.dart';
 
 
@@ -27,9 +27,12 @@ class _HomeState extends State<Home> {
   int donatedInsectCount;
   int donatedFossilCount;
   int caughtFossilCount;
+  int donatedArtCount;
+  int caughtArtCount;
   var fishList;
   var insectList;
   var fossilList;
+  var artList;
   String email;
   TextEditingController houseController = TextEditingController();
   TextEditingController rampController = TextEditingController();
@@ -41,14 +44,81 @@ class _HomeState extends State<Home> {
     var sub = await Firestore.instance.collection('users').where('email',isEqualTo: email).getDocuments();
     var list = sub.documents;
 
-    var fishSub = await Firestore.instance.collection('all').where('type',isEqualTo:'fish').getDocuments();
-    fishList = fishSub.documents;
+   // var fishSub = await Firestore.instance.collection('all').where('type',isEqualTo:'fish').getDocuments();
+    //fishList = fishSub.documents;
 
-    var insectSub = await Firestore.instance.collection('all').where('type', isEqualTo: 'insect').getDocuments();
-    insectList = insectSub.documents;
+   Firestore.instance.collection('all').where('type',isEqualTo:'fish').snapshots().listen((datasnapshot){
+      setState(() {
+        fishList = datasnapshot.documents;
+        for(int i=0;i<fishList.length;i++){
+          List donated = fishList[i]['donated'];
+          List caught = fishList[i]['caught'];
+          if(donated.contains(email)){
+            donatedFishCount++;
+          }
+          if(caught.contains(email)){
+            caughtFishCount++;
+          }
+        }
+      });
+    });
 
-    var fossilSub = await Firestore.instance.collection('all').where('type', isEqualTo: 'fossil').getDocuments();
-    fossilList = fossilSub.documents;
+    Firestore.instance.collection('all').where('type', isEqualTo: 'insect').snapshots().listen((datasnapshot){
+      setState(() {
+        insectList = datasnapshot.documents;
+        for(int i=0;i<insectList.length;i++){
+          List donated = insectList[i]['donated'];
+          List caught = insectList[i]['caught'];
+          if(donated.contains(email)){
+            donatedInsectCount++;
+          }
+          if(caught.contains(email)){
+            caughtInsectCount++;
+          }
+        }
+      });
+    });
+
+    Firestore.instance.collection('all').where('type', isEqualTo: 'fossil').snapshots().listen((datasnapshot){
+      setState(() {
+        fossilList = datasnapshot.documents;
+        for(int i=0;i<fossilList.length;i++){
+          List donated = fossilList[i]['donated'];
+          List caught = fossilList[i]['caught'];
+          if(donated.contains(email)){
+            donatedFossilCount++;
+          }
+          if(caught.contains(email)){
+            caughtFossilCount++;
+          }
+        }
+      });
+    });
+
+    Firestore.instance.collection('all').where('type', isEqualTo: 'art').snapshots().listen((datasnapshot){
+      setState(() {
+        artList = datasnapshot.documents;
+        for(int i=0;i<artList.length;i++){
+          List donated = artList[i]['donated'];
+          List caught = artList[i]['caught'];
+          if(donated.contains(email)){
+            donatedArtCount++;
+          }
+          if(caught.contains(email)){
+            caughtArtCount++;
+          }
+        }
+      });
+    });
+
+//    var insectSub = await Firestore.instance.collection('all').where('type', isEqualTo: 'insect').getDocuments();
+//    insectList = insectSub.documents;
+
+//    var fossilSub = await Firestore.instance.collection('all').where('type', isEqualTo: 'fossil').getDocuments();
+//    fossilList = fossilSub.documents;
+
+//    var artSub = await Firestore.instance.collection('all').where('type', isEqualTo: 'art').getDocuments();
+//    artList = artSub.documents;
 
     donatedFishCount = 0;
     caughtFishCount = 0;
@@ -56,39 +126,8 @@ class _HomeState extends State<Home> {
     caughtInsectCount = 0;
     donatedFossilCount=0;
     caughtFossilCount=0;
-    for(int i=0;i<fishList.length;i++){
-      List donated = fishList[i]['donated'];
-      List caught = fishList[i]['caught'];
-      if(donated.contains(email)){
-        donatedFishCount++;
-      }
-      if(caught.contains(email)){
-        caughtFishCount++;
-      }
-    }
-
-    for(int i=0;i<insectList.length;i++){
-      List donated = insectList[i]['donated'];
-      List caught = insectList[i]['caught'];
-      if(donated.contains(email)){
-        donatedInsectCount++;
-      }
-      if(caught.contains(email)){
-        caughtInsectCount++;
-      }
-    }
-
-    for(int i=0;i<fossilList.length;i++){
-      List donated = fossilList[i]['donated'];
-      List caught = fossilList[i]['caught'];
-      if(donated.contains(email)){
-        donatedFossilCount++;
-      }
-      if(caught.contains(email)){
-        caughtFossilCount++;
-      }
-    }
-
+    donatedArtCount=0;
+    caughtArtCount=0;
     setState(() {
       houseController.text = list[0]['house'].toString();
       rampController.text = list[0]['ramp'].toString();
@@ -116,7 +155,7 @@ class _HomeState extends State<Home> {
           ),
           child: Stack(
             children: <Widget>[
-              fishList!=null?SingleChildScrollView(
+              fishList!=null&&insectList!=null&&fossilList!=null&&artList!=null?SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
                     SizedBox(height: ScreenUtil().setHeight(50),),
@@ -131,7 +170,7 @@ class _HomeState extends State<Home> {
                     SizedBox(height: ScreenUtil().setHeight(40),),
                     CustomText(text: 'Welcome back,',size: ScreenUtil().setSp(50),),
                     CustomText(text: 'What did you find?',size: ScreenUtil().setSp(35),bold: false,),
-                    Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(100),endIndent:ScreenUtil().setWidth(100),height: 30,),
+                    Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(55),endIndent:ScreenUtil().setWidth(55),height: 30,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -189,11 +228,29 @@ class _HomeState extends State<Home> {
                           ],
                         ),
                       ),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MyCustomRoute(builder: (context) => Art()),
+                          );
+                        },
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              width: ScreenUtil().setWidth(100),
+                              height: ScreenUtil().setHeight(100),
+                              child: Image.asset('images/homeFrame.png'),
+                            ),
+                            CustomText(text: 'Art',size: ScreenUtil().setSp(30),),
+                          ],
+                        ),
+                      ),
                     ],
                     ),
                     SizedBox(height: ScreenUtil().setHeight(40),),
                     CustomText(text: 'Overall Progress',size: ScreenUtil().setSp(50),),
-                    Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(100),endIndent:ScreenUtil().setWidth(100),height: 30,),
+                    Divider(color: Colors.white,thickness: 3,indent: ScreenUtil().setWidth(55),endIndent:ScreenUtil().setWidth(55),height: 30,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -290,6 +347,33 @@ class _HomeState extends State<Home> {
                           width: ScreenUtil().setWidth(50),
                           child: Image.asset('images/homeShovel.png'),
                         ),
+                      ],
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(20),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(width: ScreenUtil().setWidth(130),),
+                        SizedBox(
+                          height: ScreenUtil().setHeight(50),
+                          width: ScreenUtil().setWidth(50),
+                          child: Image.asset('images/homeFrame.png'),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(40),),
+                        SizedBox(
+                            width: ScreenUtil().setWidth(105),
+                            child: CustomText(text: '$donatedArtCount/${artList.length}',size: ScreenUtil().setSp(35),align: TextAlign.end,)),
+                        SizedBox(width: ScreenUtil().setWidth(10),),
+                        SizedBox(
+                          height: ScreenUtil().setHeight(50),
+                          width: ScreenUtil().setWidth(50),
+                          child: Image.asset('images/homeOwl.png'),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(40),),
+                        SizedBox(
+                            width: ScreenUtil().setWidth(105),
+                            child: CustomText(text: '$caughtArtCount/${artList.length}',size: ScreenUtil().setSp(35),align: TextAlign.end,)),
                       ],
                     ),
                     SizedBox(height: ScreenUtil().setHeight(10),),

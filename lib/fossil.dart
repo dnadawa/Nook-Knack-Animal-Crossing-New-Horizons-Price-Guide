@@ -10,6 +10,7 @@ import 'package:nookknack/widgets/custom-text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import 'art.dart';
 import 'insects.dart';
 
 
@@ -23,6 +24,7 @@ class _FossilsState extends State<Fossils> {
   FocusNode _focus = new FocusNode();
   var fishlist;
   var subscription;
+  String page='Fossil';
   String price = '0';
   String infoName = 'Loading...';
   String infoImage = '';
@@ -523,61 +525,97 @@ class _FossilsState extends State<Fossils> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(10,0,0,0),
-                        child: GestureDetector(
-                          onTap: (){
+                  SizedBox(width: ScreenUtil().setWidth(20),),
+                  Container(
+                    height: ScreenUtil().setHeight(75),
+                    width: ScreenUtil().setWidth(220),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(40),
+                        color: Color(0xff75CBB5)
+                    ),
+                    child: Center(
+                      child: DropdownButton(
+                        iconEnabledColor: Colors.white,
+                        iconDisabledColor: Colors.white,
+                        underline: Divider(color: Color(0xff75CBB5),height: 0,thickness: 0,),
+                        items: <DropdownMenuItem>[
+                          DropdownMenuItem(
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(width: ScreenUtil().setWidth(10),),
+                                SizedBox(
+                                  width: ScreenUtil().setWidth(50),
+                                  height: ScreenUtil().setHeight(50),
+                                  child: Image.asset('images/butterflyDe.png'),
+                                ),
+                                SizedBox(width: ScreenUtil().setWidth(10),),
+                                CustomText(text: 'Insect',),
+                              ],
+                            ),value: 'Insect',),
+                          DropdownMenuItem(
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(width: ScreenUtil().setWidth(10),),
+                                SizedBox(
+                                  width: ScreenUtil().setWidth(50),
+                                  height: ScreenUtil().setHeight(50),
+                                  child: Image.asset('images/fishDe.png'),
+                                ),
+                                SizedBox(width: ScreenUtil().setWidth(10),),
+                                CustomText(text: 'Fish',),
+                              ],
+                            ),value: 'Fish',),
+                          DropdownMenuItem(
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(width: ScreenUtil().setWidth(10),),
+                                SizedBox(
+                                  width: ScreenUtil().setWidth(50),
+                                  height: ScreenUtil().setHeight(50),
+                                  child: Image.asset('images/fossil.png'),
+                                ),
+                                SizedBox(width: ScreenUtil().setWidth(10),),
+                                CustomText(text: 'Fossil',),
+                              ],
+                            ),value: 'Fossil',),
+                          DropdownMenuItem(
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(width: ScreenUtil().setWidth(10),),
+                                SizedBox(
+                                  width: ScreenUtil().setWidth(50),
+                                  height: ScreenUtil().setHeight(50),
+                                  child: Image.asset('images/artDe.png'),
+                                ),
+                                SizedBox(width: ScreenUtil().setWidth(10),),
+                                CustomText(text: 'Art',),
+                              ],
+                            ),value: 'Art',),
+                        ],
+                        onChanged:(newValue){
+                          page = newValue;
+                          if(page=='Art'){
+                            Navigator.push(
+                              context,
+                              MyCustomRoute(builder: (context) => Art()),
+                            );
+                          }
+                          else if(page=='Insect'){
                             Navigator.push(
                               context,
                               MyCustomRoute(builder: (context) => Insects()),
                             );
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Color(0xfff5f7e1),
-                            radius: 15,
-                            child: Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: Image.asset('images/butterflyDe.png'),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8,0,0,0),
-                        child: GestureDetector(
-                          onTap: (){
+                          }
+                          else if(page=='Fish'){
                             Navigator.push(
                               context,
                               MyCustomRoute(builder: (context) => Fish()),
                             );
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Color(0xfff5f7e1),
-                            radius: 15,
-                            child: Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: Image.asset('images/fishDe.png'),
-                            ),
-                          ),
-                        ),
+                          }
+                        },
+                        value: page,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(8,0,0,0),
-                        child: GestureDetector(
-                          onTap: (){},
-                          child: CircleAvatar(
-                            backgroundColor: Color(0xfff5f7e1),
-                            radius: 15,
-                            child: Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: Image.asset('images/fossil.png'),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),

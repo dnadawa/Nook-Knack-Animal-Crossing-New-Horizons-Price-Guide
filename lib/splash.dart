@@ -17,7 +17,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 2),() {
+    Timer(Duration(seconds: 3),() {
       Navigator.pushReplacement(
         context,
         CupertinoPageRoute(builder: (context) => MyApp()),
@@ -29,16 +29,22 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff50BAB0),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Image.asset('images/splash.gif'),
-          Text('Nook Knack',style: GoogleFonts.varelaRound(
-            textStyle: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 36)),
-          ),
-        ],
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage('images/splashback.png'),fit: BoxFit.fill)
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Image.asset('images/splash.gif'),
+            Text('Nook Knack',style: GoogleFonts.varelaRound(
+              textStyle: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 36)),
+            ),
+          ],
+        ),
       ),
     );
   }

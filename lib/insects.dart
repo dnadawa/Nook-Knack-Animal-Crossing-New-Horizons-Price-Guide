@@ -260,7 +260,7 @@ class _InsectsState extends State<Insects> {
 
   Widget _floatingPanel(){
     return Container(
-      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(280)),
+      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(250)),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
           image: DecorationImage(image: AssetImage('images/insectback.png'),fit: BoxFit.fill)
@@ -391,8 +391,8 @@ class _InsectsState extends State<Insects> {
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
                       SizedBox(
-                          width: ScreenUtil().setWidth(225),
-                          child: CustomText(text: infoLocation,size: ScreenUtil().setSp(30),)),
+                          width: ScreenUtil().setWidth(280),
+                          child: CustomText(text: infoLocation,size: ScreenUtil().setSp(27),)),
                       CircleAvatar(
                         backgroundColor: Color(0xff75CBB5),
                         radius: 15,
@@ -403,7 +403,7 @@ class _InsectsState extends State<Insects> {
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
                       SizedBox(
-                          width: ScreenUtil().setWidth(125),
+                          width: ScreenUtil().setWidth(170),
                           child: CustomText(text: infoTime,size: ScreenUtil().setSp(24),)),
                     ],
                   ),
@@ -811,7 +811,9 @@ class _InsectsState extends State<Insects> {
                             ),value: 'Art',),
                         ],
                         onChanged:(newValue){
-                          page = newValue;
+                          setState(() {
+                            page = newValue;
+                          });
                             if(page=='Art'){
                               Navigator.push(
                                 context,

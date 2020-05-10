@@ -148,7 +148,7 @@ class _ArtState extends State<Art> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(0, ScreenUtil().setHeight(20), ScreenUtil().setHeight(40), 0),
+            padding: EdgeInsets.fromLTRB(0, ScreenUtil().setHeight(30), ScreenUtil().setHeight(50), 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
@@ -217,7 +217,7 @@ class _ArtState extends State<Art> {
 
   Widget _floatingPanel(){
     return Container(
-      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(150)),
+      margin: EdgeInsets.only(bottom: ScreenUtil().setHeight(250)),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
           image: DecorationImage(image: AssetImage('images/artback.png'),fit: BoxFit.fill)
@@ -251,7 +251,7 @@ class _ArtState extends State<Art> {
                             ),
                           ),
                           SizedBox(height: ScreenUtil().setHeight(10),),
-                          CustomText(text: 'Genuine',)
+                          CustomText(text: 'Genuine',size: ScreenUtil().setSp(32))
                         ],
                       ),
                       infoImageForgery!=''?SizedBox(width: ScreenUtil().setWidth(50),):SizedBox.shrink(),
@@ -266,11 +266,12 @@ class _ArtState extends State<Art> {
                             ),
                           ),
                           SizedBox(height: ScreenUtil().setHeight(10),),
-                          CustomText(text: 'Forgery',)
+                          CustomText(text: 'Forgery',size: ScreenUtil().setSp(32),)
                         ],
                       ):SizedBox.shrink(),
                     ],
                   ),
+                  SizedBox(height: ScreenUtil().setHeight(15),),
                   Row(
                     children: <Widget>[
                       SizedBox(width: ScreenUtil().setWidth(40),),
@@ -339,7 +340,7 @@ class _ArtState extends State<Art> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(0, ScreenUtil().setHeight(20), ScreenUtil().setHeight(40), 0),
+            padding: EdgeInsets.fromLTRB(0, ScreenUtil().setHeight(30), ScreenUtil().setHeight(50), 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
@@ -441,12 +442,13 @@ class _ArtState extends State<Art> {
     ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: false);
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Color(0xfffffae3),
         body: SlidingUpPanel(
           controller: panelController,
           borderRadius: BorderRadius.circular(40),
           margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
-          maxHeight: ScreenUtil().setHeight(1300),
+          maxHeight: ScreenUtil().setHeight(1200),
           minHeight: ScreenUtil().setHeight(170),
           backdropEnabled: true,
           renderPanelSheet: false,
@@ -867,7 +869,6 @@ class _ArtState extends State<Art> {
                         child: Container(
                           margin: EdgeInsets.all(select[i]?4:0),
                           decoration: BoxDecoration(
-                            color: Color(0xffEFE8BD),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Stack(

@@ -393,7 +393,7 @@ class _FishState extends State<Fish> {
                       SizedBox(width: ScreenUtil().setWidth(10),),
                       SizedBox(
                           width: ScreenUtil().setWidth(100),
-                          child: CustomText(text: infoLocation,size: ScreenUtil().setSp(30),)),
+                          child: CustomText(text: infoLocation,size: ScreenUtil().setSp(27),)),
                       CircleAvatar(
                         backgroundColor: Color(0xff75CBB5),
                         radius: 15,
@@ -404,8 +404,8 @@ class _FishState extends State<Fish> {
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
                       SizedBox(
-                          width: ScreenUtil().setWidth(105),
-                          child: CustomText(text: infoShadow,size: ScreenUtil().setSp(30),)),
+                          width: ScreenUtil().setWidth(110),
+                          child: CustomText(text: infoShadow,size: ScreenUtil().setSp(27),)),
                       CircleAvatar(
                         backgroundColor: Color(0xff75CBB5),
                         radius: 15,
@@ -416,8 +416,8 @@ class _FishState extends State<Fish> {
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10),),
                       SizedBox(
-                          width: ScreenUtil().setWidth(175),
-                          child: CustomText(text: infoTime,size: ScreenUtil().setSp(30),)),
+                          width: ScreenUtil().setWidth(160),
+                          child: CustomText(text: infoTime,size: ScreenUtil().setSp(27),)),
                     ],
                   ),
                   SizedBox(height: ScreenUtil().setHeight(20),),
@@ -793,7 +793,9 @@ class _FishState extends State<Fish> {
                             ),value: 'Art',),
                         ],
                         onChanged:(newValue){
-                          page = newValue;
+                          setState(() {
+                            page = newValue;
+                          });
                           if(page=='Art'){
                             Navigator.push(
                               context,

@@ -124,7 +124,7 @@ class _FishState extends State<Fish> {
                     child: Image.asset('images/handle.png'),
                   ),
                   SizedBox(height: ScreenUtil().setHeight(10),),
-                  CustomText(text:infoName,size: ScreenUtil().setSp(55),bold: false,),
+                  Flexible(child: CustomText(text:infoName,size: ScreenUtil().setSp(55),bold: false,align: TextAlign.center,)),
                 ],
               ),
             ),
@@ -280,7 +280,7 @@ class _FishState extends State<Fish> {
                     child: Image.asset('images/handle.png'),
                   ),
                   SizedBox(height: ScreenUtil().setHeight(10),),
-                  CustomText(text:infoName,size: ScreenUtil().setSp(55),bold: false,),
+                  CustomText(text:infoName,size: ScreenUtil().setSp(55),bold: false,align: TextAlign.center,),
                   SizedBox(
                       width: ScreenUtil().setWidth(300),
                       height: ScreenUtil().setHeight(200),

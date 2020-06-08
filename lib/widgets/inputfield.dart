@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final textStyle = TextStyle(
   fontWeight: FontWeight.bold,
@@ -27,6 +26,7 @@ class InputField extends StatelessWidget {
         style: textStyle,
         cursorColor: Colors.white,
         keyboardType: type,
+        textInputAction: TextInputAction.done,
         controller: controller,
         onSubmitted: onSubmit,
         obscureText: ispassword,

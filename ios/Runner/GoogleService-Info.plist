@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>362069383743-55as867jq2hff245qe7k7bouvb6dmcca.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.362069383743-55as867jq2hff245qe7k7bouvb6dmcca</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>362069383743-qd5dmgnf2lvo53c759ajqau2lnqon73q.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAiXnZuUBeE8n9XUSVcWdpePVSpwnQbBnA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>362069383743</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.digiwrecks.nookknack</string>
+	<key>PROJECT_ID</key>
+	<string>nook-knack</string>
+	<key>STORAGE_BUCKET</key>
+	<string>nook-knack.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:362069383743:ios:65e838692435dc3b9bf68a</string>
+	<key>DATABASE_URL</key>
+	<string>https://nook-knack.firebaseio.com</string>
+</dict>
+</plist>
